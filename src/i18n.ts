@@ -46,7 +46,7 @@ const en = {
     depth: '−2 m',
     title: 'From an idea to a monorepo that runs',
     lead:
-      '/keelokit:kickstart walks you through five gates. It stops only where your decision matters, and writes everything down as it goes.',
+      '/keelokit:kickstart walks you through five gates and shows each one on a dashboard. Stage by stage, it stops wherever your decision matters; in automatic mode, only where a person is required. Everything gets written down as it goes.',
     steps: [
       ['Intake', 'An interview that reads what you already have first, then asks only what’s missing. What nobody knows yet stays written as an open question, with an owner.'],
       ['Product', 'A short PRD: the problem, who it’s for, what’s in and, explicitly, what’s out.'],
@@ -79,6 +79,7 @@ const en = {
       ['A repo you already have', '/keelokit:adopt', 'The rules mapped to its checks, and the rest as dated debt'],
       ['A story to build', '/keelokit:build', 'Tests written first, code that passes them, a verified result'],
       ['Bugs that keep slipping through', '/keelokit:bugbash', 'Root-cause fixes, and a check that covers the whole class of every bug that escaped'],
+      ['A project to follow', '/keelokit:dashboard', 'One page with every stage, what waits for you and the next step, with buttons that ask Claude for it'],
     ],
   },
   verifyTitle: 'The skeleton, checked end to end',
@@ -93,7 +94,7 @@ const en = {
   commands: {
     depth: '−8 m',
     title: 'Every command',
-    lead: 'Nine skills. You can run them one by one, or let /keelokit tell you what comes next.',
+    lead: 'Ten skills. You can run them one by one, let /keelokit tell you what comes next, or follow it all on the dashboard.',
     items: [
       ['/keelokit:kickstart', 'From an idea to a working skeleton: intake, PRD, stack, generated monorepo with CI, first backlog.'],
       ['/keelokit:adopt', 'Adds only the harness to a repo you already have. What it doesn’t meet yet becomes a dated exception.'],
@@ -101,6 +102,7 @@ const en = {
       ['/keelokit:backlog', 'Epics and stories with acceptance scenarios and the invariants they keep, in waves so parallel work never collides.'],
       ['/keelokit:build', 'One story at a time: the verifier writes the tests first, a builder makes them pass, a reviewer reads the diff and a breaker tries to break it.'],
       ['/keelokit:bugbash', 'A bug hunt across data, API, integrity, UX, i18n, accessibility and security. Every escaped bug adds a check for its whole class.'],
+      ['/keelokit:dashboard', 'One page, rebuilt from the repo: every stage and its status, what to review with the documents inline, stories by development wave and by epic, bug bashes, the decisions taken, and buttons that ask Claude for the next step.'],
       ['/keelokit:doctor', 'Is every rule still backed by a check that works? Adds rules, registers exceptions.'],
       ['/keelokit:upgrade', 'Brings a project to a newer template without touching its product code.'],
       ['/keelokit', 'Where the project stands, what comes next, what’s waiting for your decision.'],
@@ -191,13 +193,13 @@ const es: typeof en = {
     depth: '−2 m',
     title: 'De una idea a un monorepo que funciona',
     lead:
-      '/keelokit:kickstart te lleva por cinco etapas. Se frena solo donde importa tu decisión, y va dejando todo por escrito.',
+      '/keelokit:kickstart te lleva por cinco etapas y muestra cada una en un tablero. Por etapas, se frena donde importa tu decisión; en modo automático, solo donde hace falta una persona. Va dejando todo por escrito.',
     steps: [
       ['Intake', 'Una entrevista que primero lee lo que ya tenés y después pregunta solo lo que falta. Lo que nadie sabe todavía queda escrito como pregunta abierta, con un responsable.'],
       ['Producto', 'Un PRD corto: el problema, para quién es, qué entra y, explícitamente, qué queda afuera.'],
       ['Stack', 'El stack de la casa. Lo que se desvía queda registrado como decisión, no improvisado.'],
       ['Esqueleto', 'Un monorepo generado con CI, hooks de git y tests, en verde antes de escribir una feature.'],
-      ['Backlog', 'Épicas e historias con escenarios de aceptación y las reglas que tienen que respetar, agrupadas en tandas que nunca tocan los mismos archivos.'],
+      ['Backlog', 'Épicas e historias con escenarios de aceptación y las reglas que tienen que respetar, agrupadas en olas de desarrollo que nunca tocan los mismos archivos.'],
     ],
     treeTitle: 'Lo que obtenés',
     tree: [
@@ -224,6 +226,7 @@ const es: typeof en = {
       ['Un repo que ya existe', '/keelokit:adopt', 'Las reglas mapeadas a sus checks, y el resto como deuda con fecha'],
       ['Una historia para construir', '/keelokit:build', 'Tests escritos primero, código que los pasa y un resultado verificado'],
       ['Bugs que se siguen escapando', '/keelokit:bugbash', 'Arreglos en la causa raíz, y un check que cubre toda la clase de cada bug que se escapó'],
+      ['Un proyecto para seguir', '/keelokit:dashboard', 'Una página con cada etapa, lo que te espera y el próximo paso, con botones para pedírselo a Claude'],
     ],
   },
   verifyTitle: 'El esqueleto, verificado de punta a punta',
@@ -238,14 +241,15 @@ const es: typeof en = {
   commands: {
     depth: '−8 m',
     title: 'Todos los comandos',
-    lead: 'Nueve skills. Podés correrlos uno por uno, o dejar que /keelokit te diga qué sigue.',
+    lead: 'Diez skills. Podés correrlos uno por uno, dejar que /keelokit te diga qué sigue, o seguir todo en el tablero.',
     items: [
       ['/keelokit:kickstart', 'De una idea a un esqueleto que funciona: intake, PRD, stack, monorepo generado con CI y primer backlog.'],
       ['/keelokit:adopt', 'Suma solo el harness a un repo que ya tenés. Lo que todavía no cumple queda como excepción con fecha.'],
       ['/keelokit:intake', 'Lee briefs, notas o un repo, y pregunta solo lo que falta. Nunca completa un hueco adivinando.'],
-      ['/keelokit:backlog', 'Épicas e historias con escenarios de aceptación y los invariantes que respetan, en tandas para que el trabajo en paralelo no choque.'],
+      ['/keelokit:backlog', 'Épicas e historias con escenarios de aceptación y los invariantes que respetan, en olas de desarrollo para que el trabajo en paralelo no choque.'],
       ['/keelokit:build', 'Una historia por vez: el verificador escribe primero los tests, un builder los hace pasar, un revisor lee el diff y un breaker intenta romperla.'],
       ['/keelokit:bugbash', 'Una cacería de bugs en datos, API, integridad, UX, i18n, accesibilidad y seguridad. Cada bug que se escapó suma un check para toda su clase.'],
+      ['/keelokit:dashboard', 'Una página que se arma desde el repo: cada etapa y su estado, qué revisar con los documentos a la vista, las historias por ola de desarrollo y por épica, los bug bashes, las decisiones tomadas y botones para pedirle a Claude el próximo paso.'],
       ['/keelokit:doctor', '¿Cada regla sigue respaldada por un check que funciona? Suma reglas y registra excepciones.'],
       ['/keelokit:upgrade', 'Lleva un proyecto a un template más nuevo sin tocar el código del producto.'],
       ['/keelokit', 'Dónde está el proyecto, qué sigue y qué espera tu decisión.'],
