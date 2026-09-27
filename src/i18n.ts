@@ -6,6 +6,16 @@ export const AUTHOR = {
   url: 'https://leopoldosimini.com',
   github: 'https://github.com/leosimini',
   linkedin: 'https://www.linkedin.com/in/leopoldosimini/',
+  handle: 'leosimini',
+  // Same profiles as the Person on leopoldosimini.com, so search engines join both pages to one person.
+  sameAs: [
+    'https://www.linkedin.com/in/leopoldosimini/',
+    'https://github.com/leosimini',
+    'https://www.crunchbase.com/person/leopoldo-simini',
+    'https://www.scrumalliance.org/members/71762',
+    'https://www.goodreads.com/author/show/7513327.Leopoldo_Simini',
+    'https://medium.com/@leosimini',
+  ],
 };
 export const INSTALL = [
   'claude plugin marketplace add leosimini/keelokit',

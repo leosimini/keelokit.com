@@ -168,7 +168,7 @@ const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
 
     <footer class="seabed">
       <div class="wrap">
-        <p>{t.footer.made} <a href={AUTHOR.url} rel="author">{AUTHOR.name}</a>, {t.footer.when}</p>
+        <p>{t.footer.made} <a href={AUTHOR.url} rel="author me">{AUTHOR.name}</a> (<a href={AUTHOR.github} rel="me noopener">@{AUTHOR.handle}</a>), {t.footer.when}</p>
         <p class="links">
           <a href={REPO} rel="noopener">GitHub</a>
           <a href={`${REPO}/blob/main/CHANGELOG.md`} rel="noopener">Changelog</a>

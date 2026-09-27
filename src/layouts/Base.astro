@@ -13,9 +13,11 @@ const jsonld = [
   {
     '@context': 'https://schema.org',
     '@type': 'SoftwareSourceCode',
+    '@id': REPO,
     name: 'Keelokit',
     description: t.description,
     url: canonical,
+    sameAs: [`${AUTHOR.url}/keelokit`],
     codeRepository: REPO,
     programmingLanguage: ['TypeScript', 'Python'],
     runtimePlatform: 'Claude Code',
@@ -28,8 +30,9 @@ const jsonld = [
     '@type': 'Person',
     '@id': `${AUTHOR.url}/#person`,
     name: AUTHOR.name,
+    alternateName: ['Leo Simini', AUTHOR.handle],
     url: AUTHOR.url,
-    sameAs: [AUTHOR.github, AUTHOR.linkedin],
+    sameAs: AUTHOR.sameAs,
   },
 ];
 ---
@@ -41,6 +44,10 @@ const jsonld = [
     <title>{t.title}</title>
     <meta name="description" content={t.description} />
     <meta name="author" content={AUTHOR.name} />
+    <link rel="author" href={AUTHOR.url} />
+    <link rel="me" href={AUTHOR.url} />
+    <link rel="me" href={AUTHOR.github} />
+    <link rel="me" href={AUTHOR.linkedin} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="en" href={`${site}/`} />
     <link rel="alternate" hreflang="es" href={`${site}/es`} />
