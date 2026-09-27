@@ -1,5 +1,5 @@
 // Highlights /keelokit:<skill> wherever it appears in a sentence.
-export const cmd = (s: string) => s.replace(/\/keelokit(:([a-z]+))?/g, (_m: string, _c: string, name?: string) =>
+export const cmd = (s: string) => s.replace(/\/keelokit(:([a-z][a-z-]*[a-z]))?/g, (_m: string, _c: string, name?: string) =>
   `<span class="cmd"><span class="cmd-ns">/keelokit</span>${name ? `:<span class="cmd-name">${name}</span>` : ''}</span>`);
 // Real output formats of verify, doctor and the guard (Keelokit 0.5.0's template/scripts/verify.sh,
 // .keelokit/bin/doctor.py and guard.py); verify runs with an API and a web app, the doctor lines
