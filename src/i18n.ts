@@ -26,7 +26,8 @@ const en = {
   lang: 'en',
   title: 'Keelokit · a personal Claude Code harness for TypeScript monorepos',
   description:
-    'Keelokit is Leopoldo Simini’s personal Claude Code harness for building apps in TypeScript monorepos. Open source, a hobby project, shared in case it helps.',
+    'A personal Claude Code harness for building apps in TypeScript monorepos. A hobby project by Leopoldo Simini (@leosimini), built on weekends and late nights, with music on.',
+  ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
   nav: { how: 'How it starts', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
   hero: {
     eyebrow: 'Open source · a personal Claude Code harness',
@@ -165,7 +166,8 @@ const es: typeof en = {
   lang: 'es',
   title: 'Keelokit · un harness personal de Claude Code para monorepos TypeScript',
   description:
-    'Keelokit es el harness personal de Claude Code de Leopoldo Simini para construir aplicaciones en monorepos TypeScript. Open source, un proyecto hobby, compartido por si le sirve a alguien.',
+    'Un harness personal de Claude Code para construir aplicaciones en monorepos TypeScript. Un proyecto hobby de Leopoldo Simini (@leosimini), hecho los fines de semana y en noches de música y código.',
+  ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
   nav: { how: 'Cómo arranca', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
   hero: {
     eyebrow: 'Open source · un harness personal de Claude Code',
