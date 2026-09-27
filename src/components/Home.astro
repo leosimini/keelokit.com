@@ -1,0 +1,182 @@
+---
+import Foil from './Foil.astro';
+import Out from './Out.astro';
+import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
+import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = T[locale];
+const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
+---
+<header class="top wrap">
+  <a class="brand" href={locale === 'en' ? '/' : '/es'}>
+    <img src="/icon.svg" width="32" height="32" alt="" />
+    <span>Keelokit</span>
+  </a>
+  <nav aria-label={locale === 'en' ? 'Main' : 'Principal'}>
+    <a href={pageHref('how')}>{t.nav.how}</a>
+    <a href={pageHref('commands')}>{t.nav.commands}</a>
+    <a href={pageHref('keel')}>{t.nav.keel}</a>
+    <a href={pageHref('try')}>{t.nav.try}</a>
+    <a class="gh" href={REPO} rel="noopener">GitHub</a>
+    <a class="lang" href={t.nav.switchHref} hreflang={locale === 'en' ? 'es' : 'en'}>{t.nav.switch}</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-copy">
+      <p class="eyebrow">{t.hero.eyebrow}</p>
+      <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
+      <p class="lead">{t.hero.lead}</p>
+      <div class="install">
+        <pre id="install-hero"><code>{INSTALL.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
+        <button type="button" class="copy" data-copy={INSTALL.join('\n')} data-idle={t.hero.copy} data-done={t.hero.copied}>
+          <span aria-live="polite">{t.hero.copy}</span>
+        </button>
+      </div>
+      <p class="actions">
+        <a class="btn" href={REPO} rel="noopener">{t.hero.github} <span aria-hidden="true">↗</span></a>
+        <a class="dive" href={pageHref('how')}>{t.hero.scroll} <span aria-hidden="true">↓</span></a>
+      </p>
+    </div>
+    <Foil />
+  </section>
+
+  <div class="sea">
+    <p class="surface wrap">{t.surface}</p>
+
+    <section id="how" class="block wrap">
+      <p class="depth">{t.how.depth}</p>
+      <div class="rise">
+        <h2>{t.how.title}</h2>
+        <p class="sub" set:html={cmd(t.how.lead)} />
+      </div>
+      <ol class="steps rise">
+        {t.how.steps.map(([name, text], i) => (
+          <li><span class="n">{String(i + 1).padStart(2, '0')}</span><h3>{name}</h3><p>{text}</p></li>
+        ))}
+      </ol>
+      <div class="pair rise">
+        <figure class="tree">
+          <figcaption>{t.how.treeTitle}</figcaption>
+          <ul class="rows">{treeRows(t.how.tree).map((r) => <li style={`--d:${r.depth}`}><span class="guides" aria-hidden="true" /><span class:list={["path", { dir: r.name.endsWith("/") }]}>{r.name}</span>{r.note && <span class="note">{r.note}</span>}</li>)}</ul>
+          <p class="fine">{t.how.treeNote}</p>
+        </figure>
+        <figure class="term">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>{t.verifyTitle}</figcaption>
+          <pre><code>{VERIFY.map(([c, text]) => <Out c={c} text={text} />)}</code></pre>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block wrap">
+      <h2 class="rise">{t.start.title}</h2>
+      <div class="table rise" role="region" aria-label={t.start.title} tabindex="0">
+        <table>
+          <thead><tr>{t.start.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+          <tbody>{t.start.rows.map(([have, start, get]) => <tr><td>{have}</td><td><code set:html={cmd(start)} /></td><td>{get}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="commands" class="block wrap">
+      <p class="depth">{t.commands.depth}</p>
+      <div class="rise">
+        <h2>{t.commands.title}</h2>
+        <p class="sub" set:html={cmd(t.commands.lead)} />
+      </div>
+      <ul class="commands rise">
+        {t.commands.items.map(([name, text]) => (
+          <li><code set:html={cmd(name)} /><p>{text}</p></li>
+        ))}
+      </ul>
+    </section>
+
+    <section id="keel" class="block wrap">
+      <p class="depth">{t.keel.depth}</p>
+      <div class="rise">
+        <h2>{t.keel.title}</h2>
+        <p class="sub">{t.keel.lead}</p>
+      </div>
+      <div class="principles rise">
+        {t.keel.principles.map(([title, text], i) => (
+          <article><span class="n">{['I', 'II', 'III'][i]}</span><h3>{title}</h3><p>{text}</p></article>
+        ))}
+      </div>
+      <div class="pair rise">
+        <figure class="term">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>{t.keel.doctorTitle}<span class="tag">{t.keel.example}</span></figcaption>
+          <pre><code>{DOCTOR.map(([c, text]) => <Out c={c} text={text} />)}</code></pre>
+        </figure>
+        <figure class="rules">
+          <figcaption>{t.keel.rulesTitle}</figcaption>
+          <ul>
+            {t.keel.rules.map(([id, rule, check]) => (
+              <li><code class="rid">{id}</code><span class="rule">{rule}</span><span class="check">{check}</span></li>
+            ))}
+          </ul>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block wrap">
+      <p class="depth">{t.auto.depth}</p>
+      <h2 class="rise">{t.auto.title}</h2>
+      <div class="pair rise">
+        <ol class="timeline">
+          {t.auto.items.map(([when, what]) => <li><h3>{when}</h3><p>{what}</p></li>)}
+        </ol>
+        <figure class="term">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>{t.auto.guardExample}</figcaption>
+          <pre><code>{GUARD.map(([c, text]) => <Out c={c} text={text} />)}</code></pre>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block wrap">
+      <p class="depth">{t.honest.depth}</p>
+      <h2 class="rise">{t.honest.title}</h2>
+      <div class="honest rise">
+        {t.honest.items.map(([title, text]) => <article><h3>{title}</h3><p set:html={cmd(text)} /></article>)}
+      </div>
+      <aside class="why rise">
+        <h2>{t.note.title}</h2>
+        {t.note.body.map((p) => <p>{p}</p>)}
+        <p class="sign">— {t.note.sign}</p>
+      </aside>
+      <p class="learned rise"><strong>{t.honest.learnedTitle}.</strong> {t.honest.learned}</p>
+    </section>
+
+    <section id="try" class="block wrap try">
+      <p class="depth">{t.try.depth}</p>
+      <div class="rise">
+        <h2>{t.try.title}</h2>
+        <div class="install">
+          <pre id="install-try"><code>{INSTALL.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
+          <button type="button" class="copy" data-copy={INSTALL.join('\n')} data-idle={t.hero.copy} data-done={t.hero.copied}>
+            <span aria-live="polite">{t.hero.copy}</span>
+          </button>
+        </div>
+        <p class="sub" set:html={cmd(t.try.lead)} />
+        <p class="fine">{t.try.needs}</p>
+        <p class="actions"><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+      </div>
+      <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />
+    </section>
+
+    <footer class="seabed">
+      <div class="wrap">
+        <p>{t.footer.made} <a href={AUTHOR.url} rel="author">{AUTHOR.name}</a>, {t.footer.when}</p>
+        <p class="links">
+          <a href={REPO} rel="noopener">GitHub</a>
+          <a href={`${REPO}/blob/main/CHANGELOG.md`} rel="noopener">Changelog</a>
+          <a href={`${REPO}/blob/main/LICENSE`} rel="noopener">{t.footer.license}</a>
+          <a href={AUTHOR.linkedin} rel="me noopener">LinkedIn</a>
+          <a href={t.nav.switchHref} hreflang={locale === 'en' ? 'es' : 'en'}>{t.nav.switch}</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+</main>

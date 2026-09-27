@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://keelokit.com/sitemap-index.xml

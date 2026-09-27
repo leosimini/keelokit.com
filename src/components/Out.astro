@@ -1,0 +1,6 @@
+---
+// One line of terminal output. `cmdline` gets a "$" prompt, `agentline` an "agent ›" prompt.
+interface Props { c: string; text: string }
+const { c, text } = Astro.props;
+---
+<span class:list={['line', c]}>{c === 'cmdline' && <span class="prompt" aria-hidden="true">$ </span>}{c === 'agentline' && <span class="prompt agent" aria-hidden="true">agent › </span>}{text}</span>
