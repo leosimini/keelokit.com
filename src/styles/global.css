@@ -125,6 +125,9 @@ body { background: linear-gradient(var(--ground) 0 600px, var(--abyss) 600px); }
 .sea h2 { font-family: var(--font-display); font-size: clamp(36px, 4.6vw, 58px); line-height: 1.04; letter-spacing: -0.01em; color: var(--foam); }
 .sub { margin-top: 18px; font-size: 18px; color: var(--foam-2); max-width: 640px; }
 .fine { font-size: 14px; color: var(--foam-3); margin-top: 14px; }
+.release { font-size: 14px; color: var(--ink-2); margin-top: 18px; }
+.release[hidden] { display: none; }
+.release a { color: inherit; }
 .sea h3 { font-size: 18px; font-weight: 600; color: var(--foam); }
 .cmd { font-family: var(--font-mono); font-size: 0.9em; white-space: nowrap; }
 .cmd-ns { color: var(--foam-3); }
@@ -182,7 +185,7 @@ td:first-child { color: var(--foam); }
 @media (max-width: 620px) { .commands { grid-template-columns: 1fr; } }
 
 /* The keel */
-.principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 52px; }
+.principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 56px; margin-top: 52px; }
 .principles .n { font-family: var(--font-display); font-style: italic; font-size: 34px; color: var(--foil); line-height: 1; }
 .principles h3 { font-family: var(--font-display); font-size: 28px; font-weight: 500; line-height: 1.1; margin: 12px 0 10px; }
 .principles p { color: var(--foam-2); font-size: 16px; }

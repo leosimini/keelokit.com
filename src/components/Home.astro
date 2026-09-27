@@ -3,11 +3,13 @@ import Foil from './Foil.astro';
 import Out from './Out.astro';
 import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
 import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
+import { fetchRelease, releaseDate, releaseNotes } from '../lib/release';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = T[locale];
 const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
+const release = await fetchRelease();
 ---
 <header class="top wrap">
   <a class="brand" href={locale === 'en' ? '/' : '/es'}>
@@ -39,6 +41,10 @@ const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
       <p class="actions">
         <a class="btn" href={REPO} rel="noopener">{t.hero.github} <span aria-hidden="true">↗</span></a>
         <a class="dive" href={pageHref('how')}>{t.hero.scroll} <span aria-hidden="true">↓</span></a>
+      </p>
+      <p class="release" data-release data-lang={t.lang} hidden={!release}>
+        {t.hero.release}: <strong data-release-version>{release && `v${release.version}`}</strong><span data-release-date>{release?.date && ` · ${releaseDate(release.date, t.lang)}`}</span>
+        · <a data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener">{t.hero.notes} <span aria-hidden="true">↗</span></a>
       </p>
     </div>
     <Foil />
@@ -102,7 +108,7 @@ const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
       </div>
       <div class="principles rise">
         {t.keel.principles.map(([title, text], i) => (
-          <article><span class="n">{['I', 'II', 'III'][i]}</span><h3>{title}</h3><p>{text}</p></article>
+          <article><span class="n">{['I', 'II', 'III', 'IV'][i]}</span><h3>{title}</h3><p>{text}</p></article>
         ))}
       </div>
       <div class="pair rise">
