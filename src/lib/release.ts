@@ -31,5 +31,6 @@ export const releaseDate = (date: string, lang: string) =>
   new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${date}T00:00:00Z`));
 
+// Each release has a GitHub Release with its CHANGELOG entry as notes (Keelokit's Release workflow).
 export const releaseNotes = (version: string) =>
-  `https://github.com/leosimini/keelokit/blob/v${version}/CHANGELOG.md`;
+  `https://github.com/leosimini/keelokit/releases/tag/v${version}`;

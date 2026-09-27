@@ -104,7 +104,7 @@ const jsonld = [
           if (!r) return;
           line.querySelector('[data-release-version]')!.textContent = `v${r.version}`;
           line.querySelector('[data-release-date]')!.textContent = r.date ? ` · ${releaseDate(r.date, line.dataset.lang!)}` : '';
-          line.querySelector<HTMLAnchorElement>('[data-release-notes]')!.href = releaseNotes(r.version);
+          line.querySelectorAll<HTMLAnchorElement>('[data-release-notes]').forEach((a) => { a.href = releaseNotes(r.version); });
           line.hidden = false;
         });
       }

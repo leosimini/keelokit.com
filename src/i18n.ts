@@ -28,7 +28,7 @@ const en = {
   description:
     'A Claude Code harness for building apps in TypeScript monorepos: rules backed by checks, tests written before the code, and bugs caught by class. A hobby project by Leopoldo Simini (@leosimini).',
   ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
-  nav: { how: 'How it starts', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
+  nav: { how: 'How it starts', dashboard: 'Dashboard', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
   hero: {
     eyebrow: 'Open source · a Claude Code harness',
     title: ['The keel under', 'my apps.'],
@@ -79,7 +79,7 @@ const en = {
       ['A repo you already have', '/keelokit:adopt', 'The rules mapped to its checks, and the rest as dated debt'],
       ['A story to build', '/keelokit:build', 'Tests written first, code that passes them, a verified result'],
       ['Bugs that keep slipping through', '/keelokit:bugbash', 'Root-cause fixes, and a check that covers the whole class of every bug that escaped'],
-      ['A project to follow', '/keelokit:dashboard', 'One page with every stage, what waits for you and the next step, with buttons that ask Claude for it'],
+      ['A project to follow', '/keelokit:dashboard', 'One page with every stage, what waits for you and the next step, with buttons that ask Claude for it', 'new'],
     ],
   },
   verifyTitle: 'The skeleton, checked end to end',
@@ -94,6 +94,7 @@ const en = {
   commands: {
     depth: '−8 m',
     title: 'Every command',
+    badge: 'New',
     lead: 'Ten skills. You can run them one by one, let /keelokit tell you what comes next, or follow it all on the dashboard.',
     items: [
       ['/keelokit:kickstart', 'From an idea to a working skeleton: intake, PRD, stack, generated monorepo with CI, first backlog.'],
@@ -102,10 +103,27 @@ const en = {
       ['/keelokit:backlog', 'Epics and stories with acceptance scenarios and the invariants they keep, in waves so parallel work never collides.'],
       ['/keelokit:build', 'One story at a time: the verifier writes the tests first, a builder makes them pass, a reviewer reads the diff and a breaker tries to break it.'],
       ['/keelokit:bugbash', 'A bug hunt across data, API, integrity, UX, i18n, accessibility and security. Every escaped bug adds a check for its whole class.'],
-      ['/keelokit:dashboard', 'One page, rebuilt from the repo: every stage and its status, what to review with the documents inline, stories by development wave and by epic, bug bashes, the decisions taken, and buttons that ask Claude for the next step.'],
+      ['/keelokit:dashboard', 'One page, rebuilt from the repo: every stage and its status, what to review with the documents inline, stories by development wave and by epic, bug bashes, the decisions taken, and buttons that ask Claude for the next step.', 'new'],
       ['/keelokit:doctor', 'Is every rule still backed by a check that works? Adds rules, registers exceptions.'],
       ['/keelokit:upgrade', 'Brings a project to a newer template without touching its product code.'],
       ['/keelokit', 'Where the project stands, what comes next, what’s waiting for your decision.'],
+    ],
+  },
+  dash: {
+    depth: '−11 m',
+    badge: 'New in 0.6',
+    title: 'The whole project on one page',
+    lead: '/keelokit:dashboard builds a page from your repo, in your language: where the project is, what waits for you, and the next step. It opens at the start of kickstart, refreshes at every stage, and tells you where a paused run stopped.',
+    caption: 'Bookline, a sample project, halfway through its build',
+    open: 'Open full size',
+    darkCaption: 'Light or dark, one click',
+    parts: [
+      ['hero', 'Where you are, and what comes next', 'The stage you’re in, the whole road ahead, and the next step with its command ready to copy. Status reads at a glance: done, waiting for you, in progress.'],
+      ['review', 'Approve knowing what you approve', 'The stage waiting for you opens by itself with what to check: the PRD’s scope and metrics, the stack, the documents inline. Approve or ask for changes from the same place.'],
+      ['backlog', 'Stories by development wave, or by epic', 'Progress per wave, what each story waits for, and a button to build one story or a whole wave in parallel. Only the wave with work left stays open.'],
+      ['bugbash', 'Every bug bash, and what it left behind', 'What each bug hunt found, its severity, the check that now covers that kind of bug, the decisions it needs from you, and the stories it added to the backlog.'],
+      ['side', 'The decisions, fixed once', 'Greenfield or brownfield, stage by stage or automatic, one story at a time or in parallel, the apps and the recorded decisions. Keelokit doesn’t ask them again.'],
+      ['ask', 'Ask Claude from the page', 'Every action fills a box with its request. Send it to the Claude session watching the dashboard, or copy it into any chat. On claude.ai it’s a private page; in a terminal, a local file.'],
     ],
   },
   keel: {
@@ -175,7 +193,7 @@ const es: typeof en = {
   description:
     'Un harness de Claude Code para construir aplicaciones en monorepos TypeScript: reglas respaldadas por checks, tests escritos antes que el código y bugs atrapados por clase. Un proyecto hobby de Leopoldo Simini (@leosimini).',
   ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
-  nav: { how: 'Cómo arranca', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
+  nav: { how: 'Cómo arranca', dashboard: 'Tablero', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
   hero: {
     eyebrow: 'Open source · un harness de Claude Code',
     title: ['La quilla debajo', 'de mis apps.'],
@@ -226,7 +244,7 @@ const es: typeof en = {
       ['Un repo que ya existe', '/keelokit:adopt', 'Las reglas mapeadas a sus checks, y el resto como deuda con fecha'],
       ['Una historia para construir', '/keelokit:build', 'Tests escritos primero, código que los pasa y un resultado verificado'],
       ['Bugs que se siguen escapando', '/keelokit:bugbash', 'Arreglos en la causa raíz, y un check que cubre toda la clase de cada bug que se escapó'],
-      ['Un proyecto para seguir', '/keelokit:dashboard', 'Una página con cada etapa, lo que te espera y el próximo paso, con botones para pedírselo a Claude'],
+      ['Un proyecto para seguir', '/keelokit:dashboard', 'Una página con cada etapa, lo que te espera y el próximo paso, con botones para pedírselo a Claude', 'new'],
     ],
   },
   verifyTitle: 'El esqueleto, verificado de punta a punta',
@@ -241,6 +259,7 @@ const es: typeof en = {
   commands: {
     depth: '−8 m',
     title: 'Todos los comandos',
+    badge: 'Nuevo',
     lead: 'Diez skills. Podés correrlos uno por uno, dejar que /keelokit te diga qué sigue, o seguir todo en el tablero.',
     items: [
       ['/keelokit:kickstart', 'De una idea a un esqueleto que funciona: intake, PRD, stack, monorepo generado con CI y primer backlog.'],
@@ -249,10 +268,27 @@ const es: typeof en = {
       ['/keelokit:backlog', 'Épicas e historias con escenarios de aceptación y los invariantes que respetan, en olas de desarrollo para que el trabajo en paralelo no choque.'],
       ['/keelokit:build', 'Una historia por vez: el verificador escribe primero los tests, un builder los hace pasar, un revisor lee el diff y un breaker intenta romperla.'],
       ['/keelokit:bugbash', 'Una cacería de bugs en datos, API, integridad, UX, i18n, accesibilidad y seguridad. Cada bug que se escapó suma un check para toda su clase.'],
-      ['/keelokit:dashboard', 'Una página que se arma desde el repo: cada etapa y su estado, qué revisar con los documentos a la vista, las historias por ola de desarrollo y por épica, los bug bashes, las decisiones tomadas y botones para pedirle a Claude el próximo paso.'],
+      ['/keelokit:dashboard', 'Una página que se arma desde el repo: cada etapa y su estado, qué revisar con los documentos a la vista, las historias por ola de desarrollo y por épica, los bug bashes, las decisiones tomadas y botones para pedirle a Claude el próximo paso.', 'new'],
       ['/keelokit:doctor', '¿Cada regla sigue respaldada por un check que funciona? Suma reglas y registra excepciones.'],
       ['/keelokit:upgrade', 'Lleva un proyecto a un template más nuevo sin tocar el código del producto.'],
       ['/keelokit', 'Dónde está el proyecto, qué sigue y qué espera tu decisión.'],
+    ],
+  },
+  dash: {
+    depth: '−11 m',
+    badge: 'Nuevo en 0.6',
+    title: 'Todo el proyecto en una página',
+    lead: '/keelokit:dashboard arma una página desde tu repo, en tu idioma: dónde está el proyecto, qué te espera y cuál es el próximo paso. Se abre al empezar kickstart, se actualiza en cada etapa y te dice dónde quedó un proceso a medias.',
+    caption: 'Turnero, un proyecto de ejemplo, a mitad de la construcción',
+    open: 'Ver en tamaño completo',
+    darkCaption: 'Claro u oscuro, con un clic',
+    parts: [
+      ['hero', 'Dónde estás y qué sigue', 'La etapa en la que estás, todo el camino por delante y el próximo paso con su comando listo para copiar. El estado se lee de un vistazo: aprobado, te espera a vos, en curso.'],
+      ['review', 'Aprobar sabiendo qué aprobás', 'La etapa que te espera se abre sola con lo que hay que mirar: el alcance y las métricas del PRD, el stack, los documentos a la vista. Aprobás o pedís cambios desde ahí mismo.'],
+      ['backlog', 'Historias por ola de desarrollo o por épica', 'El avance de cada ola, qué espera cada historia y un botón para construir una historia o una ola entera en paralelo. Solo queda abierta la ola con trabajo pendiente.'],
+      ['bugbash', 'Cada bug bash y lo que dejó', 'Qué encontró cada cacería de errores, su severidad, el control que ahora cubre ese tipo de error, las decisiones que necesita de vos y las historias que sumó al backlog.'],
+      ['side', 'Las decisiones, fijas', 'Greenfield o brownfield, por etapas o automático, de a una historia o en paralelo, las aplicaciones y las decisiones registradas. Keelokit no te las vuelve a preguntar.'],
+      ['ask', 'Pedile a Claude desde la página', 'Cada acción llena una caja con su pedido. Lo enviás a la sesión de Claude que mira el tablero, o lo copiás en cualquier chat. En claude.ai es una página privada; en una terminal, un archivo local.'],
     ],
   },
   keel: {

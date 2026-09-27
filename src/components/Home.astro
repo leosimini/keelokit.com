@@ -4,12 +4,16 @@ import Out from './Out.astro';
 import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
 import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
 import { fetchRelease, releaseDate, releaseNotes } from '../lib/release';
+import { SHOTS } from '../lib/shots';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = T[locale];
 const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
 const release = await fetchRelease();
+const shot = (key: string) => ({ src: `/img/dashboard/${locale}/${key}.webp`, ...SHOTS[locale][key] });
+const full = shot('full');
+const dark = shot('dark');
 ---
 <header class="top wrap">
   <a class="brand" href={locale === 'en' ? '/' : '/es'}>
@@ -18,6 +22,7 @@ const release = await fetchRelease();
   </a>
   <nav aria-label={locale === 'en' ? 'Main' : 'Principal'}>
     <a href={pageHref('how')}>{t.nav.how}</a>
+    <a href={pageHref('dashboard')}>{t.nav.dashboard}</a>
     <a href={pageHref('commands')}>{t.nav.commands}</a>
     <a href={pageHref('keel')}>{t.nav.keel}</a>
     <a href={pageHref('try')}>{t.nav.try}</a>
@@ -43,7 +48,7 @@ const release = await fetchRelease();
         <a class="dive" href={pageHref('how')}>{t.hero.scroll} <span aria-hidden="true">↓</span></a>
       </p>
       <p class="release" data-release data-lang={t.lang} hidden={!release}>
-        {t.hero.release}: <strong data-release-version>{release && `v${release.version}`}</strong><span data-release-date>{release?.date && ` · ${releaseDate(release.date, t.lang)}`}</span>
+        {t.hero.release}: <a class="version" data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener"><strong data-release-version>{release && `v${release.version}`}</strong></a><span data-release-date>{release?.date && ` · ${releaseDate(release.date, t.lang)}`}</span>
         · <a data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener">{t.hero.notes} <span aria-hidden="true">↗</span></a>
       </p>
     </div>
@@ -82,7 +87,7 @@ const release = await fetchRelease();
       <div class="table rise" role="region" aria-label={t.start.title} tabindex="0">
         <table>
           <thead><tr>{t.start.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
-          <tbody>{t.start.rows.map(([have, start, get]) => <tr><td>{have}</td><td><code set:html={cmd(start)} /></td><td>{get}</td></tr>)}</tbody>
+          <tbody>{t.start.rows.map(([have, start, get, badge]) => <tr><td>{have}</td><td><code set:html={cmd(start)} />{badge && <span class="new">{t.commands.badge}</span>}</td><td>{get}</td></tr>)}</tbody>
         </table>
       </div>
     </section>
@@ -94,10 +99,46 @@ const release = await fetchRelease();
         <p class="sub" set:html={cmd(t.commands.lead)} />
       </div>
       <ul class="commands rise">
-        {t.commands.items.map(([name, text]) => (
-          <li><code set:html={cmd(name)} /><p>{text}</p></li>
+        {t.commands.items.map(([name, text, badge]) => (
+          <li class:list={{ 'is-new': badge }}><code set:html={cmd(name)} />{badge && <span class="new">{t.commands.badge}</span>}<p>{text}</p></li>
         ))}
       </ul>
+    </section>
+
+    <section id="dashboard" class="block wrap dash">
+      <p class="depth">{t.dash.depth}</p>
+      <div class="rise">
+        <p><span class="new">{t.dash.badge}</span></p>
+        <h2>{t.dash.title}</h2>
+        <p class="sub" set:html={cmd(t.dash.lead)} />
+      </div>
+      <figure class="shot rise">
+        <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>{t.dash.caption}</span><a class="tag" href={full.src} target="_blank" rel="noopener">{t.dash.open} <span aria-hidden="true">↗</span></a></figcaption>
+        <div class="scroller" tabindex="0" aria-label={t.dash.caption}>
+          <img src={full.src} width={full.w} height={full.h} alt={`${t.dash.title}: ${t.dash.caption}`} loading="lazy" decoding="async" />
+        </div>
+      </figure>
+      <div class="parts">
+        {t.dash.parts.map(([key, title, text], i) => {
+          const s = shot(key);
+          return (
+            <article class:list={['part', 'rise', { flip: i % 2 === 1 }]}>
+              <a class:list={['frame', { narrow: s.w < 900, tall: s.h / s.w > 0.95 }]} href={s.src} target="_blank" rel="noopener">
+                <img src={s.src} width={s.w} height={s.h} alt={title} loading="lazy" decoding="async" />
+              </a>
+              <div class="part-copy">
+                <span class="n">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      <figure class="shot dark rise">
+        <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>{t.dash.darkCaption}</span></figcaption>
+        <a class="frame" href={dark.src} target="_blank" rel="noopener"><img src={dark.src} width={dark.w} height={dark.h} alt={t.dash.darkCaption} loading="lazy" decoding="async" /></a>
+      </figure>
     </section>
 
     <section id="keel" class="block wrap">
