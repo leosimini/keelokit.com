@@ -5,6 +5,7 @@ import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
 import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
 import { fetchRelease, releaseDate, releaseNotes } from '../lib/release';
 import { SHOTS } from '../lib/shots';
+import { STACK } from '../lib/stack';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -80,6 +81,14 @@ const dark = shot('dark');
           <pre><code>{VERIFY.map(([c, text]) => <Out c={c} text={text} />)}</code></pre>
         </figure>
       </div>
+      <div class="stack rise">
+        <p class="stack-title">{t.how.stackTitle}</p>
+        <ul>
+          {STACK.map((i) => (
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={i.d} /></svg><span>{i.label}</span></li>
+          ))}
+        </ul>
+      </div>
     </section>
 
     <section class="block wrap">
@@ -87,7 +96,7 @@ const dark = shot('dark');
       <div class="table rise" role="region" aria-label={t.start.title} tabindex="0">
         <table>
           <thead><tr>{t.start.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
-          <tbody>{t.start.rows.map(([have, start, get, badge]) => <tr><td>{have}</td><td><code set:html={cmd(start)} />{badge && <span class="new">{t.commands.badge}</span>}</td><td>{get}</td></tr>)}</tbody>
+          <tbody>{t.start.rows.map(([have, start, get, badge]) => <tr><td>{have}</td><td><code set:html={cmd(start)} />{badge && <span class="new">{t.commands.badge}</span>}</td><td set:html={cmd(get)} /></tr>)}</tbody>
         </table>
       </div>
     </section>
@@ -98,11 +107,34 @@ const dark = shot('dark');
         <h2>{t.commands.title}</h2>
         <p class="sub" set:html={cmd(t.commands.lead)} />
       </div>
-      <ul class="commands rise">
-        {t.commands.items.map(([name, text, badge]) => (
-          <li class:list={{ 'is-new': badge }}><code set:html={cmd(name)} />{badge && <span class="new">{t.commands.badge}</span>}<p>{text}</p></li>
+      <div class="cmd-groups">
+        {t.commands.groups.map((g) => (
+          <section class="cmd-group rise" aria-labelledby={`cmd-${g.id}`}>
+            <header><h3 id={`cmd-${g.id}`}>{g.label}</h3><p>{g.lead}</p></header>
+            <div class="commands">
+              {g.items.map((c) => (
+                <details class:list={['command', { 'is-new': c.badge }]}>
+                  <summary>
+                    <span class="cmd-line"><code set:html={cmd(c.name)} />{c.badge && <span class="new">{t.commands.badge}</span>}</span>
+                    <p>{c.text}</p>
+                    <span class="more">{t.commands.more}<span class="chev" aria-hidden="true"></span></span>
+                  </summary>
+                  <div class="command-body">
+                    <div>
+                      <p class="k">{t.commands.how}</p>
+                      <ol>{c.steps.map((step) => <li set:html={cmd(step)} />)}</ol>
+                    </div>
+                    <div>
+                      <p class="k">{t.commands.when}</p>
+                      <p>{c.when}</p>
+                    </div>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
         ))}
-      </ul>
+      </div>
     </section>
 
     <section id="dashboard" class="block wrap dash">
@@ -129,7 +161,7 @@ const dark = shot('dark');
               <div class="part-copy">
                 <span class="n">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{title}</h3>
-                <p>{text}</p>
+                <p set:html={cmd(text)} />
               </div>
             </article>
           );
