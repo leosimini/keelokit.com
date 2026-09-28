@@ -1,0 +1,140 @@
+---
+// The page in plain words, for founders and people new to agents: what Keelokit does, who does
+// what, and where each piece runs. The technical part of the page follows it, unchanged.
+import { T, type Locale } from '../i18n';
+import { cmd } from '../lib/content';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = T[locale];
+const p = t.plain;
+const pageHref = (hash: string) => `${locale === 'en' ? '/' : '/es'}#${hash}`;
+const chip = (who: 'you' | 'claude' | 'approve') => ({ cls: who === 'claude' ? 'claude' : 'you', label: p.steps.who[who] });
+const gh = p.where.github;
+const devLinks: [string, string][] = [
+  ['how', t.how.title], ['commands', t.commands.title], ['dashboard', t.dash.title], ['keel', t.keel.title], ['try', t.try.title],
+];
+---
+<section id="plain" class="block wrap">
+  <p class="depth">{p.idea.depth}</p>
+  <div class="rise">
+    <h2>{p.idea.title[0]} <em class="pl-em">{p.idea.title[1]}</em></h2>
+    <p class="sub">{p.idea.lead}</p>
+  </div>
+  <div class="pl-contrast rise">
+    <div class="pl-without"><p class="pl-k">{p.idea.without[0]}</p><p>{p.idea.without[1]}</p></div>
+    <div class="pl-with"><p class="pl-k">{p.idea.with[0]}</p><p>{p.idea.with[1]}</p></div>
+  </div>
+</section>
+
+<section class="block wrap">
+  <p class="depth">{p.steps.depth}</p>
+  <div class="rise">
+    <h2>{p.steps.title}</h2>
+    <p class="pl-legend">
+      <span><span class="pl-chip you">{p.steps.who.you}</span> {p.steps.legend.you}</span>
+      <span><span class="pl-chip claude">{p.steps.who.claude}</span> {p.steps.legend.claude}</span>
+    </p>
+  </div>
+  <ol class="steps pl-steps rise">
+    {p.steps.items.map(([name, text, who], i) => (
+      <li>
+        <span class="n">{String(i + 1).padStart(2, '0')}</span>
+        <h3>{name}</h3>
+        <p>{text}</p>
+        <span class="pl-who">{who.map((w) => { const c = chip(w); return <span class:list={['pl-chip', c.cls]}>{c.label}</span>; })}</span>
+      </li>
+    ))}
+  </ol>
+  <p class="pl-mode rise" set:html={p.steps.mode} />
+</section>
+
+<section class="block wrap">
+  <p class="depth">{p.crew.depth}</p>
+  <div class="rise">
+    <h2>{p.crew.title}</h2>
+    <p class="sub">{p.crew.lead}</p>
+  </div>
+  <div class="pl-crew rise">
+    {p.crew.roles.map(([agent, name, text], i) => (
+      <article class:list={['pl-role', { key: i === 0, builder: i === 1 }]}>
+        <code class="pl-agent">{agent}</code>
+        <h3>{name}</h3>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+  <p class="pl-rule rise">{p.crew.rule}</p>
+</section>
+
+<section class="block wrap">
+  <p class="depth">{p.where.depth}</p>
+  <div class="rise">
+    <h2>{p.where.title}</h2>
+    <p class="sub">{p.where.lead}</p>
+  </div>
+  <div class="pl-map rise">
+    <div class="pl-node">
+      <p class="pl-place">{p.where.computer[0]}</p>
+      <h3>{p.where.computer[1]}</h3>
+      <p>{p.where.computer[2]}</p>
+    </div>
+    <div class="pl-arrow" aria-hidden="true"><svg viewBox="0 0 56 14"><path d="M0 7h50M44 1l8 6-8 6" /></svg>{p.where.arrows[0]}</div>
+    <div class="pl-node">
+      <p class="pl-place">{gh[0]}</p>
+      <h3>{gh[1]}</h3>
+      <ul>{(gh[2] as string[]).map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div class="pl-arrow" aria-hidden="true"><svg viewBox="0 0 56 14"><path d="M0 7h50M44 1l8 6-8 6" /></svg>{p.where.arrows[1]}</div>
+    <div class="pl-node">
+      <p class="pl-place">{p.where.fly[0]}</p>
+      <h3>{p.where.fly[1]}</h3>
+      <p>{p.where.fly[2]}</p>
+      <div class="pl-envs">
+        <div class="pl-env"><b>{p.where.staging[0]}</b><span>{p.where.staging[1]}</span></div>
+        <div class="pl-gate"><i aria-hidden="true"></i>{p.where.gate}</div>
+        <div class="pl-env prod"><b>{p.where.production[0]}</b><span>{p.where.production[1]}</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pl-also rise">
+    {p.where.also.map(([name, text]) => <div><b>{name}</b><span>{text}</span></div>)}
+  </div>
+</section>
+
+<section class="block wrap">
+  <p class="depth">{p.split.depth}</p>
+  <h2 class="rise">{p.split.title}</h2>
+  <div class="pl-split rise">
+    <div class="pl-col you">
+      <h3><span class="pl-chip you">{p.steps.who.you}</span></h3>
+      <ol>{p.split.you.map((item) => <li>{item}</li>)}</ol>
+      <p class="pl-dash"><a href={pageHref('dashboard')}>{p.split.dash[0]}</a> {p.split.dash[1]}</p>
+    </div>
+    <div class="pl-col claude">
+      <h3><span class="pl-chip claude">{p.steps.who.claude}</span></h3>
+      <ol>{p.split.claude.map((item) => <li>{item}</li>)}</ol>
+    </div>
+  </div>
+</section>
+
+<section class="block wrap">
+  <p class="depth">{p.faq.depth}</p>
+  <h2 class="rise">{p.faq.title}</h2>
+  <div class="pl-faq rise">
+    {p.faq.items.map(([q, a], i) => (
+      <article class:list={{ flag: i === 0 }}><h3>{q}</h3><p set:html={cmd(a)} /></article>
+    ))}
+  </div>
+</section>
+
+<section id="devs" class="block wrap">
+  <p class="depth">{p.devs.depth}</p>
+  <div class="rise">
+    <h2>{p.devs.title[0]} <em class="pl-em">{p.devs.title[1]}</em></h2>
+    <p class="sub">{p.devs.lead}</p>
+  </div>
+  <nav class="pl-devlinks rise" aria-label={p.devs.title.join(' ')}>
+    {devLinks.map(([hash, title]) => <a href={pageHref(hash)}>{title} <span aria-hidden="true">↓</span></a>)}
+  </nav>
+</section>

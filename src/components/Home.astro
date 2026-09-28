@@ -1,9 +1,10 @@
 ---
 import Foil from './Foil.astro';
 import Out from './Out.astro';
+import Plain from './Plain.astro';
 import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
 import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
-import { fetchRelease, releaseDate, releaseNotes } from '../lib/release';
+import { fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
 import { SHOTS } from '../lib/shots';
 import { STACK } from '../lib/stack';
 
@@ -22,7 +23,7 @@ const dark = shot('dark');
     <span>Keelokit</span>
   </a>
   <nav aria-label={locale === 'en' ? 'Main' : 'Principal'}>
-    <a href={pageHref('how')}>{t.nav.how}</a>
+    <a href={pageHref('plain')}>{t.nav.plain}</a>
     <a href={pageHref('dashboard')}>{t.nav.dashboard}</a>
     <a href={pageHref('commands')}>{t.nav.commands}</a>
     <a href={pageHref('keel')}>{t.nav.keel}</a>
@@ -38,19 +39,15 @@ const dark = shot('dark');
       <p class="eyebrow">{t.hero.eyebrow}</p>
       <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
       <p class="lead">{t.hero.lead}</p>
-      <div class="install">
-        <pre id="install-hero"><code>{INSTALL.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
-        <button type="button" class="copy" data-copy={INSTALL.join('\n')} data-idle={t.hero.copy} data-done={t.hero.copied}>
-          <span aria-live="polite">{t.hero.copy}</span>
-        </button>
+      <p class="lead-2">{t.hero.lead2}</p>
+      <div class="doors">
+        <a class="door plain" href={pageHref('plain')}><span class="who">{t.hero.doors.plain[0]}</span><span class="what">{t.hero.doors.plain[1]} <span aria-hidden="true">↓</span></span></a>
+        <a class="door dev" href={pageHref('devs')}><span class="who">{t.hero.doors.dev[0]}</span><span class="what">{t.hero.doors.dev[1]} <span aria-hidden="true">→</span></span></a>
       </div>
-      <p class="actions">
-        <a class="btn" href={REPO} rel="noopener">{t.hero.github} <span aria-hidden="true">↗</span></a>
-        <a class="dive" href={pageHref('how')}>{t.hero.scroll} <span aria-hidden="true">↓</span></a>
-      </p>
       <p class="release" data-release data-lang={t.lang} hidden={!release}>
         {t.hero.release}: <a class="version" data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener"><strong data-release-version>{release && `v${release.version}`}</strong></a><span data-release-date>{release?.date && ` · ${releaseDate(release.date, t.lang)}`}</span>
         · <a data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener">{t.hero.notes} <span aria-hidden="true">↗</span></a>
+        · <a data-release-zip href={release ? releaseZip(release.version) : '#'}>{t.hero.zip} <span aria-hidden="true">↓</span></a>
       </p>
     </div>
     <Foil />
@@ -58,6 +55,8 @@ const dark = shot('dark');
 
   <div class="sea">
     <p class="surface wrap">{t.surface}</p>
+
+    <Plain locale={locale} />
 
     <section id="how" class="block wrap">
       <p class="depth">{t.how.depth}</p>
@@ -240,6 +239,7 @@ const dark = shot('dark');
         </div>
         <p class="sub" set:html={cmd(t.try.lead)} />
         <p class="fine">{t.try.needs}</p>
+        <p class="fine">{t.try.upload} <a data-release-zip href={release ? releaseZip(release.version) : `${REPO}/releases/latest`}>{t.hero.zip} <span aria-hidden="true">↓</span></a></p>
         <p class="actions"><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
       </div>
       <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />

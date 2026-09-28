@@ -31,22 +31,117 @@ const en = {
   description:
     'A Claude Code harness for building apps in TypeScript monorepos: rules backed by checks, tests written before the code, and bugs caught by class. A hobby project by Leopoldo Simini (@leosimini).',
   ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
-  nav: { how: 'How it starts', dashboard: 'Dashboard', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
+  nav: { plain: 'How it works', dashboard: 'Dashboard', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
   hero: {
     eyebrow: 'Open source · a Claude Code harness',
     title: ['The keel under', 'my apps.'],
-    lead:
-      'The harness I use to turn ideas into first versions with coding agents: my stack, my rules, the way I like to work. I maintain it on weekends and late nights, with music on, and share it in case it helps you too.',
-    github: 'View on GitHub',
+    lead: 'Claude Code writes code. Keelokit makes it work like a disciplined team: it writes things down, tests, reviews itself and ships nothing without your OK.',
+    lead2: 'For founders and teams who want a first MVP built right, and for anyone starting out with agents. It’s the method I use on my own projects.',
+    doors: { plain: ['Not technical', 'How does it work?'], dev: ['Developer', '/keelokit:project-new'] },
     copy: 'Copy',
     copied: 'Copied',
-    scroll: 'Dive in',
     release: 'Latest release',
     notes: 'What’s new',
+    zip: 'Download .zip',
   },
   surface: 'What you build rides on top. What keeps it on course sits underneath.',
+  plain: {
+    idea: {
+      depth: '−2 m',
+      title: ['Claude Code can code. What it lacks is', 'a method.'],
+      lead: 'Keelokit is the playbook you install in it, like the one you’d hand someone joining your team: the same stages, the same rules, and someone who checks every delivery.',
+      without: ['Claude Code on its own', 'Ask it to “build me an app” and it will. Its own way each time, with nothing written down, and the one who built it tells you it’s ready.'],
+      with: ['With Keelokit', 'First it understands what you want and writes it down. Then it builds in small pieces, with tests, with another agent reviewing and another trying to break it. You approve what matters.'],
+    },
+    steps: {
+      depth: '−4 m',
+      title: 'From an idea to a published app, in seven steps.',
+      who: { you: 'You', claude: 'Claude', approve: 'You approve' },
+      legend: { you: 'your part: answer and approve', claude: 'does it on its own' },
+      items: [
+        ['Interview', 'It asks about your idea and writes down what problem it solves, for whom and under which rules. What nobody knows yet stays as an open question.', ['you', 'claude']],
+        ['PRD', 'A short document of what gets built and what doesn’t, and how you’ll measure whether it works.', ['claude', 'approve']],
+        ['Skeleton', 'The project’s structure, with tests and automatic checks from day one.', ['claude']],
+        ['Tasks', 'The work split into small stories, each with its “done when…”.', ['claude']],
+        ['Build', 'Story by story, with a team of agents that check each other.', ['claude']],
+        ['Bug hunt', 'It looks for bugs and security holes. Every kind of bug it finds leaves a check so it doesn’t come back.', ['claude']],
+        ['Release', 'First to a test copy. To your users, only when you approve it.', ['claude', 'approve']],
+      ] as [string, string, ('you' | 'claude' | 'approve')[]][],
+      mode: 'You choose once how it works: <b>stage by stage</b>, stopping at each one for your review, or <b>automatic</b>, stopping only where a person is needed: questions only you can answer, accounts, money, production.',
+    },
+    crew: {
+      depth: '−6 m',
+      title: 'Every story goes through a team, not a single agent.',
+      lead: 'Each role is a different agent with its own job, and none of them grades its own work.',
+      roles: [
+        ['verifier', 'The verifier', 'Before anyone writes code, it turns the story’s criteria into tests. At the end it uses the app the way your customer would. It’s the only one that can say “done”.'],
+        ['general agent', 'The builder', 'Writes code until the tests pass. It didn’t write them, and it doesn’t decide when it’s finished.'],
+        ['reviewer', 'The reviewer', 'Reads the code cold against the story and the house rules, like a colleague who didn’t write it.'],
+        ['breaker', 'The breaker', 'Tries to break it: two clicks in a row, two requests at once, a user from another account, the edge of every limit.'],
+        ['context-auditor', 'The auditor', 'Before anything is built, it reads the context and the PRD like an outsider: what’s missing, what contradicts itself.'],
+      ],
+      rule: 'Whoever writes the code can’t say it’s done.',
+    },
+    where: {
+      depth: '−8 m',
+      title: 'Where everything happens.',
+      lead: 'Keelokit has no server of its own and collects nothing. Everything stays on your computer and in your accounts.',
+      computer: ['Your computer', 'Where the work happens', 'Claude Code runs there with Keelokit. That’s where the code is written and the app is tried out while it’s built.'],
+      github: ['GitHub', 'Keeps it and checks it', [
+        'Keeps the code in a private repository in your name, with the history of every change.',
+        'On every change, a robot runs all the tests and checks. If something fails, it doesn’t go in.',
+        'Asks a person to approve before anything reaches production.',
+      ]],
+      fly: ['Fly.io', 'Where the app lives', 'The server on the internet for the back of the app, the part that handles requests, and its database.'],
+      arrows: ['every change', 'if everything passes'],
+      staging: ['Staging', 'A test copy. It updates itself with every approved change.'],
+      gate: 'your OK',
+      production: ['Production', 'The one your customers use. It only changes when you approve.'],
+      also: [
+        ['Web hosting', 'The one you choose. Your web app and your landing page go there.'],
+        ['Docker', 'A test database on your computer, so real data is never touched.'],
+        ['Sentry (optional)', 'Tells you when the app throws errors at your users.'],
+        ['claude.ai', 'Where the project dashboard is published, private to your account.'],
+      ],
+    },
+    split: {
+      depth: '−10 m',
+      title: 'What you put in, and what Claude does.',
+      you: [
+        'You tell it your idea and answer what only you know.',
+        'You approve the PRD.',
+        'You create the accounts (GitHub, Fly.io, hosting) and put in the card.',
+        'You approve every release to production.',
+      ],
+      dash: ['A dashboard', 'shows where things are and what waits for your OK, without reading code.'],
+      claude: [
+        'Writes the context, the PRD and the backlog.',
+        'Sets up the project with its tests and automatic checks.',
+        'Codes, tests and reviews itself with a team of agents.',
+        'Hunts bugs and security problems, and leaves a check for each kind.',
+        'Sets up the servers with a step-by-step guide and verifies that each step worked. It asks before creating anything that costs money.',
+      ],
+    },
+    faq: {
+      depth: '−12 m',
+      title: 'Questions before you start.',
+      items: [
+        ['Do I need to know how to code?', 'Not to use it. To install it, a little: you need Node, Python, Docker and git, on macOS or Linux, and you use it from the terminal. If you’ve never opened one, ask someone to help the first time. After that, Claude guides you.'],
+        ['How much does it cost?', 'Keelokit is free and open source. You pay for your Claude plan, which gets more use than a regular chat because several agents work on each story, and for hosting the app. Claude asks before creating anything paid.'],
+        ['Where does my data stay?', 'In your repository and your accounts. Keelokit has no server of its own and collects nothing.'],
+        ['What if I already have a project?', '/keelokit:project-adopt adds the rules and the checks to your repo without rewriting your code. If your stack is different, you get the rules and the checks, but not the skeleton.'],
+        ['Does it work for any app?', 'It’s built for web and mobile MVPs in TypeScript, on a chosen stack. It’s opinionated on purpose, so it won’t suit everyone.'],
+        ['How fast is it?', 'It puts working, maintainable code first. For small changes there’s a light mode, with fewer steps and fewer agents.'],
+      ],
+    },
+    devs: {
+      depth: '−14 m',
+      title: ['For developers:', 'how it’s built.'],
+      lead: 'The commands, the house rules, the guard and what runs on every commit. The same method, in detail.',
+    },
+  },
   how: {
-    depth: '−2 m',
+    depth: '−16 m',
     title: 'From an idea to a monorepo that runs',
     lead:
       '/keelokit:project-new walks you through five gates and shows each one on a dashboard. Stage by stage, it stops wherever your decision matters; in automatic mode, only where a person is required. Everything gets written down as it goes.',
@@ -97,7 +192,7 @@ const en = {
     sign: 'Leo',
   },
   commands: {
-    depth: '−8 m',
+    depth: '−20 m',
     title: 'Every command',
     badge: 'New',
     lead: "Twelve commands and the entry point, grouped by what you’re doing. Open any of them to see what it does, step by step.",
@@ -133,7 +228,7 @@ const en = {
     ] as CommandGroup[],
   },
   dash: {
-    depth: '−11 m',
+    depth: '−24 m',
     badge: 'New in 0.6',
     title: 'The whole project on one page',
     lead: '/keelokit:project-dashboard builds a page from your repo, in your language: where the project is, what waits for you, and the next step. It opens when /keelokit:project-new starts, refreshes at every stage, and tells you where a paused run stopped.',
@@ -152,7 +247,7 @@ const en = {
     ],
   },
   keel: {
-    depth: '−15 m',
+    depth: '−28 m',
     title: 'The part you don’t see',
     lead: 'Agents kept telling me “done” and leaving bugs behind. These four ideas are what came out of fixing that, project after project.',
     principles: [
@@ -176,7 +271,7 @@ const en = {
     example: 'Example output',
   },
   auto: {
-    depth: '−24 m',
+    depth: '−32 m',
     title: 'What runs on its own',
     items: [
       ['Before every agent action', 'A guard stops secrets, edits to .env files and to applied migrations, skipped hooks, silenced tests and production deploys.'],
@@ -187,7 +282,7 @@ const en = {
     guardExample: 'The guard, stopping an agent',
   },
   honest: {
-    depth: '−32 m',
+    depth: '−36 m',
     title: 'Good to know',
     items: [
       ['It’s opinionated', 'It’s built around my preferences and my stack. It won’t fit every project or every team. If your stack is different, /keelokit:project-adopt still gives you the rules and the checks.'],
@@ -203,6 +298,7 @@ const en = {
     title: 'Try it',
     lead: 'In an empty folder run /keelokit:project-new. In a repo you already have, /keelokit:project-adopt.',
     needs: 'You need Node 22 with pnpm 10, Python 3.11+, uv, Docker and git. macOS or Linux.',
+    upload: 'On claude.ai, upload the latest release’s .zip in Customize → Plugins → Upload.',
     github: 'Code, docs and license on GitHub',
   },
   footer: {
@@ -218,22 +314,117 @@ const es: typeof en = {
   description:
     'Un harness de Claude Code para construir aplicaciones en monorepos TypeScript: reglas respaldadas por checks, tests escritos antes que el código y bugs atrapados por clase. Un proyecto hobby de Leopoldo Simini (@leosimini).',
   ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
-  nav: { how: 'Cómo arranca', dashboard: 'Tablero', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
+  nav: { plain: 'Cómo funciona', dashboard: 'Tablero', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
   hero: {
     eyebrow: 'Open source · un harness de Claude Code',
     title: ['La quilla debajo', 'de mis apps.'],
-    lead:
-      'El harness que uso para convertir ideas en primeras versiones con agentes de código: mi stack, mis reglas, mi forma de trabajar. Lo mantengo los fines de semana y en noches de música y código, y lo comparto por si te sirve a vos también.',
-    github: 'Ver en GitHub',
+    lead: 'Claude Code programa. Keelokit hace que trabaje como un equipo ordenado: documenta, prueba, se revisa a sí mismo y no publica nada sin tu OK.',
+    lead2: 'Para founders y equipos que quieren un primer MVP bien hecho, y para quien arranca con agentes. Es el método que uso en mis propios proyectos.',
+    doors: { plain: ['No soy técnico', '¿Cómo funciona?'], dev: ['Soy dev', '/keelokit:project-new'] },
     copy: 'Copiar',
     copied: 'Copiado',
-    scroll: 'Sumergirse',
     release: 'Última versión',
     notes: 'Novedades',
+    zip: 'Descargar .zip',
   },
   surface: 'Lo que construís va arriba. Lo que te mantiene el rumbo, abajo.',
+  plain: {
+    idea: {
+      depth: '−2 m',
+      title: ['Claude Code sabe programar. Lo que le falta es', 'un método.'],
+      lead: 'Keelokit es el manual de trabajo que le instalás, como el que le das a alguien que entra a tu equipo: las mismas etapas, las mismas reglas y alguien que revisa cada entrega.',
+      without: ['Claude Code solo', 'Le pedís “haceme una app” y la hace. Cada vez a su manera, sin documentos, y el mismo que la programó te dice que está lista.'],
+      with: ['Con Keelokit', 'Primero entiende qué querés y lo escribe. Después construye de a partes chicas, con pruebas, con otro agente que revisa y otro que intenta romperlo. Vos aprobás lo importante.'],
+    },
+    steps: {
+      depth: '−4 m',
+      title: 'De la idea a la app publicada, en siete pasos.',
+      who: { you: 'Vos', claude: 'Claude', approve: 'Vos aprobás' },
+      legend: { you: 'tu parte: responder y aprobar', claude: 'lo hace solo' },
+      items: [
+        ['Entrevista', 'Te pregunta por tu idea y escribe qué problema resuelve, para quién y con qué reglas. Lo que nadie sabe todavía queda como pregunta abierta.', ['you', 'claude']],
+        ['PRD', 'Un documento corto de qué se construye y qué no, y de cómo vas a medir si funciona.', ['claude', 'approve']],
+        ['Esqueleto', 'La estructura del proyecto, con pruebas y controles automáticos desde el primer día.', ['claude']],
+        ['Tareas', 'El trabajo en historias chicas, cada una con su “está terminada cuando…”.', ['claude']],
+        ['Construcción', 'Historia por historia, con un equipo de agentes que se controla entre sí.', ['claude']],
+        ['Caza de bugs', 'Busca errores y agujeros de seguridad. Cada tipo de bug que encuentra deja un control para que no vuelva.', ['claude']],
+        ['Publicación', 'Primero a una copia de prueba. A tus usuarios, solo cuando vos lo aprobás.', ['claude', 'approve']],
+      ] as [string, string, ('you' | 'claude' | 'approve')[]][],
+      mode: 'Elegís una vez cómo querés trabajar: <b>etapa por etapa</b>, y para en cada una para que revises, o <b>automático</b>, y para solo donde hace falta una persona: preguntas que solo vos podés responder, cuentas, plata, producción.',
+    },
+    crew: {
+      depth: '−6 m',
+      title: 'Cada historia pasa por un equipo, no por un solo agente.',
+      lead: 'Cada rol es un agente distinto, con su propio trabajo, y ninguno se corrige a sí mismo.',
+      roles: [
+        ['verifier', 'El verificador', 'Antes de que nadie programe, convierte los criterios de la historia en pruebas. Al final usa la app como la usaría tu cliente. Es el único que puede decir “terminado”.'],
+        ['agente general', 'El constructor', 'Programa hasta que las pruebas pasan. No las escribió él y no decide cuándo terminó.'],
+        ['reviewer', 'El revisor', 'Lee el código en frío contra la historia y las reglas de la casa, como un colega que no lo escribió.'],
+        ['breaker', 'El rompedor', 'Intenta romperlo: dos clics seguidos, dos pedidos a la vez, un usuario de otra cuenta, el borde de cada límite.'],
+        ['context-auditor', 'El auditor', 'Antes de construir, lee el contexto y el PRD como un externo: qué falta, qué se contradice.'],
+      ],
+      rule: 'El que programa no puede decir que terminó.',
+    },
+    where: {
+      depth: '−8 m',
+      title: 'Dónde pasa cada cosa.',
+      lead: 'Keelokit no tiene servidor propio ni junta datos. Todo queda en tu computadora y en tus cuentas.',
+      computer: ['Tu computadora', 'Donde se trabaja', 'Ahí corre Claude Code con Keelokit. Ahí se escribe el código y se prueba la app mientras se construye.'],
+      github: ['GitHub', 'Guarda y controla', [
+        'Guarda el código en un repositorio privado a tu nombre, con el historial de cada cambio.',
+        'Con cada cambio, un robot corre todas las pruebas y los controles. Si algo falla, no entra.',
+        'Pide la aprobación de una persona antes de pasar a producción.',
+      ]],
+      fly: ['Fly.io', 'Donde vive la app', 'El servidor en internet para la parte de atrás de la app, la que procesa pedidos, y su base de datos.'],
+      arrows: ['cada cambio', 'si todo pasa'],
+      staging: ['Staging', 'Una copia de prueba. Se actualiza sola con cada cambio aprobado.'],
+      gate: 'tu OK',
+      production: ['Producción', 'La que usan tus clientes. Solo cambia cuando vos aprobás.'],
+      also: [
+        ['Hosting web', 'El que elijas. Ahí se publica la web y la página de presentación.'],
+        ['Docker', 'Una base de datos de prueba en tu computadora, para no tocar datos reales.'],
+        ['Sentry (opcional)', 'Te avisa si la app tira errores a tus usuarios.'],
+        ['claude.ai', 'Donde se publica el tablero del proyecto, privado en tu cuenta.'],
+      ],
+    },
+    split: {
+      depth: '−10 m',
+      title: 'Lo que ponés vos y lo que hace Claude.',
+      you: [
+        'Contás tu idea y respondés lo que solo vos sabés.',
+        'Aprobás el PRD.',
+        'Creás las cuentas (GitHub, Fly.io, hosting) y ponés la tarjeta.',
+        'Aprobás cada salida a producción.',
+      ],
+      dash: ['Un tablero', 'te muestra en qué etapa está y qué espera tu OK, sin leer código.'],
+      claude: [
+        'Escribe el contexto, el PRD y el backlog.',
+        'Arma el proyecto con sus pruebas y controles automáticos.',
+        'Programa, prueba y se revisa con un equipo de agentes.',
+        'Caza bugs y problemas de seguridad, y deja un control por cada tipo.',
+        'Configura los servidores con una guía paso a paso y verifica que cada paso funcionó. Pregunta antes de crear algo que cueste plata.',
+      ],
+    },
+    faq: {
+      depth: '−12 m',
+      title: 'Preguntas antes de empezar.',
+      items: [
+        ['¿Necesito saber programar?', 'Para usarlo, no. Para instalarlo, un poco: hace falta Node, Python, Docker y git, en macOS o Linux, y se usa desde la terminal. Si nunca abriste una, pedile ayuda a alguien la primera vez. Después, Claude te guía.'],
+        ['¿Cuánto cuesta?', 'Keelokit es gratis y de código abierto. Pagás tu plan de Claude, que se usa más que en un chat normal porque trabajan varios agentes por historia, y el hosting de la app. Claude pregunta antes de crear algo pago.'],
+        ['¿Dónde quedan mis datos?', 'En tu repositorio y en tus cuentas. Keelokit no tiene servidor propio y no junta nada.'],
+        ['¿Y si ya tengo un proyecto?', '/keelokit:project-adopt le suma las reglas y los controles a tu repo sin reescribir tu código. Si tu stack es otro, te llevás las reglas y los controles, pero no el esqueleto.'],
+        ['¿Sirve para cualquier app?', 'Está pensado para MVPs web y mobile en TypeScript, con un stack elegido. Es opinado a propósito, así que no le va a servir a todos.'],
+        ['¿Qué tan rápido va?', 'Prioriza que funcione y se pueda mantener. Para cambios chicos hay un modo liviano, con menos pasos y menos agentes.'],
+      ],
+    },
+    devs: {
+      depth: '−14 m',
+      title: ['Para devs:', 'cómo está hecho.'],
+      lead: 'Los comandos, las reglas de la casa, el guard y lo que corre solo en cada commit. El mismo método, en detalle.',
+    },
+  },
   how: {
-    depth: '−2 m',
+    depth: '−16 m',
     title: 'De una idea a un monorepo que funciona',
     lead:
       '/keelokit:project-new te lleva por cinco etapas y muestra cada una en un tablero. Por etapas, se frena donde importa tu decisión; en modo automático, solo donde hace falta una persona. Va dejando todo por escrito.',
@@ -284,7 +475,7 @@ const es: typeof en = {
     sign: 'Leo',
   },
   commands: {
-    depth: '−8 m',
+    depth: '−20 m',
     title: 'Todos los comandos',
     badge: 'Nuevo',
     lead: "Doce comandos y la entrada, agrupados según lo que estés haciendo. Abrí cualquiera para ver qué hace, paso a paso.",
@@ -320,7 +511,7 @@ const es: typeof en = {
     ] as CommandGroup[],
   },
   dash: {
-    depth: '−11 m',
+    depth: '−24 m',
     badge: 'Nuevo en 0.6',
     title: 'Todo el proyecto en una página',
     lead: '/keelokit:project-dashboard arma una página desde tu repo, en tu idioma: dónde está el proyecto, qué te espera y cuál es el próximo paso. Se abre cuando arranca /keelokit:project-new, se actualiza en cada etapa y te dice dónde quedó un proceso a medias.',
@@ -339,7 +530,7 @@ const es: typeof en = {
     ],
   },
   keel: {
-    depth: '−15 m',
+    depth: '−28 m',
     title: 'Lo que no se ve',
     lead: 'Los agentes me decían “listo” y dejaban bugs. Estas cuatro ideas son lo que salió de ir resolviendo eso, proyecto a proyecto.',
     principles: [
@@ -363,7 +554,7 @@ const es: typeof en = {
     example: 'Salida de ejemplo',
   },
   auto: {
-    depth: '−24 m',
+    depth: '−32 m',
     title: 'Lo que corre solo',
     items: [
       ['Antes de cada acción de un agente', 'Un guard frena secretos, cambios a archivos .env y a migraciones ya aplicadas, hooks salteados, tests silenciados y deploys a producción.'],
@@ -374,7 +565,7 @@ const es: typeof en = {
     guardExample: 'El guard, frenando a un agente',
   },
   honest: {
-    depth: '−32 m',
+    depth: '−36 m',
     title: 'Bueno saber',
     items: [
       ['Es opinado', 'Está hecho a mi gusto y con mi stack. No va a encajar en todos los proyectos ni en todos los equipos. Si tu stack es otro, /keelokit:project-adopt igual te da las reglas y los checks.'],
@@ -390,6 +581,7 @@ const es: typeof en = {
     title: 'Probarlo',
     lead: 'En una carpeta vacía corré /keelokit:project-new. En un repo que ya tenés, /keelokit:project-adopt.',
     needs: 'Necesitás Node 22 con pnpm 10, Python 3.11+, uv, Docker y git. macOS o Linux.',
+    upload: 'En claude.ai, subí el .zip de la última versión en Customize → Plugins → Upload.',
     github: 'Código, documentación y licencia en GitHub',
   },
   footer: {

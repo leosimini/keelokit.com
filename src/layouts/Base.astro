@@ -83,7 +83,7 @@ const jsonld = [
     <a class="skip" href="#main">{locale === 'en' ? 'Skip to content' : 'Ir al contenido'}</a>
     <slot />
     <script>
-      import { fetchRelease, releaseDate, releaseNotes } from '../lib/release';
+      import { fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
       // Copy buttons: the label says "Copied" for a moment, and screen readers hear it.
       document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
         btn.addEventListener('click', async () => {
@@ -105,6 +105,7 @@ const jsonld = [
           line.querySelector('[data-release-version]')!.textContent = `v${r.version}`;
           line.querySelector('[data-release-date]')!.textContent = r.date ? ` · ${releaseDate(r.date, line.dataset.lang!)}` : '';
           line.querySelectorAll<HTMLAnchorElement>('[data-release-notes]').forEach((a) => { a.href = releaseNotes(r.version); });
+          document.querySelectorAll<HTMLAnchorElement>('[data-release-zip]').forEach((a) => { a.href = releaseZip(r.version); });
           line.hidden = false;
         });
       }

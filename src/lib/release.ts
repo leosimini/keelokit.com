@@ -34,3 +34,7 @@ export const releaseDate = (date: string, lang: string) =>
 // Each release has a GitHub Release with its CHANGELOG entry as notes (Keelokit's Release workflow).
 export const releaseNotes = (version: string) =>
   `https://github.com/leosimini/keelokit/releases/tag/v${version}`;
+
+// GitHub builds a .zip of the code at each tag; it's what you upload to claude.ai as a plugin.
+export const releaseZip = (version: string) =>
+  `https://github.com/leosimini/keelokit/archive/refs/tags/v${version}.zip`;
