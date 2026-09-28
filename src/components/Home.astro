@@ -3,7 +3,7 @@ import Foil from './Foil.astro';
 import Out from './Out.astro';
 import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
 import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
-import { fetchRelease, releaseDate, releaseNotes } from '../lib/release';
+import { DOWNLOAD, fetchRelease, releaseDate, releaseNotes } from '../lib/release';
 import { SHOTS } from '../lib/shots';
 import { STACK } from '../lib/stack';
 
@@ -45,6 +45,7 @@ const dark = shot('dark');
         </button>
       </div>
       <p class="actions">
+        <a class="btn board" href={DOWNLOAD}><span aria-hidden="true">⬇</span> {t.hero.download}</a>
         <a class="btn" href={REPO} rel="noopener">{t.hero.github} <span aria-hidden="true">↗</span></a>
         <a class="dive" href={pageHref('how')}>{t.hero.scroll} <span aria-hidden="true">↓</span></a>
       </p>
@@ -240,7 +241,8 @@ const dark = shot('dark');
         </div>
         <p class="sub" set:html={cmd(t.try.lead)} />
         <p class="fine">{t.try.needs}</p>
-        <p class="actions"><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+        <p class="actions"><a class="btn board" href={DOWNLOAD}><span aria-hidden="true">⬇</span> {t.hero.download}</a><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+        <p class="fine">{t.try.zip}</p>
       </div>
       <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />
     </section>

@@ -38,6 +38,7 @@ const en = {
     lead:
       'The harness I use to turn ideas into first versions with coding agents: my stack, my rules, the way I like to work. I maintain it on weekends and late nights, with music on, and share it in case it helps you too.',
     github: 'View on GitHub',
+    download: 'Download the latest version from GitHub',
     copy: 'Copy',
     copied: 'Copied',
     scroll: 'Dive in',
@@ -204,6 +205,7 @@ const en = {
     lead: 'In an empty folder run /keelokit:project-new. In a repo you already have, /keelokit:project-adopt.',
     needs: 'You need Node 22 with pnpm 10, Python 3.11+, uv, Docker and git. macOS or Linux.',
     github: 'Code, docs and license on GitHub',
+    zip: 'The download is keelokit-plugin.zip, the plugin ready to install: in Claude, Customize → Plugins → Upload. Each version’s zip is on its GitHub release.',
   },
   footer: {
     made: 'Keelokit is a hobby project by',
@@ -225,6 +227,7 @@ const es: typeof en = {
     lead:
       'El harness que uso para convertir ideas en primeras versiones con agentes de código: mi stack, mis reglas, mi forma de trabajar. Lo mantengo los fines de semana y en noches de música y código, y lo comparto por si te sirve a vos también.',
     github: 'Ver en GitHub',
+    download: 'Descargá la última versión desde GitHub',
     copy: 'Copiar',
     copied: 'Copiado',
     scroll: 'Sumergirse',
@@ -391,6 +394,7 @@ const es: typeof en = {
     lead: 'En una carpeta vacía corré /keelokit:project-new. En un repo que ya tenés, /keelokit:project-adopt.',
     needs: 'Necesitás Node 22 con pnpm 10, Python 3.11+, uv, Docker y git. macOS o Linux.',
     github: 'Código, documentación y licencia en GitHub',
+    zip: 'La descarga es keelokit-plugin.zip, el plugin listo para instalar: en Claude, Customize → Plugins → Upload. El zip de cada versión está en su release de GitHub.',
   },
   footer: {
     made: 'Keelokit es un proyecto hobby de',

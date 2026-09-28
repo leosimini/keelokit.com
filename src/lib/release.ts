@@ -31,6 +31,10 @@ export const releaseDate = (date: string, lang: string) =>
   new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${date}T00:00:00Z`));
 
+// Every GitHub Release carries the plugin ready to install, always under this name, so this link
+// downloads the latest version (Keelokit's Release workflow attaches it).
+export const DOWNLOAD = 'https://github.com/leosimini/keelokit/releases/latest/download/keelokit-plugin.zip';
+
 // Each release has a GitHub Release with its CHANGELOG entry as notes (Keelokit's Release workflow).
 export const releaseNotes = (version: string) =>
   `https://github.com/leosimini/keelokit/releases/tag/v${version}`;

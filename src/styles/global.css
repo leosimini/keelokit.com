@@ -79,6 +79,8 @@ body { background: linear-gradient(var(--ground) 0 600px, var(--abyss) 600px); }
 .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 999px; background: var(--sea-1); color: var(--foam); text-decoration: none; font-weight: 600; font-size: 15px; transition: background-color 0.2s ease, transform 0.2s ease; }
 .btn:hover { background: var(--sea-2); transform: translateY(-1px); }
 .btn.light { background: var(--foam); color: var(--sea-2); }
+.btn.board { background: var(--board); color: var(--ink); }
+.btn.board:hover { background: #ffd84f; }
 .btn.light:hover { background: #fff; }
 .dive { text-decoration: none; color: var(--ink-2); font-weight: 500; }
 .dive span { display: inline-block; animation: nudge 2.4s ease-in-out infinite; }
