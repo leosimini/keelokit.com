@@ -83,7 +83,7 @@ const jsonld = [
     <a class="skip" href="#main">{locale === 'en' ? 'Skip to content' : 'Ir al contenido'}</a>
     <slot />
     <script>
-      import { fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
+      import { fetchReleaseCached, releaseDate, releaseNotes, releaseZip } from '../lib/release';
       // Copy buttons: the label says "Copied" for a moment, and screen readers hear it.
       document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
         btn.addEventListener('click', async () => {
@@ -97,10 +97,11 @@ const jsonld = [
         });
       });
       // The release line: the build wrote the version it saw; this refreshes it from the release
-      // branch, so a new Keelokit version shows up without redeploying the site.
+      // branch, so a new Keelokit version shows up without redeploying the site. Cached for an
+      // hour, so it doesn't ask GitHub again on every page.
       const line = document.querySelector<HTMLElement>('[data-release]');
       if (line) {
-        fetchRelease().then((r) => {
+        fetchReleaseCached().then((r) => {
           if (!r) return;
           line.querySelector('[data-release-version]')!.textContent = `v${r.version}`;
           line.querySelector('[data-release-date]')!.textContent = r.date ? ` · ${releaseDate(r.date, line.dataset.lang!)}` : '';

@@ -27,6 +27,29 @@ export async function fetchRelease(timeoutMs = 5000): Promise<Release | null> {
   }
 }
 
+const CACHE_KEY = 'keelokit:release';
+
+// Browser-only: skips the request entirely when a fetch from within the last hour is still cached,
+// so switching pages or reloading doesn't ask GitHub again for no reason. A release is rare enough
+// that an hour of staleness doesn't matter, and a failed fetch never overwrites the cache, so the
+// next visit retries instead of waiting out the full hour.
+export async function fetchReleaseCached(ttlMs = 60 * 60 * 1000): Promise<Release | null> {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { release, ts } = JSON.parse(cached) as { release: Release; ts: number };
+      if (Date.now() - ts < ttlMs) return release;
+    }
+  } catch {
+    // storage unavailable (private mode, quota, disabled) — fall through to a plain fetch
+  }
+  const release = await fetchRelease();
+  if (release) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ release, ts: Date.now() })); } catch {}
+  }
+  return release;
+}
+
 export const releaseDate = (date: string, lang: string) =>
   new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${date}T00:00:00Z`));
