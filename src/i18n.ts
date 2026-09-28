@@ -36,7 +36,7 @@ const en = {
     eyebrow: 'Open source · a Claude Code harness',
     title: ['The keel under', 'my apps.'],
     lead: 'Claude Code writes code. Keelokit makes it work like a disciplined team: it writes things down, tests, reviews itself and ships nothing without your OK.',
-    lead2: 'For founders and teams who want a first MVP built right, and for anyone starting out with agents. It’s the method I use on my own projects.',
+    lead2: 'For startups and teams who want a first MVP built right, and for anyone starting out with agents. It’s the method I use on my own projects.',
     doors: { plain: ['Not technical', 'How does it work?'], dev: ['Developer', '/keelokit:project-new'] },
     github: 'View on GitHub',
     download: 'Download the latest version from GitHub',
@@ -83,7 +83,7 @@ const en = {
         ['breaker', 'The breaker', 'Tries to break it: two clicks in a row, two requests at once, a user from another account, the edge of every limit.'],
         ['context-auditor', 'The auditor', 'Before anything is built, it reads the context and the PRD like an outsider: what’s missing, what contradicts itself.'],
       ],
-      rule: 'Whoever writes the code can’t say it’s done.',
+      rule: 'The agent that writes the code can’t close a task until another agent has reviewed it.',
     },
     where: {
       depth: '−8 m',
@@ -113,7 +113,7 @@ const en = {
       you: [
         'You tell it your idea and answer what only you know.',
         'You approve the PRD.',
-        'You create the accounts (GitHub, Fly.io, hosting) and put in the card.',
+        'You create the accounts (GitHub, Fly.io, hosting).',
         'You approve every release to production.',
       ],
       dash: ['A dashboard', 'shows where things are and what waits for your OK, without reading code.'],
@@ -237,7 +237,7 @@ const en = {
     badge: 'New in 0.8',
     title: 'One page to work from, one report to share',
     lead: '/keelokit:project-dashboard builds a short page from your repo, in your language: where the project is, the next step, what waits for you. It stays live, and it’s light: published once, then each refresh updates the open page without sending it through the chat again, so following a project costs very few tokens. For someone else, /keelokit:project-report generates the complete status, read-only, to share or export.',
-    caption: 'Bookline, a sample project, halfway through its build',
+    caption: 'Fleetly, a sample mobile app for delivery fleets, halfway through its build',
     open: 'Open full size',
     darkCaption: 'Light or dark, one click',
     parts: [
@@ -252,7 +252,7 @@ const en = {
   keel: {
     depth: '−28 m',
     title: 'The part you don’t see',
-    lead: 'Agents kept telling me “done” and leaving bugs behind. These four ideas are what came out of fixing that, project after project.',
+    lead: 'In my experience, agents tend to close stories and leave a trail of bugs behind them, bugs they neither write down nor mention. That’s where these four ideas came from.',
     principles: [
       ['A rule needs a check', 'Each rule points to something that verifies it: a test, a lint rule, a git hook, a CI job. The doctor tells you when a rule has lost its check.'],
       ['Unknowns stay questions', 'What nobody knows yet is written down with an owner and the exact question. Plausible defaults don’t get invented.'],
@@ -322,7 +322,7 @@ const es: typeof en = {
     eyebrow: 'Open source · un harness de Claude Code',
     title: ['La quilla debajo', 'de mis apps.'],
     lead: 'Claude Code programa. Keelokit hace que trabaje como un equipo ordenado: documenta, prueba, se revisa a sí mismo y no publica nada sin tu OK.',
-    lead2: 'Para founders y equipos que quieren un primer MVP bien hecho, y para quien arranca con agentes. Es el método que uso en mis propios proyectos.',
+    lead2: 'Para startups y equipos que quieren un primer MVP bien hecho, y para quien arranca con agentes. Es el método que uso en mis propios proyectos.',
     doors: { plain: ['No soy técnico', '¿Cómo funciona?'], dev: ['Soy dev', '/keelokit:project-new'] },
     github: 'Ver en GitHub',
     download: 'Descargá la última versión desde GitHub',
@@ -369,7 +369,7 @@ const es: typeof en = {
         ['breaker', 'El rompedor', 'Intenta romperlo: dos clics seguidos, dos pedidos a la vez, un usuario de otra cuenta, el borde de cada límite.'],
         ['context-auditor', 'El auditor', 'Antes de construir, lee el contexto y el PRD como un externo: qué falta, qué se contradice.'],
       ],
-      rule: 'El que programa no puede decir que terminó.',
+      rule: 'El mismo agente que programa no puede cerrar una tarea sin que otro agente la revise.',
     },
     where: {
       depth: '−8 m',
@@ -399,7 +399,7 @@ const es: typeof en = {
       you: [
         'Contás tu idea y respondés lo que solo vos sabés.',
         'Aprobás el PRD.',
-        'Creás las cuentas (GitHub, Fly.io, hosting) y ponés la tarjeta.',
+        'Creás las cuentas (GitHub, Fly.io, hosting).',
         'Aprobás cada salida a producción.',
       ],
       dash: ['Un tablero', 'te muestra en qué etapa está y qué espera tu OK, sin leer código.'],
@@ -523,7 +523,7 @@ const es: typeof en = {
     badge: 'Nuevo en 0.8',
     title: 'Una página para trabajar, un reporte para compartir',
     lead: '/keelokit:project-dashboard arma una página corta desde tu repo, en tu idioma: dónde está el proyecto, el próximo paso, lo que te espera. Se mantiene en vivo y es liviana: se publica una vez y cada actualización cambia la página abierta sin volver a pasarla por el chat, así que seguir un proyecto gasta muy pocos tokens. Para otra persona, /keelokit:project-report genera el estado completo, de solo lectura, para compartir o exportar.',
-    caption: 'Turnero, un proyecto de ejemplo, a mitad de la construcción',
+    caption: 'Fleetly, una app móvil de ejemplo para flotas de reparto, a mitad de la construcción',
     open: 'Ver en tamaño completo',
     darkCaption: 'Claro u oscuro, con un clic',
     parts: [
@@ -538,7 +538,7 @@ const es: typeof en = {
   keel: {
     depth: '−28 m',
     title: 'Lo que no se ve',
-    lead: 'Los agentes me decían “listo” y dejaban bugs. Estas cuatro ideas son lo que salió de ir resolviendo eso, proyecto a proyecto.',
+    lead: 'En mi experiencia, los agentes tienden a cerrar historias y dejan un tendal de bugs en el camino, que no documentan ni explicitan. De ahí salieron estas cuatro ideas.',
     principles: [
       ['Una regla necesita un check', 'Cada regla apunta a algo que la verifica: un test, una regla de lint, un hook de git, un job de CI. El doctor avisa cuando una regla se quedó sin su check.'],
       ['Lo que no se sabe queda como pregunta', 'Lo que nadie sabe todavía se escribe con un responsable y la pregunta exacta. No se inventan valores que suenan bien.'],
