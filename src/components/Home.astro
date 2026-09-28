@@ -4,7 +4,7 @@ import Out from './Out.astro';
 import Plain from './Plain.astro';
 import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
 import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
-import { fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
+import { DOWNLOAD, fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
 import { SHOTS } from '../lib/shots';
 import { STACK } from '../lib/stack';
 
@@ -231,6 +231,7 @@ const dark = shot('dark');
       <p class="depth">{t.try.depth}</p>
       <div class="rise">
         <h2>{t.try.title}</h2>
+        <p class="via">{t.hero.cli}</p>
         <div class="install">
           <pre id="install-try"><code>{INSTALL.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
           <button type="button" class="copy" data-copy={INSTALL.join('\n')} data-idle={t.hero.copy} data-done={t.hero.copied}>
@@ -239,8 +240,8 @@ const dark = shot('dark');
         </div>
         <p class="sub" set:html={cmd(t.try.lead)} />
         <p class="fine">{t.try.needs}</p>
-        <p class="fine">{t.try.upload} <a data-release-zip href={release ? releaseZip(release.version) : `${REPO}/releases/latest`}>{t.hero.zip} <span aria-hidden="true">↓</span></a></p>
-        <p class="actions"><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+        <p class="actions"><a class="btn board" href={DOWNLOAD}><span aria-hidden="true">⬇</span> {t.hero.download}</a><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+        <p class="fine">{t.try.zip}</p>
       </div>
       <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />
     </section>

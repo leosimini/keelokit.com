@@ -31,10 +31,16 @@ export const releaseDate = (date: string, lang: string) =>
   new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${date}T00:00:00Z`));
 
+// Every GitHub Release carries the plugin ready to install, always under this name, so this link
+// downloads the latest version (Keelokit's Release workflow attaches it).
+export const DOWNLOAD = 'https://github.com/leosimini/keelokit/releases/latest/download/keelokit-plugin.zip';
+
 // Each release has a GitHub Release with its CHANGELOG entry as notes (Keelokit's Release workflow).
 export const releaseNotes = (version: string) =>
   `https://github.com/leosimini/keelokit/releases/tag/v${version}`;
 
-// GitHub builds a .zip of the code at each tag; it's what you upload to claude.ai as a plugin.
+// The plugin ready to install, attached to that version's GitHub Release by Keelokit's Release
+// workflow (from 0.8.0 on). It's the file to upload to Claude — not GitHub's "Source code" zip, which
+// wraps the whole repository in a folder.
 export const releaseZip = (version: string) =>
-  `https://github.com/leosimini/keelokit/archive/refs/tags/v${version}.zip`;
+  `https://github.com/leosimini/keelokit/releases/download/v${version}/keelokit-plugin.zip`;

@@ -95,6 +95,9 @@ body { background: linear-gradient(var(--ground) 0 600px, var(--abyss) 600px); }
 .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 999px; background: var(--sea-1); color: var(--foam); text-decoration: none; font-weight: 600; font-size: 15px; transition: background-color 0.2s ease, transform 0.2s ease; }
 .btn:hover { background: var(--sea-2); transform: translateY(-1px); }
 .btn.light { background: var(--foam); color: var(--sea-2); }
+.btn.board { background: var(--board); color: var(--ink); }
+.via { font-size: 14px; color: inherit; opacity: .75; margin: 28px 0 -20px; }
+.btn.board:hover { background: #ffd84f; }
 .btn.light:hover { background: #fff; }
 
 .foil-scene { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: auto; aspect-ratio: 1600 / 560; z-index: 0; }
