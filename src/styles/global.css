@@ -80,6 +80,7 @@ body { background: linear-gradient(var(--ground) 0 600px, var(--abyss) 600px); }
 .btn:hover { background: var(--sea-2); transform: translateY(-1px); }
 .btn.light { background: var(--foam); color: var(--sea-2); }
 .btn.board { background: var(--board); color: var(--ink); }
+.via { font-size: 14px; color: inherit; opacity: .75; margin: 28px 0 -20px; }
 .btn.board:hover { background: #ffd84f; }
 .btn.light:hover { background: #fff; }
 .dive { text-decoration: none; color: var(--ink-2); font-weight: 500; }

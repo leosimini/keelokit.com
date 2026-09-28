@@ -38,6 +38,7 @@ const dark = shot('dark');
       <p class="eyebrow">{t.hero.eyebrow}</p>
       <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
       <p class="lead">{t.hero.lead}</p>
+      <p class="via">{t.hero.cli}</p>
       <div class="install">
         <pre id="install-hero"><code>{INSTALL.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
         <button type="button" class="copy" data-copy={INSTALL.join('\n')} data-idle={t.hero.copy} data-done={t.hero.copied}>
@@ -233,6 +234,7 @@ const dark = shot('dark');
       <p class="depth">{t.try.depth}</p>
       <div class="rise">
         <h2>{t.try.title}</h2>
+        <p class="via">{t.hero.cli}</p>
         <div class="install">
           <pre id="install-try"><code>{INSTALL.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
           <button type="button" class="copy" data-copy={INSTALL.join('\n')} data-idle={t.hero.copy} data-done={t.hero.copied}>
