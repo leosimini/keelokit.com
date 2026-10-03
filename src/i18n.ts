@@ -27,9 +27,9 @@ export const INSTALL = [
 
 const en = {
   lang: 'en',
-  title: 'Keelokit · a Claude Code harness for TypeScript monorepos',
+  title: 'Keelokit · the Claude Code plugin where no agent calls its own code done',
   description:
-    'A Claude Code harness for building apps in TypeScript monorepos: rules backed by checks, tests written before the code, and bugs caught by class. A hobby project by Leopoldo Simini (@leosimini).',
+    'Stop agents from calling buggy code “done”. Separate agents test, review and try to break every story, and each bug leaves a check so it can’t return. From idea to a TypeScript app with CI. By Leopoldo Simini.',
   ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
   nav: { plain: 'How it works', dashboard: 'Dashboard', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
   hero: {
@@ -313,9 +313,9 @@ const en = {
 
 const es: typeof en = {
   lang: 'es',
-  title: 'Keelokit · un harness de Claude Code para monorepos TypeScript',
+  title: 'Keelokit · el plugin de Claude Code donde ningún agente da por terminado su propio código',
   description:
-    'Un harness de Claude Code para construir aplicaciones en monorepos TypeScript: reglas respaldadas por checks, tests escritos antes que el código y bugs atrapados por clase. Un proyecto hobby de Leopoldo Simini (@leosimini).',
+    'Que los agentes dejen de dar por “terminado” código con bugs. Otros agentes prueban, revisan e intentan romper cada historia, y cada bug deja un control para que no vuelva. De la idea a una app TypeScript con CI. Por Leopoldo Simini.',
   ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
   nav: { plain: 'Cómo funciona', dashboard: 'Tablero', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
   hero: {
