@@ -110,6 +110,60 @@ const jsonld = [
           line.hidden = false;
         });
       }
+      // The bar: compact once the page moves, deep glass once the sky is behind it.
+      const bar = document.querySelector<HTMLElement>('[data-bar]');
+      const hero = document.querySelector<HTMLElement>('.hero');
+      const toTop = document.querySelector<HTMLElement>('[data-to-top]');
+      const onScroll = () => {
+        const y = window.scrollY;
+        bar?.classList.toggle('is-stuck', y > 8);
+        bar?.classList.toggle('is-deep', !!hero && hero.getBoundingClientRect().bottom < (bar?.offsetHeight ?? 60));
+        if (toTop) toTop.hidden = y < document.documentElement.scrollHeight / 2 - innerHeight / 2;
+      };
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      // Where you are: the section under the bar is marked in the nav and in the menu.
+      const spied = [...new Set([...document.querySelectorAll<HTMLAnchorElement>('[data-spy]')].map((a) => a.dataset.spy!))]
+        .map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+      let ticking = false;
+      const mark = () => {
+        ticking = false;
+        const current = spied.filter((el) => el.getBoundingClientRect().top < innerHeight * 0.4).pop();
+        const id = current && current.getBoundingClientRect().bottom > 0 ? current.id : undefined;
+        document.querySelectorAll<HTMLAnchorElement>('[data-spy]').forEach((a) => {
+          if (a.dataset.spy === id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        });
+      };
+      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
+      mark();
+      // The menu (mobile): a sheet with the sections; Esc, the close button or a link close it.
+      const sheet = document.querySelector<HTMLElement>('[data-menu]');
+      const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+      if (sheet && opener) {
+        const focusables = () => [...sheet.querySelectorAll<HTMLElement>('a, button')];
+        const close = (refocus = true) => {
+          sheet.hidden = true;
+          opener.setAttribute('aria-expanded', 'false');
+          document.documentElement.classList.remove('menu-open');
+          if (refocus) opener.focus();
+        };
+        opener.addEventListener('click', () => {
+          sheet.hidden = false;
+          opener.setAttribute('aria-expanded', 'true');
+          document.documentElement.classList.add('menu-open');
+          focusables()[1]?.focus();
+        });
+        sheet.querySelector('[data-menu-close]')?.addEventListener('click', () => close());
+        sheet.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => close(false)));
+        sheet.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') { close(); return; }
+          if (e.key !== 'Tab') return;
+          const f = focusables(); const first = f[0]; const last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
+        matchMedia('(min-width: 901px)').addEventListener('change', (m) => { if (m.matches && !sheet.hidden) close(false); });
+      }
       // Sections rise into view once; nothing moves for people who ask for less motion.
       const els = document.querySelectorAll('.rise');
       if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {

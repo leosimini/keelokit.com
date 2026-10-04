@@ -16,22 +16,53 @@ const release = await fetchRelease();
 const shot = (key: string) => ({ src: `/img/dashboard/${locale}/${key}.webp`, ...SHOTS[locale][key] });
 const full = shot('full');
 const dark = shot('dark');
+// Page order, with each section's depth: the menu reads like a dive.
+const NAV: [string, string, string][] = [
+  ['plain', t.nav.plain, t.plain.idea.depth],
+  ['commands', t.nav.commands, t.commands.depth],
+  ['dashboard', t.nav.dashboard, t.dash.depth],
+  ['local', t.nav.local, t.local.depth],
+  ['keel', t.nav.keel, t.keel.depth],
+  ['try', t.nav.try, t.try.depth],
+];
 ---
+<div class="bar" data-bar>
 <header class="top wrap">
   <a class="brand" href={locale === 'en' ? '/' : '/es'}>
     <img src="/icon.svg" width="32" height="32" alt="" />
     <span>Keelokit</span>
   </a>
-  <nav aria-label={locale === 'en' ? 'Main' : 'Principal'}>
-    <a href={pageHref('plain')}>{t.nav.plain}</a>
-    <a href={pageHref('dashboard')}>{t.nav.dashboard}</a>
-    <a href={pageHref('commands')}>{t.nav.commands}</a>
-    <a href={pageHref('keel')}>{t.nav.keel}</a>
-    <a href={pageHref('try')}>{t.nav.try}</a>
+  <nav class="links" aria-label={locale === 'en' ? 'Main' : 'Principal'}>
+    {NAV.map(([id, label]) => <a href={pageHref(id)} data-spy={id}>{label}</a>)}
+  </nav>
+  <div class="ends">
+    <a class="dl" href={DOWNLOAD} data-release-zip><span aria-hidden="true">⬇</span> {t.nav.download}</a>
     <a class="gh" href={REPO} rel="noopener">GitHub</a>
     <a class="lang" href={t.nav.switchHref} hreflang={locale === 'en' ? 'es' : 'en'}>{t.nav.switch}</a>
-  </nav>
+    <a class="try-m" href={pageHref('try')}>{t.nav.try}</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+      <span class="burger-lines" aria-hidden="true"><i></i><i></i><i></i></span><span class="sr">{t.nav.menu}</span>
+    </button>
+  </div>
 </header>
+</div>
+<div class="sheet" id="menu" role="dialog" aria-modal="true" aria-label={t.nav.menu} hidden data-menu>
+  <div class="sheet-top wrap">
+    <span class="brand"><img src="/icon.svg" width="32" height="32" alt="" /><span>Keelokit</span></span>
+    <button class="close" type="button" data-menu-close><span aria-hidden="true">✕</span><span class="sr">{t.nav.close}</span></button>
+  </div>
+  <nav class="wrap" aria-label={t.nav.sections}>
+    <ol>
+      {NAV.map(([id, label, depth]) => <li><a href={pageHref(id)} data-spy={id}><span class="d">{depth}</span>{label}</a></li>)}
+    </ol>
+    <p class="sheet-ends">
+      <a class="btn board" href={DOWNLOAD} data-release-zip><span aria-hidden="true">⬇</span> {t.nav.download}</a>
+      <a href={REPO} rel="noopener">GitHub ↗</a>
+      <a href={t.nav.switchHref} hreflang={locale === 'en' ? 'es' : 'en'}>{t.nav.switch}</a>
+    </p>
+  </nav>
+</div>
+<a class="to-top" href="#main" data-to-top hidden><span aria-hidden="true">↑</span><span class="sr">{t.nav.top}</span></a>
 
 <main id="main">
   <section class="hero">

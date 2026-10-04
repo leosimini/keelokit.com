@@ -31,7 +31,7 @@ const en = {
   description:
     'Stop agents from calling buggy code “done”. Separate agents test, review and try to break every story, and each bug leaves a check so it can’t return. From idea to a TypeScript app with CI. By Leopoldo Simini.',
   ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
-  nav: { plain: 'How it works', dashboard: 'Dashboard', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es' },
+  nav: { plain: 'How it works', dashboard: 'Dashboard', local: 'Local', commands: 'Commands', keel: 'The keel', try: 'Try it', switch: 'Español', switchHref: '/es', download: 'Download', menu: 'Menu', close: 'Close the menu', sections: 'Sections', top: 'Back to top' },
   hero: {
     eyebrow: 'Open source · a Claude Code harness',
     title: ['The keel under', 'my apps.'],
@@ -340,7 +340,7 @@ const es: typeof en = {
   description:
     'Que los agentes dejen de dar por “terminado” código con bugs. Otros agentes prueban, revisan e intentan romper cada historia, y cada bug deja un control para que no vuelva. De la idea a una app TypeScript con CI. Por Leopoldo Simini.',
   ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
-  nav: { plain: 'Cómo funciona', dashboard: 'Tablero', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/' },
+  nav: { plain: 'Cómo funciona', dashboard: 'Tablero', local: 'Local', commands: 'Comandos', keel: 'La quilla', try: 'Probarlo', switch: 'English', switchHref: '/', download: 'Descargar', menu: 'Menú', close: 'Cerrar el menú', sections: 'Secciones', top: 'Volver arriba' },
   hero: {
     eyebrow: 'Open source · un harness de Claude Code',
     title: ['La quilla debajo', 'de mis apps.'],

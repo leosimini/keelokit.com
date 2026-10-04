@@ -42,16 +42,57 @@ p { margin: 0; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--foam); padding: 8px 14px; z-index: 10; }
 .skip:focus { left: 8px; }
 
-/* Header */
-.top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; position: relative; z-index: 2; }
-.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; letter-spacing: 0.02em; font-size: 18px; }
+/* Header: a bar that stays. Cream over the sky, deep glass over the sea; compact once you scroll. */
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.bar { position: sticky; top: 0; z-index: 20; transition: background-color .25s ease, box-shadow .25s ease; }
+.bar.is-stuck { background: rgba(246, 241, 232, 0.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--line); }
+.bar.is-deep { background: rgba(4, 15, 40, 0.82); box-shadow: 0 1px 0 var(--glass-line); }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; transition: padding .25s ease; }
+.bar.is-stuck .top { padding-block: 10px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; letter-spacing: 0.02em; font-size: 18px; color: var(--ink); }
 .brand img { border-radius: 8px; box-shadow: 0 4px 12px rgba(17, 77, 150, 0.25); }
-.top nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 28px); font-size: 15px; }
-.top nav a { text-decoration: none; color: var(--ink-2); }
-.top nav a:hover { color: var(--ink); }
-.top nav .gh { color: var(--ink); font-weight: 600; }
-.top nav .lang { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--line); padding: 5px 10px; border-radius: 999px; }
-@media (max-width: 860px) { .top nav a:not(.gh):not(.lang) { display: none; } }
+.top .links, .top .ends { display: flex; align-items: center; gap: clamp(12px, 1.8vw, 24px); font-size: 15px; }
+.top a { text-decoration: none; color: var(--ink-2); }
+.top a:hover, .top a[aria-current] { color: var(--ink); }
+.top .links a[aria-current] { box-shadow: inset 0 -2px 0 var(--foil); }
+.top .gh { color: var(--ink); font-weight: 600; }
+.top .lang { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--line); padding: 5px 10px; border-radius: 999px; }
+.top .dl { background: var(--board); color: #172126; font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 999px; }
+.top .dl:hover { color: #172126; filter: brightness(.96); }
+.bar.is-deep .top .brand, .bar.is-deep .top .gh, .bar.is-deep .top a:hover, .bar.is-deep .top a[aria-current] { color: var(--foam); }
+.bar.is-deep .top a { color: var(--foam-2); }
+.bar.is-deep .top .dl { color: #172126; }
+.bar.is-deep .top .lang { border-color: var(--glass-line); }
+.try-m, .burger { display: none; }
+.burger { background: none; border: 0; padding: 8px; margin: -8px -8px -8px 0; cursor: pointer; color: inherit; }
+.burger-lines { display: grid; gap: 5px; width: 22px; }
+.burger-lines i { display: block; height: 2px; border-radius: 2px; background: var(--ink); }
+.bar.is-deep .burger-lines i { background: var(--foam); }
+@media (max-width: 1040px) { .top .links { gap: 14px; font-size: 14px; } }
+@media (max-width: 900px) {
+  .top .links, .top .gh, .top .lang, .top .dl { display: none; }
+  .try-m, .burger { display: inline-flex; }
+  .top .try-m { font-weight: 600; font-size: 14px; color: var(--ink); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
+  .bar.is-deep .top .try-m { color: var(--foam); border-color: var(--glass-line); }
+}
+/* The menu: a full-screen sheet, the sections listed like a dive. */
+.sheet { position: fixed; inset: 0; z-index: 40; background: var(--abyss); color: var(--foam); overflow-y: auto; }
+.sheet[hidden] { display: none; }
+.sheet-top { display: flex; align-items: center; justify-content: space-between; padding-block: 14px; }
+.sheet .brand { color: var(--foam); }
+.sheet .close { background: none; border: 0; color: var(--foam); font-size: 22px; padding: 10px; margin-right: -10px; cursor: pointer; }
+.sheet ol { list-style: none; padding: 0; margin: 18px 0 0; }
+.sheet li a { display: flex; align-items: baseline; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--glass-line); text-decoration: none; font-family: var(--font-display); font-size: 30px; line-height: 1.1; }
+.sheet li a[aria-current] { color: var(--board); }
+.sheet .d { font: 12px var(--font-mono); color: var(--foam-3); min-width: 52px; }
+.sheet-ends { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin: 28px 0 40px; }
+.sheet-ends a:not(.btn) { color: var(--foam-2); }
+html.menu-open { overflow: hidden; }
+/* Back to top, once you're past half the page. */
+.to-top { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 15; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--board); color: #172126; text-decoration: none; font-size: 20px; box-shadow: 0 6px 18px rgba(4, 15, 40, 0.35); }
+.to-top[hidden] { display: none; }
+section[id], #main { scroll-margin-top: 72px; }
+@media (prefers-reduced-motion: reduce) { .bar, .top { transition: none; } html { scroll-behavior: auto; } }
 
 /* Hero: cream sky above the water */
 body { background: linear-gradient(var(--ground) 0 600px, var(--abyss) 600px); }
