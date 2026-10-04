@@ -160,6 +160,7 @@ body { background: linear-gradient(var(--ground) 0 600px, var(--abyss) 600px); }
 @media (max-width: 900px) { .steps { grid-template-columns: 1fr; } .steps li { padding: 18px 0 18px 28px; border-top: 0; border-left: 1px solid var(--glass-line); } .steps li::before { left: -5px; top: 24px; } }
 
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 56px; align-items: start; }
+.pair > * { min-width: 0; }
 @media (max-width: 900px) { .pair { grid-template-columns: 1fr; } }
 figure { margin: 0; }
 figcaption { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--foam-3); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
@@ -201,6 +202,12 @@ td:first-child { color: var(--foam); }
 .principles .n { font-family: var(--font-display); font-style: italic; font-size: 34px; color: var(--foil); line-height: 1; }
 .principles h3 { font-family: var(--font-display); font-size: 28px; font-weight: 500; line-height: 1.1; margin: 12px 0 10px; }
 .principles p { color: var(--foam-2); font-size: 16px; }
+.proof { margin-top: 56px; border-top: 1px solid var(--glass-line); padding-top: 28px; }
+.proof h3 { font-family: var(--font-display); font-size: 28px; font-weight: 500; margin: 0 0 16px; }
+.proof ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 56px; }
+.proof li { color: var(--foam-2); font-size: 16px; }
+.proof strong { color: var(--foam); font-weight: 600; }
+@media (max-width: 760px) { .proof ul { grid-template-columns: 1fr; } }
 @media (max-width: 900px) { .principles { grid-template-columns: 1fr; gap: 32px; } }
 .rules ul { list-style: none; padding: 0; margin: 0; border-radius: 14px; border: 1px solid var(--glass-line); background: var(--glass); }
 .rules li { display: grid; grid-template-columns: 76px 1fr; gap: 2px 14px; padding: 14px 18px; border-bottom: 1px solid var(--glass-line); }
@@ -254,7 +261,7 @@ td:first-child { color: var(--foam); }
 
 /* New features and the dashboard section */
 .new { display: inline-flex; align-items: center; font: 600 11px/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--board); border-radius: 999px; padding: 5px 9px; margin-left: 10px; vertical-align: 2px; white-space: nowrap; }
-.dash .rise > p:first-child .new { margin: 0 0 18px; }
+.dash .rise > p:first-child .new, #local .rise > p:first-child .new { margin: 0 0 18px; }
 .release a.version { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
 .release a.version:hover { text-decoration-color: currentColor; }
 .shot { margin-top: 48px; background: #06152f; border: 1px solid var(--glass-line); border-radius: 16px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7); overflow: hidden; }

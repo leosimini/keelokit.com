@@ -32,6 +32,18 @@ export const GUARD: Line[] = [
   ['err', 'edit .env.example, real values go in the secret store'],
 ];
 
+// An example of .keelokit/bin/run-local.sh (Keelokit 0.9.0) on a Mac that is missing the JDK, with a
+// phone over USB and the app already installed. Check it against the script when it changes.
+export const LOCAL: Line[] = [
+  ['cmdline', 'pnpm run:local android'],
+  ['step', '▶ Diagnosis'], ['ok', '  ✓ Node v22.12.0'], ['ok', '  ✓ pnpm 10.33.0'], ['ok', '  ✓ Docker running'],
+  ['warn', '  ! JDK 17'],
+  ['step', '▶ I am going to install/configure:'], ['', '    JDK 17 (brew install --cask zulu@17)   [y/N] y'],
+  ['step', '▶ Database and API'], ['ok', '  ✓ database on port 5432'], ['ok', '  ✓ API on port 3000 (log: .local-dev/logs/api.log)'],
+  ['step', '▶ Android: Galaxy S20 (USB)'], ['ok', '  ✓ already installed, nothing native changed: no rebuild'],
+  ['ok', '  ✓ Metro running, app opened'],
+];
+
 // The file tree is written with box-drawing prefixes for readability; the page draws it with CSS
 // (indent guides), because many monospace fonts lack those glyphs and stretch the lines.
 export const treeRows = (rows: string[][]) =>

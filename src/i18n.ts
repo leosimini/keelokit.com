@@ -183,6 +183,7 @@ const en = {
       ['Bugs that keep slipping through', '/keelokit:check-bugbash', 'Root-cause fixes, and a check that covers the whole class of every bug that escaped'],
       ['A project to follow', '/keelokit:project-dashboard', 'A light, live page: the next step to copy, what waits for you, every wave and its stories', 'new'],
       ['Someone to show it to', '/keelokit:project-report', 'The complete status, read-only, as a page to share or a file to export', 'new'],
+      ['An app to try on your phone', '/keelokit:run-local', 'Your app and its API running on a phone, an emulator or the simulator, in one command', 'new'],
       ['A product ready for users', '/keelokit:ship-setup', 'Staging and production set up and verified, then /keelokit:ship-release for each version'],
     ],
   },
@@ -223,7 +224,8 @@ const en = {
         { name: "/keelokit:check-security", text: "Security and privacy in depth: personal data, the law of each market, abuse of the critical journeys, scans.", badge: false, steps: ["Maps every piece of personal data: what, why, who sees it, for how long, where it goes.", "Names the privacy law of each market and what it asks of this product.", "Threat-models the critical journeys; scans dependencies, images and staging (OWASP ZAP).", "Checks personal data in logs, export and deletion, retention and encryption.", "Fixes with a test and a check per class; privacy choices and legal questions come to you."], when: "Before the first production release, and when a release touches personal data, auth or payments." },
         { name: "/keelokit:check-health", text: "Is every rule still backed by a check that works? Adds rules, registers exceptions.", badge: false, steps: ["Checks that every house rule has a check that looks alive: a test, a lint rule, a CI job, a git hook.", "Checks exceptions, context, invariants, critical areas and the backlog.", "Adds a new rule with its check, or registers a dated exception with your approval."], when: "When CI or the dashboard reports harness errors, or to add a rule." },
       ] },
-      { id: "ship", label: "Ship", lead: "Get it in front of users", items: [
+      { id: "envs", label: "Environments", lead: "From your phone to your users: local, staging and production, releases", items: [
+        { name: "/keelokit:run-local", text: "Your app and its API on your phone, an Android emulator or the iOS simulator, in one command. Whatever your Mac is missing, it installs after one yes.", badge: true, steps: ["Checks what the Mac is missing (Node, Docker, the JDK, the Android SDK, Xcode…), shows it all at once and installs it after one yes.", "Starts the database and the API, asks whether to load the sample data, and shows the test users to sign in with.", "Launches the app on the phone, emulator or simulator you choose, without rebuilding what is already installed.", "When a step fails it keeps the error, so Claude reads it, fixes it and tries again. It never stops a process, a container or an emulator without asking."], when: "You want to see and touch what you are building. macOS, for projects with a mobile app." },
         { name: "/keelokit:ship-setup", text: "Staging and production for people who have never deployed: a guide, the automation, and proof for each step.", badge: false, steps: ["Writes a deploy guide with a checklist per environment, in plain words.", "Does what needs none of your credentials: Fly.io apps, config, GitHub environments with production approval, deploy tokens.", "Walks you through accounts, logins, payment and your own keys; it never types a credential.", "Verifies each step for real and shows it on the dashboard."], when: "After the skeleton, before the first release, or when an environment isn’t ready." },
         { name: "/keelokit:ship-release", text: "A version of your product people can name, read about and roll back to.", badge: false, steps: ["Picks the next version from what landed: new things, fixes, breaking changes.", "Writes release notes users understand, each line tied to its story or finding.", "Tags vX.Y.Z on main, only after your yes.", "Production deploys only after a person approves it in GitHub; it follows the deploy to the end."], when: "A wave is done and the last bug bash is clean." },
       ] },
@@ -239,7 +241,7 @@ const en = {
     lead: '/keelokit:project-dashboard builds a short page from your repo, in your language: where the project is, the next step, what waits for you. It stays live, and it’s light: published once, then each refresh updates the open page without sending it through the chat again, so following a project costs very few tokens. For someone else, /keelokit:project-report generates the complete status, read-only, to share or export.',
     caption: 'Fleetly, a sample mobile app for delivery fleets, halfway through its build',
     open: 'Open full size',
-    darkCaption: 'Light or dark, one click',
+    darkCaption: 'Light or dark, one click, with contrast tested to WCAG AA in both',
     parts: [
       ['voyage', 'Where you are, and what comes next', 'The stages as one line of progress, the run decisions you took once, and the one next step with its command ready to copy.'],
       ['waiting', 'What waits for you', 'Approvals, the decisions a bug bash or a security review left with the option it recommends, environments still being set up, harness updates. Each links to its source and has its request ready.'],
@@ -248,6 +250,20 @@ const en = {
       ['ask', 'Copy it, or send it to Claude', 'Every button copies its request and fills this box: complete it, then send it to the Claude session watching the dashboard, or paste it into any chat.'],
       ['report', 'The full report, to share or export', '/keelokit:project-report lays out every stage with its documents, every finding, the decisions and the history. Read-only, as a page you can share or an HTML file that opens anywhere.'],
     ],
+  },
+  local: {
+    depth: '−26 m',
+    badge: 'New in 0.9',
+    title: 'Your app on your phone, in one command',
+    lead: '/keelokit:run-local starts the database and the API and opens your app on an Android phone, an emulator or the iOS simulator. It is the first step of the environments: local, then staging and production with /keelokit:ship-setup, then versions with /keelokit:ship-release.',
+    points: [
+      ['It sets up the Mac for you', 'It checks what is missing, shows it all at once and installs it after one yes. Nothing gets installed behind your back.'],
+      ['The second run is instant', 'If the app is already installed and nothing native changed, it skips the build and just opens it.'],
+      ['Ready to try', 'It asks whether to load the sample data and shows the test users to sign in with.'],
+      ['When something breaks, Claude fixes it', 'Each step leaves its log and the last error; Claude reads it, repairs it and runs it again. It never stops a process, a container or an emulator without asking.'],
+    ],
+    termTitle: 'Your app on an Android phone',
+    note: 'macOS for now. Launched on a Galaxy S20 over USB and on the iOS simulator.',
   },
   keel: {
     depth: '−28 m',
@@ -258,6 +274,13 @@ const en = {
       ['Unknowns stay questions', 'What nobody knows yet is written down with an owner and the exact question. Plausible defaults don’t get invented.'],
       ['The builder doesn’t grade itself', 'A verifier writes the acceptance tests before the code, a reviewer reads the diff cold, a breaker attacks the branch, and only the verifier can call a story done.'],
       ['Bugs come in classes', 'What must always hold (totals add up, a notice goes out once, a limit holds with two requests at once) is written as an invariant and proven with property, concurrency and replay tests. Critical code gets mutation testing, so its tests can actually fail.'],
+    ],
+    proofTitle: 'Proof, not promises',
+    proof: [
+      ['Built with itself', 'Keelokit runs on its own harness. A bug bash of its own repo found 50 root causes, and every fix came with a check for its class.'],
+      ['Findings reproduced, fixes reviewed', 'In a bug bash, an agent that didn’t report a finding has to reproduce it (two, for the serious ones), and one that didn’t write a fix reviews it. A rejected fix is undone; a run cut short picks up where it stopped.'],
+      ['Repo text is data, not orders', 'The bug bash’s agents get what the repository says marked as data, so an instruction planted in a file can’t steer them.'],
+      ['Not only apps', 'It looks at what the project is: a web or mobile product, or a library, CLI or plugin, and checks what matters for it: screens and data, or developer experience, docs and packaging.'],
     ],
     doctorTitle: 'The doctor, in a project',
     rulesTitle: 'A few house rules, and what enforces them',
@@ -277,7 +300,7 @@ const en = {
     depth: '−32 m',
     title: 'What runs on its own',
     items: [
-      ['Before every agent action', 'A guard stops secrets, edits to .env files and to applied migrations, skipped hooks, silenced tests and production deploys.'],
+      ['Before every agent action', 'A guard stops secrets (AWS, GitHub, Stripe, Anthropic, npm, GitLab, JWT keys and more, even split across two edits), edits to .env files and to applied migrations, skipped hooks, silenced tests and production deploys.'],
       ['When a session starts', 'A short status: where the project is and which stories are ready.'],
       ['On every commit and push', 'The same guard as a git hook, then the full local check before anything reaches the remote.'],
       ['In CI', 'Secret scan, lint and types, unit and integration tests on a real PostgreSQL, end-to-end journeys with an accessibility scan and against the real API, mutation testing of critical code, static analysis, a staging deploy.'],
@@ -469,6 +492,7 @@ const es: typeof en = {
       ['Bugs que se siguen escapando', '/keelokit:check-bugbash', 'Arreglos en la causa raíz, y un check que cubre toda la clase de cada bug que se escapó'],
       ['Un proyecto para seguir', '/keelokit:project-dashboard', 'Una página liviana y en vivo: el próximo paso para copiar, lo que te espera, cada ola con sus historias', 'new'],
       ['Alguien a quien mostrárselo', '/keelokit:project-report', 'El estado completo, de solo lectura, como página para compartir o archivo para exportar', 'new'],
+      ['Una app para probar en tu teléfono', '/keelokit:run-local', 'Tu app y su API corriendo en un teléfono, un emulador o el simulador, con un comando', 'new'],
       ['Un producto listo para usuarios', '/keelokit:ship-setup', 'Staging y producción configurados y verificados, y después /keelokit:ship-release para cada versión'],
     ],
   },
@@ -509,7 +533,8 @@ const es: typeof en = {
         { name: "/keelokit:check-security", text: "Seguridad y privacidad a fondo: datos personales, la ley de cada mercado, abusos de los recorridos críticos, escaneos.", badge: false, steps: ["Mapea cada dato personal: qué es, para qué, quién lo ve, cuánto tiempo, a dónde va.", "Nombra la ley de privacidad de cada mercado y qué le pide a este producto.", "Modela las amenazas de los recorridos críticos; escanea dependencias, imágenes y staging (OWASP ZAP).", "Revisa datos personales en los logs, exportación y borrado, retención y cifrado.", "Corrige con un test y un control por clase; las decisiones de privacidad y las preguntas legales te llegan a vos."], when: "Antes del primer lanzamiento a producción, y cuando un release toca datos personales, autenticación o pagos." },
         { name: "/keelokit:check-health", text: "¿Cada regla sigue respaldada por un check que funciona? Suma reglas y registra excepciones.", badge: false, steps: ["Verifica que cada regla de la casa tenga un control vivo: un test, una regla de lint, un job de CI, un hook de git.", "Revisa excepciones, contexto, invariantes, áreas críticas y el backlog.", "Suma una regla nueva con su control, o registra una excepción con fecha y tu aprobación."], when: "Cuando el CI o el tablero muestran errores del harness, o para sumar una regla." },
       ] },
-      { id: "ship", label: "Publicar", lead: "Llegar a los usuarios", items: [
+      { id: "envs", label: "Entornos", lead: "De tu teléfono a tus usuarios: local, staging y producción, versiones", items: [
+        { name: "/keelokit:run-local", text: "Tu app y su API en tu teléfono, un emulador de Android o el simulador de iOS, con un comando. Lo que le falte a tu Mac, lo instala después de un solo sí.", badge: true, steps: ["Revisa qué le falta a la Mac (Node, Docker, el JDK, el SDK de Android, Xcode…), lo muestra todo junto y lo instala después de un solo sí.", "Levanta la base de datos y la API, pregunta si cargar los datos de ejemplo y muestra los usuarios de prueba para entrar.", "Abre la app en el teléfono, emulador o simulador que elijas, sin recompilar lo que ya está instalado.", "Si un paso falla, guarda el error para que Claude lo lea, lo arregle y vuelva a intentar. Nunca frena un proceso, un contenedor o un emulador sin preguntar."], when: "Querés ver y tocar lo que estás construyendo. En macOS, para proyectos con app móvil." },
         { name: "/keelokit:ship-setup", text: "Staging y producción para quien nunca desplegó nada: una guía, la automatización y la prueba de cada paso.", badge: false, steps: ["Escribe una guía de despliegue con un checklist por entorno, en palabras simples.", "Hace lo que no necesita tus credenciales: apps en Fly.io, configuración, entornos de GitHub con aprobación para producción, tokens de despliegue.", "Te guía con las cuentas, los inicios de sesión, el pago y tus propias claves; nunca escribe una credencial.", "Verifica cada paso de verdad y lo muestra en el tablero."], when: "Después del esqueleto, antes del primer release, o cuando un entorno no está listo." },
         { name: "/keelokit:ship-release", text: "Una versión de tu producto que se puede nombrar, leer y a la que se puede volver.", badge: false, steps: ["Elige la próxima versión según lo que entró: cosas nuevas, arreglos, cambios que rompen.", "Escribe notas de versión que un usuario entiende, cada línea atada a su historia o hallazgo.", "Crea el tag vX.Y.Z en main, solo después de tu sí.", "Producción se despliega solo cuando una persona lo aprueba en GitHub; sigue el despliegue hasta el final."], when: "Terminó una ola y el último bug bash está limpio." },
       ] },
@@ -525,7 +550,7 @@ const es: typeof en = {
     lead: '/keelokit:project-dashboard arma una página corta desde tu repo, en tu idioma: dónde está el proyecto, el próximo paso, lo que te espera. Se mantiene en vivo y es liviana: se publica una vez y cada actualización cambia la página abierta sin volver a pasarla por el chat, así que seguir un proyecto gasta muy pocos tokens. Para otra persona, /keelokit:project-report genera el estado completo, de solo lectura, para compartir o exportar.',
     caption: 'Fleetly, una app móvil de ejemplo para flotas de reparto, a mitad de la construcción',
     open: 'Ver en tamaño completo',
-    darkCaption: 'Claro u oscuro, con un clic',
+    darkCaption: 'Claro u oscuro, con un clic, y el contraste probado con WCAG AA en los dos',
     parts: [
       ['voyage', 'Dónde estás y qué sigue', 'Las etapas como una línea de avance, las decisiones de ejecución que tomaste una sola vez y el único próximo paso con su comando listo para copiar.'],
       ['waiting', 'Lo que te espera', 'Aprobaciones, las decisiones que dejó un bug bash o una revisión de seguridad con la opción que recomienda, entornos a medio configurar, actualizaciones del harness. Cada una con el link a su origen y su pedido listo.'],
@@ -534,6 +559,20 @@ const es: typeof en = {
       ['ask', 'Copialo o mandáselo a Claude', 'Cada botón copia su pedido y llena esta caja: lo completás y lo enviás a la sesión de Claude que mira el tablero, o lo pegás en cualquier chat.'],
       ['report', 'El reporte completo, para compartir o exportar', '/keelokit:project-report muestra cada etapa con sus documentos, cada hallazgo, las decisiones y el historial. De solo lectura, como página para compartir o archivo HTML que se abre en cualquier lado.'],
     ],
+  },
+  local: {
+    depth: '−26 m',
+    badge: 'Nuevo en 0.9',
+    title: 'Tu app en tu teléfono, con un comando',
+    lead: '/keelokit:run-local levanta la base de datos y la API y abre tu app en un teléfono Android, un emulador o el simulador de iOS. Es el primer paso de los entornos: local, después staging y producción con /keelokit:ship-setup, y las versiones con /keelokit:ship-release.',
+    points: [
+      ['Prepara la Mac por vos', 'Revisa qué falta, lo muestra todo junto y lo instala después de un solo sí. Nada se instala a tus espaldas.'],
+      ['La segunda vez es instantánea', 'Si la app ya está instalada y no cambió nada nativo, no recompila: la abre y listo.'],
+      ['Lista para probar', 'Pregunta si cargar los datos de ejemplo y muestra los usuarios de prueba para entrar.'],
+      ['Si algo se rompe, Claude lo arregla', 'Cada paso deja su log y el último error; Claude lo lee, lo repara y vuelve a correrlo. Nunca frena un proceso, un contenedor o un emulador sin preguntar.'],
+    ],
+    termTitle: 'Tu app en un teléfono Android',
+    note: 'Por ahora en macOS. Probado en un Galaxy S20 por USB y en el simulador de iOS.',
   },
   keel: {
     depth: '−28 m',
@@ -544,6 +583,13 @@ const es: typeof en = {
       ['Lo que no se sabe queda como pregunta', 'Lo que nadie sabe todavía se escribe con un responsable y la pregunta exacta. No se inventan valores que suenan bien.'],
       ['El que construye no se evalúa', 'Un verificador escribe los tests de aceptación antes del código, un revisor lee el diff en frío, un breaker ataca la rama, y solo el verificador puede dar una historia por terminada.'],
       ['Los bugs vienen en clases', 'Lo que siempre tiene que cumplirse (los totales cierran, un aviso sale una sola vez, un límite aguanta dos requests a la vez) se escribe como invariante y se prueba con tests de propiedades, de concurrencia y de repetición. El código crítico pasa por mutation testing, para que sus tests puedan fallar de verdad.'],
+    ],
+    proofTitle: 'Pruebas, no promesas',
+    proof: [
+      ['Construido con sí mismo', 'Keelokit usa su propio harness. Un bug bash sobre su propio repo encontró 50 causas raíz, y cada arreglo dejó un control para su tipo de bug.'],
+      ['Hallazgos reproducidos, arreglos revisados', 'En un bug bash, cada hallazgo lo tiene que reproducir un agente que no lo reportó (dos, en los graves), y cada arreglo lo revisa uno que no lo escribió. Un arreglo rechazado se deshace; una corrida cortada sigue donde quedó.'],
+      ['El texto del repo es dato, no orden', 'Los agentes del bug bash reciben lo que dice el repositorio marcado como dato, así una instrucción plantada en un archivo no los puede manejar.'],
+      ['No solo apps', 'Mira qué es el proyecto: un producto web o móvil, o una librería, una CLI o un plugin, y revisa lo que importa en cada caso: pantallas y datos, o experiencia del desarrollador, documentación y empaquetado.'],
     ],
     doctorTitle: 'El doctor, en un proyecto',
     rulesTitle: 'Algunas reglas de la casa, y qué las hace cumplir',
@@ -563,7 +609,7 @@ const es: typeof en = {
     depth: '−32 m',
     title: 'Lo que corre solo',
     items: [
-      ['Antes de cada acción de un agente', 'Un guard frena secretos, cambios a archivos .env y a migraciones ya aplicadas, hooks salteados, tests silenciados y deploys a producción.'],
+      ['Antes de cada acción de un agente', 'Un guard frena secretos (claves de AWS, GitHub, Stripe, Anthropic, npm, GitLab, JWT y más, aunque vengan partidas en dos ediciones), cambios a archivos .env y a migraciones ya aplicadas, hooks salteados, tests silenciados y deploys a producción.'],
       ['Al empezar una sesión', 'Un estado corto: dónde está el proyecto y qué historias están listas.'],
       ['En cada commit y push', 'El mismo guard como hook de git, y después el chequeo local completo antes de que algo llegue al remoto.'],
       ['En CI', 'Escaneo de secretos, lint y tipos, tests unitarios y de integración contra un PostgreSQL real, recorridos de punta a punta con análisis de accesibilidad y contra la API real, mutation testing del código crítico, análisis estático y deploy a staging.'],

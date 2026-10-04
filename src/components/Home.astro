@@ -3,7 +3,7 @@ import Foil from './Foil.astro';
 import Out from './Out.astro';
 import Plain from './Plain.astro';
 import { AUTHOR, INSTALL, REPO, T, type Locale } from '../i18n';
-import { cmd, DOCTOR, GUARD, treeRows, VERIFY } from '../lib/content';
+import { cmd, DOCTOR, GUARD, LOCAL, treeRows, VERIFY } from '../lib/content';
 import { DOWNLOAD, fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
 import { SHOTS } from '../lib/shots';
 import { STACK } from '../lib/stack';
@@ -172,6 +172,25 @@ const dark = shot('dark');
       </figure>
     </section>
 
+    <section id="local" class="block wrap">
+      <p class="depth">{t.local.depth}</p>
+      <div class="rise">
+        <p><span class="new">{t.local.badge}</span></p>
+        <h2>{t.local.title}</h2>
+        <p class="sub" set:html={cmd(t.local.lead)} />
+      </div>
+      <div class="pair rise">
+        <ol class="timeline">
+          {t.local.points.map(([title, text]) => <li><h3>{title}</h3><p>{text}</p></li>)}
+        </ol>
+        <figure class="term">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>{t.local.termTitle}<span class="tag">{t.keel.example}</span></figcaption>
+          <pre><code>{LOCAL.map(([c, text]) => <Out c={c} text={text} />)}</code></pre>
+        </figure>
+      </div>
+      <p class="fine rise">{t.local.note}</p>
+    </section>
+
     <section id="keel" class="block wrap">
       <p class="depth">{t.keel.depth}</p>
       <div class="rise">
@@ -182,6 +201,10 @@ const dark = shot('dark');
         {t.keel.principles.map(([title, text], i) => (
           <article><span class="n">{['I', 'II', 'III', 'IV'][i]}</span><h3>{title}</h3><p>{text}</p></article>
         ))}
+      </div>
+      <div class="proof rise">
+        <h3>{t.keel.proofTitle}</h3>
+        <ul>{t.keel.proof.map(([title, text]) => <li><strong>{title}.</strong> {text}</li>)}</ul>
       </div>
       <div class="pair rise">
         <figure class="term">
