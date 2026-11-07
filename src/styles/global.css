@@ -735,3 +735,9 @@ a.skip:focus { left: 8px; }
 #why .why { margin-top: 0; }
 .sea figure.voyage figcaption { align-items: flex-start; }
 @media (min-width: 1101px) { .roles.five { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+/* A file tree whose paths are long: the note goes under the path instead of squeezing beside it */
+.tree.stack-notes .rows li { grid-template-columns: calc(var(--d) * 14px) minmax(0, 1fr); row-gap: 0; }
+.tree.stack-notes .path { white-space: normal; overflow-wrap: anywhere; }
+.tree.stack-notes .note { grid-column: 2; line-height: 1.4; padding-bottom: 6px; }
+.tree.stack-notes .guides { grid-row: 1 / span 2; }

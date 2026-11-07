@@ -39,12 +39,12 @@ const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar
           <p class="sub" set:html={rich(t.logbook.lead)} />
         </div>
         <div class="pair rise">
-          <figure class="tree">
+          <figure class="tree stack-notes">
             <figcaption>{t.logbook.treeTitle}</figcaption>
             <ul class="rows">{treeRows(t.logbook.tree).map((r) => <li style={`--d:${r.depth}`}><span class="guides" aria-hidden="true" /><span class:list={["path", { dir: r.name.endsWith("/") }]}>{r.name}</span>{r.note && <span class="note">{r.note}</span>}</li>)}</ul>
           </figure>
           <ul class="facts">
-            {t.logbook.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+            {t.logbook.points.map(([title, text]) => <li><h3 set:html={rich(title)} /><p set:html={rich(text)} /></li>)}
           </ul>
         </div>
       </section>
@@ -74,7 +74,7 @@ const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar
           <p class="sub">{t.seals.lead}</p>
         </div>
         <ul class="facts rise">
-          {t.seals.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+          {t.seals.points.map(([title, text]) => <li><h3 set:html={rich(title)} /><p set:html={rich(text)} /></li>)}
         </ul>
       </section>
 
@@ -82,7 +82,7 @@ const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar
         <p class="depth">{t.watch.depth}</p>
         <h2 class="rise">{t.watch.title}</h2>
         <ul class="facts rise">
-          {t.watch.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+          {t.watch.points.map(([title, text]) => <li><h3 set:html={rich(title)} /><p set:html={rich(text)} /></li>)}
         </ul>
       </section>
 
@@ -108,7 +108,7 @@ const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar
           <p class="sub" set:html={rich(t.tide.lead)} />
         </div>
         <ul class="facts rise">
-          {t.tide.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+          {t.tide.points.map(([title, text]) => <li><h3 set:html={rich(title)} /><p set:html={rich(text)} /></li>)}
         </ul>
       </section>
 
