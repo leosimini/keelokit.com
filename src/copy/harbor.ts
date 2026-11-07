@@ -3,14 +3,14 @@
 // Marks: `code` and **bold** (see lib/rich.ts).
 export const harbor = {
   en: {
-    title: 'Keelokit Harbor · many Claude Code sessions, one convoy, one push to main',
+    title: 'Keelokit Harbor · the meta-orchestrator of releases for Claude Code',
     description:
-      'Keelokit Harbor is a Claude Code plugin that orchestrates many parallel sessions, in Claude Desktop, the CLI and the cloud, across accounts, and lands their work on main in one convoy: one verify, one push, a logbook every session reads. By Leopoldo Simini.',
+      'Keelokit Harbor is the meta-orchestrator of releases for Claude Code. It coordinates sessions that can’t see each other, in Claude Desktop, the CLI and the cloud, across accounts, and lands their work on main in one convoy: one verify, one push, a logbook every session reads. By Leopoldo Simini.',
     ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
     hero: {
       crumb: 'Keelokit Harbor',
-      title: ['Many sessions.', 'One convoy. One push to main.'],
-      lead: 'Sessions in Claude Desktop, in the CLI and in the cloud, on several accounts, cannot see each other. Each one finishes its work on its own branch. Harbor is the orchestrator that brings it together: a skipper gathers the batch, it is verified once, and after the harbormaster’s ok it lands on `main` in one push, in order.',
+      title: ['Sessions that can’t see each other.', 'One convoy. One push to main.'],
+      lead: 'Harbor is the meta-orchestrator of releases. Sessions in Claude Desktop, in the CLI and in the cloud, on several accounts, cannot see each other. Each one finishes its work on its own branch, and Harbor brings it together as coordinated, verified releases: a skipper gathers the batch, it is verified once, and after the harbormaster’s ok it lands on `main` in one push, in order.',
       lead2: 'I built it from hundreds of hours, thousands by now, of running many sessions at once and needing them to keep delivering with almost no intervention. It is opinionated and built around how I work, so take what’s useful.',
       scene: 'A convoy of three cargo ships and small vessels arriving at a quay with a lighthouse',
       status: [
@@ -22,7 +22,7 @@ export const harbor = {
     problem: {
       depth: '−2 m',
       title: 'One landing per story doesn’t scale.',
-      lead: 'Keelokit builds one story per session and lands it on `main` after a local verify. With a few sessions that is the right amount of process. With many, on more than one account or machine, three costs show up.',
+      lead: 'Keelokit builds one story per session and lands it on `main` after a local verify. With sessions that don’t depend on each other, that is the right amount of process. When orchestrating gets complex, with sessions on more than one account, machine or tool, three costs show up.',
       symptoms: [
         ['A full verify per landing', 'Every story repeats the whole check before it is pushed, whatever else is already waiting.'],
         ['Nobody sees the combination', 'Two branches can each be green and break each other. You find out when both are on `main`.'],
@@ -70,9 +70,9 @@ export const harbor = {
     },
     skip: {
       depth: '−10 m',
-      title: 'If you work with one session at a time, you don’t need it.',
+      title: 'If nothing needs orchestrating, you don’t need it.',
       points: [
-        'Keelokit alone lands each story on `main` after its own verify. For one person, or sessions that rarely overlap, that is less to run.',
+        'Keelokit alone lands each story on `main` after its own verify. For one person, or sessions that don’t depend on each other, that is less to run.',
         'Keelokit’s `coordinate` skill already covers parallel sessions that don’t collide, without convoys.',
         'Harbor changes how work lands. With it adopted, `build-story` stops at its own branch and the convoy does the landing. It is not a mode you mix with direct landing in the same repo.',
       ],
@@ -102,14 +102,14 @@ export const harbor = {
     },
   },
   es: {
-    title: 'Keelokit Harbor · muchas sesiones de Claude Code, un convoy, un solo push a main',
+    title: 'Keelokit Harbor · el meta-orquestador de releases para Claude Code',
     description:
-      'Keelokit Harbor es un plugin de Claude Code que orquesta muchas sesiones en paralelo, en Claude Desktop, la CLI y la nube, en varias cuentas, y sube su trabajo a main en un solo convoy: un verify, un push, un logbook que lee cada sesión. Por Leopoldo Simini.',
+      'Keelokit Harbor es el meta-orquestador de releases para Claude Code. Coordina sesiones que no se ven entre sí, en Claude Desktop, la CLI y la nube, en varias cuentas, y sube su trabajo a main en un solo convoy: un verify, un push, un logbook que lee cada sesión. Por Leopoldo Simini.',
     ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
     hero: {
       crumb: 'Keelokit Harbor',
-      title: ['Muchas sesiones.', 'Un convoy. Un solo push a main.'],
-      lead: 'Las sesiones de Claude Desktop, de la CLI y de la nube, en varias cuentas, no se ven entre sí. Cada una termina su trabajo en su propia rama. Harbor es el orquestador que lo junta: un skipper reúne el lote, se verifica una vez y, con el ok del harbormaster, entra a `main` en un solo push, en orden.',
+      title: ['Sesiones que no se ven entre sí.', 'Un convoy. Un solo push a main.'],
+      lead: 'Harbor es el meta-orquestador de releases. Las sesiones de Claude Desktop, de la CLI y de la nube, en varias cuentas, no se ven entre sí. Cada una termina su trabajo en su propia rama y Harbor lo junta como releases coordinados y verificados: un skipper reúne el lote, se verifica una vez y, con el ok del harbormaster, entra a `main` en un solo push, en orden.',
       lead2: 'Lo armé con cientos de horas, a esta altura miles, corriendo muchas sesiones a la vez y necesitando que sigan entregando con casi nada de intervención. Es opinado y está hecho a mi manera de trabajar, así que tomá lo que te sirva.',
       scene: 'Un convoy de tres buques de carga y embarcaciones chicas llegando a un muelle con un faro',
       status: [
@@ -121,7 +121,7 @@ export const harbor = {
     problem: {
       depth: '−2 m',
       title: 'Una subida por historia no escala.',
-      lead: 'Keelokit construye una historia por sesión y la sube a `main` después de un verify local. Con pocas sesiones, es la cantidad justa de proceso. Con muchas, en más de una cuenta o máquina, aparecen tres costos.',
+      lead: 'Keelokit construye una historia por sesión y la sube a `main` después de un verify local. Cuando las sesiones no dependen entre sí, es la cantidad justa de proceso. Cuando orquestar se complica, con sesiones en más de una cuenta, máquina o herramienta, aparecen tres costos.',
       symptoms: [
         ['Un verify completo por subida', 'Cada historia repite el chequeo entero antes de subir, sin importar qué más esté esperando.'],
         ['Nadie ve la combinación', 'Dos ramas pueden estar verdes por separado y romperse entre sí. Te enterás cuando las dos ya están en `main`.'],
@@ -169,9 +169,9 @@ export const harbor = {
     },
     skip: {
       depth: '−10 m',
-      title: 'Si trabajás con una sesión por vez, no lo necesitás.',
+      title: 'Si no hay nada que orquestar, no lo necesitás.',
       points: [
-        'Keelokit solo sube cada historia a `main` después de su propio verify. Para una persona, o sesiones que casi no se pisan, es menos para correr.',
+        'Keelokit solo sube cada historia a `main` después de su propio verify. Para una persona, o sesiones que no dependen entre sí, es menos para correr.',
         'La skill `coordinate` de Keelokit ya cubre las sesiones en paralelo que no chocan, sin convoyes.',
         'Harbor cambia cómo se sube el trabajo. Con Harbor adoptado, `build-story` se detiene en su propia rama y el convoy hace la subida. No es un modo que se mezcle con la subida directa en el mismo repo.',
       ],

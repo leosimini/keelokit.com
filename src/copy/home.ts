@@ -6,16 +6,16 @@ export const home = {
   en: {
     title: 'Keelokit and Keelokit Harbor · two plugins for Claude Code',
     description:
-      'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor orchestrates many sessions that can’t see each other, in Claude Desktop, the CLI and the cloud, and lands their work on main in one convoy. By Leopoldo Simini.',
+      'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor is the meta-orchestrator of releases: it coordinates sessions that can’t see each other, in Claude Desktop, the CLI and the cloud, and lands their work on main in one convoy. By Leopoldo Simini.',
     ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
     hero: {
       eyebrow: 'Open source · two plugins for Claude Code',
       title: ['Many sessions that can’t see each other.', 'One harbor that brings them to main.'],
-      lead: 'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor is the powerful part for when there are many: sessions in Claude Desktop, in the CLI and in the cloud, across several accounts, none of which can see the others. Each one finishes its work; Harbor brings it together onto `main`, in order.',
+      lead: 'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor is the meta-orchestrator of releases, the powerful part for when orchestrating gets complex: sessions in Claude Desktop, in the CLI and in the cloud, across several accounts, none of which can see the others. Each one finishes its work; Harbor brings it together onto `main` as coordinated, verified releases, in order.',
       lead2: 'Both come from hundreds of hours, thousands by now, of developing many projects in parallel, with many sessions on several accounts that had to keep delivering software with almost no intervention, around the clock or unattended.',
       doors: [
         ['Start here', 'Keelokit', 'One session, done right.'],
-        ['Add it when sessions pile up', 'Keelokit Harbor', 'Many sessions, one landing.'],
+        ['Add it to orchestrate', 'Keelokit Harbor', 'The meta-orchestrator of releases.'],
       ] as [string, string, string][],
       scene: 'A convoy of three cargo ships and small vessels sailing toward a port with a lighthouse',
       cap: 'a convoy heading for main',
@@ -36,7 +36,7 @@ export const home = {
           go: 'Keelokit, in plain words', tech: 'How it’s built',
         },
         {
-          name: 'Keelokit Harbor', tag: 'The orchestrator for many sessions.',
+          name: 'Keelokit Harbor', tag: 'The meta-orchestrator of releases.',
           points: [
             '**Convoys:** many branches are merged into one, verified once and pushed once.',
             '**A logbook** on a git branch that every session, account and machine reads with `git fetch`.',
@@ -60,11 +60,12 @@ export const home = {
     guide: {
       eyebrow: 'When to install which',
       title: 'Start with Keelokit. Add Harbor when this starts to hurt.',
-      lead: 'What decides it is how you work, not how big the project is. The signal for Harbor is developing with many sessions at once, local and in the cloud, and having to coordinate several development CLIs, or a whole team developing in the same repo.',
+      lead: 'What decides it is how complex your orchestration is, not how big the project is or how many sessions you run. The signal for Harbor is sessions in Claude Desktop, the CLI and the cloud, on several accounts, that can’t see each other and have to be coordinated, or a whole team developing in the same repo, with work that has to reach `main` as releases that land together and in order.',
       rows: [
-        ['k', 'A session at a time, or a couple that rarely overlap, on one account and one machine.', 'Keelokit alone', 'direct landing'],
+        ['k', 'Sessions that don’t depend on each other’s work, on one account and one machine.', 'Keelokit alone', 'direct landing'],
         ['k', 'First time with agents, or building a first MVP.', 'Keelokit alone', 'direct landing'],
-        ['h', 'Many sessions at once, local and in the cloud, and you have to coordinate several development CLIs.', 'Add Harbor', 'one convoy for all of them'],
+        ['h', 'Several development CLIs and sessions to coordinate, local and in the cloud, that can’t see each other.', 'Add Harbor', 'one logbook, one convoy'],
+        ['h', 'Work that has to reach `main` as releases: together, verified once and in order.', 'Add Harbor', 'convoys and the harbormaster’s ok'],
         ['h', 'A whole team developing in the same repo.', 'Add Harbor', 'one logbook everyone reads'],
         ['h', 'More than one Claude account, or more than one machine, the cloud included.', 'Add Harbor', 'shared logbook'],
         ['h', 'Each landing costs a full verify, and every push to `main` starts a CI run you pay for.', 'Add Harbor', 'one verify and one push per convoy'],
@@ -73,10 +74,10 @@ export const home = {
       vignettes: [
         ['k', 'Solo, one MVP', 'One laptop, one story at a time, a Claude plan. Keelokit lands each story as it’s proven. Nothing to coordinate.'],
         ['k', 'A couple of stories a day, a helper now and then', 'A small team where two sessions sometimes run in parallel. Keelokit’s own `coordinate` skill is enough: the sessions don’t collide.'],
-        ['h', 'Many sessions across two accounts', 'Two Claude accounts, Claude Desktop on a laptop, the CLI and a cloud container. None of the sessions can see the others. Each one ends on its own branch; nobody sees the combination until a convoy is assembled and verified once.'],
+        ['h', 'Desktop, CLI and cloud, across two accounts', 'Two Claude accounts, Claude Desktop on a laptop, the CLI and a cloud container. None of the sessions can see the others. Each one ends on its own branch; nobody sees the combination until a convoy is assembled and verified once.'],
         ['h', 'A migrations folder everyone touches', 'Several branches add migrations in the same week and CI minutes are counting. Harbor keeps them out of the same open convoy and pushes once.'],
       ] as [string, string, string][],
-      truth: 'Harbor builds on Keelokit, so you start there and add Harbor when the sessions multiply.',
+      truth: 'Harbor builds on Keelokit, so you start there and add Harbor when orchestrating the releases gets complex.',
     },
     together: {
       eyebrow: 'How they work together',
@@ -126,16 +127,16 @@ export const home = {
   es: {
     title: 'Keelokit y Keelokit Harbor · dos plugins para Claude Code',
     description:
-      'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor orquesta muchas sesiones que no se ven entre sí, en Claude Desktop, la CLI y la nube, y sube su trabajo a main en un solo convoy. Por Leopoldo Simini.',
+      'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor es el meta-orquestador de releases: coordina sesiones que no se ven entre sí, en Claude Desktop, la CLI y la nube, y sube su trabajo a main en un solo convoy. Por Leopoldo Simini.',
     ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
     hero: {
       eyebrow: 'Open source · dos plugins para Claude Code',
       title: ['Muchas sesiones que no se ven entre sí.', 'Un puerto que las lleva a main.'],
-      lead: 'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor es la parte potente para cuando son muchas: sesiones de Claude Desktop, de la CLI y de la nube, en varias cuentas, que no se ven entre sí. Cada una termina su trabajo; Harbor lo junta en `main`, en orden.',
+      lead: 'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor es el meta-orquestador de releases, la parte potente para cuando orquestar se complica: sesiones de Claude Desktop, de la CLI y de la nube, en varias cuentas, que no se ven entre sí. Cada una termina su trabajo; Harbor lo junta en `main` como releases coordinados y verificados, en orden.',
       lead2: 'Los dos salen de cientos de horas, a esta altura miles, desarrollando muchos proyectos en paralelo, con muchas sesiones en varias cuentas que tenían que seguir entregando software con casi nada de intervención, de día y de noche o sin supervisión.',
       doors: [
         ['Empezá acá', 'Keelokit', 'Una sesión, bien hecha.'],
-        ['Sumalo cuando se acumulen sesiones', 'Keelokit Harbor', 'Muchas sesiones, una subida.'],
+        ['Sumalo para orquestar', 'Keelokit Harbor', 'El meta-orquestador de releases.'],
       ],
       scene: 'Un convoy de tres buques de carga y embarcaciones chicas navegando hacia un puerto con un faro',
       cap: 'un convoy rumbo a main',
@@ -156,7 +157,7 @@ export const home = {
           go: 'Keelokit, en palabras simples', tech: 'Cómo está hecho',
         },
         {
-          name: 'Keelokit Harbor', tag: 'El orquestador de muchas sesiones.',
+          name: 'Keelokit Harbor', tag: 'El meta-orquestador de releases.',
           points: [
             '**Convoys:** muchas ramas se mergean en una, se verifican una vez y se suben una vez.',
             '**Un logbook** en una rama de git que cada sesión, cuenta y máquina lee con `git fetch`.',
@@ -180,11 +181,12 @@ export const home = {
     guide: {
       eyebrow: 'Cuál instalar',
       title: 'Empezá con Keelokit. Sumá Harbor cuando esto empiece a doler.',
-      lead: 'Lo que decide es cómo trabajás, no qué tan grande es el proyecto. La señal para Harbor es desarrollar con muchas sesiones a la vez, locales y en la nube, y tener que coordinar varias CLI de desarrollo, o un equipo entero desarrollando en el mismo repo.',
+      lead: 'Lo que decide es qué tan compleja es tu orquestación, no qué tan grande es el proyecto ni cuántas sesiones corrés. La señal para Harbor es tener sesiones de Claude Desktop, de la CLI y de la nube, en varias cuentas, que no se ven entre sí y hay que coordinar, o un equipo entero desarrollando en el mismo repo, con trabajo que tiene que llegar a `main` como releases que aterrizan juntos y en orden.',
       rows: [
-        ['k', 'Una sesión por vez, o un par que casi no se cruzan, en una cuenta y una máquina.', 'Solo Keelokit', 'subida directa'],
+        ['k', 'Sesiones que no dependen del trabajo de las otras, en una cuenta y una máquina.', 'Solo Keelokit', 'subida directa'],
         ['k', 'Primera vez con agentes, o armando un primer MVP.', 'Solo Keelokit', 'subida directa'],
-        ['h', 'Muchas sesiones a la vez, locales y en la nube, y tenés que coordinar varias CLI de desarrollo.', 'Sumá Harbor', 'un convoy para todas'],
+        ['h', 'Varias CLI de desarrollo y sesiones para coordinar, locales y en la nube, que no se ven entre sí.', 'Sumá Harbor', 'un logbook, un convoy'],
+        ['h', 'Trabajo que tiene que llegar a `main` como releases: juntos, verificados una vez y en orden.', 'Sumá Harbor', 'convoys y el ok del harbormaster'],
         ['h', 'Un equipo entero desarrollando en el mismo repo.', 'Sumá Harbor', 'un logbook que lee todo el equipo'],
         ['h', 'Más de una cuenta de Claude, o más de una máquina, la nube incluida.', 'Sumá Harbor', 'logbook compartido'],
         ['h', 'Cada subida cuesta un verify completo, y cada push a `main` dispara una corrida de CI que pagás.', 'Sumá Harbor', 'un verify y un push por convoy'],
@@ -193,10 +195,10 @@ export const home = {
       vignettes: [
         ['k', 'Solo, un MVP', 'Una notebook, una historia por vez, un plan de Claude. Keelokit sube cada historia cuando está probada. Nada que coordinar.'],
         ['k', 'Un par de historias por día, algún ayudante', 'Un equipo chico donde a veces corren dos sesiones en paralelo. Alcanza con la skill `coordinate` de Keelokit: las sesiones no se pisan.'],
-        ['h', 'Muchas sesiones en dos cuentas', 'Dos cuentas de Claude, Claude Desktop en una notebook, la CLI y un contenedor en la nube. Ninguna sesión ve a las otras. Cada una termina en su rama; nadie ve la combinación hasta que se ensambla un convoy y se verifica una vez.'],
+        ['h', 'Desktop, CLI y nube, en dos cuentas', 'Dos cuentas de Claude, Claude Desktop en una notebook, la CLI y un contenedor en la nube. Ninguna sesión ve a las otras. Cada una termina en su rama; nadie ve la combinación hasta que se ensambla un convoy y se verifica una vez.'],
         ['h', 'Una carpeta de migraciones que toca todo el mundo', 'Varias ramas agregan migraciones en la misma semana y los minutos de CI corren. Harbor las mantiene fuera del mismo convoy abierto y sube una sola vez.'],
       ],
-      truth: 'Harbor se apoya en Keelokit, así que empezás por ahí y sumás Harbor cuando las sesiones se multiplican.',
+      truth: 'Harbor se apoya en Keelokit, así que empezás por ahí y sumás Harbor cuando orquestar los releases se complica.',
     },
     together: {
       eyebrow: 'Cómo trabajan juntos',

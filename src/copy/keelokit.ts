@@ -11,7 +11,7 @@ export const keelokit = {
       lead: 'Claude Code writes code. Keelokit makes it work like a disciplined team: it writes things down, tests, reviews itself and ships nothing without your OK.',
       lead2: 'For startups and teams who want a first MVP built right, and for anyone starting out with agents. It’s the method I use on my own projects.',
       doors: { plain: ['Not technical', 'How does it work?'], dev: ['Developer', 'How it’s built'] },
-      harbor: ['Running many sessions at once?', 'Keelokit Harbor is the other plugin'],
+      harbor: ['Orchestrating sessions that can’t see each other?', 'Keelokit Harbor is the other plugin'],
     },
     surface: 'What you build rides on top. What keeps it on course sits underneath.',
     plain: {
@@ -155,7 +155,7 @@ export const keelokit = {
       lead: 'Claude Code programa. Keelokit hace que trabaje como un equipo ordenado: documenta, prueba, se revisa a sí mismo y no publica nada sin tu OK.',
       lead2: 'Para startups y equipos que quieren un primer MVP bien hecho, y para quien arranca con agentes. Es el método que uso en mis propios proyectos.',
       doors: { plain: ['No soy técnico', '¿Cómo funciona?'], dev: ['Soy dev', 'Cómo está hecho'] },
-      harbor: ['¿Corrés muchas sesiones a la vez?', 'Keelokit Harbor es el otro plugin'],
+      harbor: ['¿Orquestás sesiones que no se ven entre sí?', 'Keelokit Harbor es el otro plugin'],
     },
     surface: 'Lo que construís va arriba. Lo que te mantiene el rumbo, abajo.',
     plain: {
