@@ -1,0 +1,18 @@
+---
+// One card of the crew: a small picture, Harbor's word (kept in English), its nautical name and what
+// it really does. `art` picks the picture; the label is its alt text.
+import Mini from './art/Mini.astro';
+import RoleIcon from './art/RoleIcon.astro';
+import { rich } from '../lib/rich';
+interface Props { art: string; term: string; title: string; text: string; label: string }
+const { art, term, title, text, label } = Astro.props;
+const mini = art === 'lighthouse' || art === 'vessels' || art === 'logbook';
+---
+<article class="role">
+  <div class="art">
+    {mini ? <Mini name={art as 'lighthouse' | 'vessels' | 'logbook'} label={label} /> : <RoleIcon name={art as 'wheel' | 'seal' | 'channel' | 'crew' | 'approve'} label={label} />}
+  </div>
+  <p class="jargon">{term}</p>
+  <h3>{title}</h3>
+  <p set:html={rich(text)} />
+</article>

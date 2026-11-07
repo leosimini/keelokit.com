@@ -1,0 +1,59 @@
+---
+// The bar: brand, the two plugins, the guide, GitHub and the language. Sticky; on a phone a button
+// opens a sheet that lists the site like a dive.
+import { AUTHOR, C, HARBOR_REPO, PATHS, REPO, href, type Locale, type Page } from '../copy/common';
+
+interface Props { locale: Locale; page: Page }
+const { locale, page } = Astro.props;
+const n = C[locale].nav;
+const other: Locale = locale === 'en' ? 'es' : 'en';
+const home = href(locale, '/');
+const here = (p: Page) => href(locale, PATHS[p]);
+const section = page === 'keelokit' || page === 'technical' ? 'keelokit' : page === 'harbor' || page === 'harborTech' ? 'harbor' : 'home';
+const gh = section === 'harbor' ? HARBOR_REPO : section === 'keelokit' ? REPO : AUTHOR.github;
+const links: [string, string, string][] = [
+  ['keelokit', n.keelokit, here('keelokit')],
+  ['harbor', n.harbor, here('harbor')],
+  ['which', n.which, `${home}#guide`],
+];
+---
+<div class="bar" data-bar>
+<header class="top wrap">
+  <a class="brand" href={home}>
+    <img src="/icon.svg" width="32" height="32" alt="" />
+    <span>Keelokit</span>
+  </a>
+  <nav class="links" aria-label={n.main}>
+    {links.map(([id, label, to]) => <a href={to} aria-current={id === section ? 'page' : undefined}>{label}</a>)}
+  </nav>
+  <div class="ends">
+    <a class="gh" href={gh} rel="noopener">GitHub</a>
+    <a class="lang" href={href(other, PATHS[page])} hreflang={other}>{n.switch}</a>
+    <a class="dl" href={`${home}#try`}>{n.install}</a>
+    <a class="try-m" href={`${home}#try`}>{n.install}</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+      <span class="burger-lines" aria-hidden="true"><i></i><i></i><i></i></span><span class="sr">{n.menu}</span>
+    </button>
+  </div>
+</header>
+</div>
+<div class="sheet" id="menu" role="dialog" aria-modal="true" aria-label={n.menu} hidden data-menu>
+  <div class="sheet-top wrap">
+    <span class="brand"><img src="/icon.svg" width="32" height="32" alt="" /><span>Keelokit</span></span>
+    <button class="close" type="button" data-menu-close><span aria-hidden="true">✕</span><span class="sr">{n.close}</span></button>
+  </div>
+  <nav class="wrap" aria-label={n.sections}>
+    <ol>
+      {n.dive.map(([id, depth, label]) => (
+        <li><a href={id === 'home' ? `${home}#guide` : here(id as Page)} aria-current={id === page ? 'page' : undefined}><span class="d">{depth}</span>{label}</a></li>
+      ))}
+    </ol>
+    <p class="sheet-ends">
+      <a class="btn board" href={`${home}#try`}>{n.install}</a>
+      <a href={REPO} rel="noopener">Keelokit ↗</a>
+      <a href={HARBOR_REPO} rel="noopener">Harbor ↗</a>
+      <a href={href(other, PATHS[page])} hreflang={other}>{n.switch}</a>
+    </p>
+  </nav>
+</div>
+<a class="to-top" href="#main" data-to-top hidden><span aria-hidden="true">↑</span><span class="sr">{n.top}</span></a>

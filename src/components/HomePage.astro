@@ -1,0 +1,157 @@
+---
+// The home: what each plugin does, how they fit, which one to install. Both plugins stand at the
+// same level; Keelokit is marked "start here".
+import Sprite from './art/Sprite.astro';
+import Sailboat from './art/Sailboat.astro';
+import CargoShip from './art/CargoShip.astro';
+import Convoy from './art/Convoy.astro';
+import Port from './art/Port.astro';
+import Pane from './Pane.astro';
+import Install from './Install.astro';
+import ReleaseLine from './ReleaseLine.astro';
+import RoleCard from './RoleCard.astro';
+import { C, HARBOR_INSTALL, HARBOR_INSTALL_ES, HARBOR_REPO, HARBOR_VERSION, INSTALL, PATHS, REPO, href, type Locale } from '../copy/common';
+import { home } from '../copy/home';
+import { DOWNLOAD, fetchRelease, releaseZip } from '../lib/release';
+import { rich } from '../lib/rich';
+import { cmd } from '../lib/content';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = home[locale];
+const c = C[locale];
+const release = await fetchRelease();
+const p = (page: keyof typeof PATHS) => href(locale, PATHS[page]);
+const hLines = locale === 'en' ? HARBOR_INSTALL : HARBOR_INSTALL_ES;
+const harborBadge = `${HARBOR_VERSION} · ${c.badges.notReleased}`;
+const voyageArt = ['sailboat', 'cargo', 'convoy'];
+// Old links such as /#commands pointed into the one long page. A hash never reaches the server, so
+// the home sends them to where those sections live now.
+const oldAnchors = {
+  plain: '/keelokit#plain', how: '/keelokit/technical#how', start: '/keelokit#start', commands: '/keelokit/technical#commands',
+  dashboard: '/keelokit#dashboard', local: '/keelokit#local', keel: '/keelokit#keel', devs: '/keelokit/technical',
+};
+const prefix = locale === 'en' ? '' : '/es';
+---
+<Sprite />
+<script is:inline set:html={`(function(){var m=${JSON.stringify(oldAnchors)};var h=location.hash.slice(1);if(h&&m[h])location.replace(${JSON.stringify(prefix)}+m[h]);})();`} />
+
+<section class="hero subhero home-hero">
+  <div class="wrap hero-copy">
+    <p class="eyebrow">{t.hero.eyebrow}</p>
+    <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
+    <p class="lead" set:html={rich(t.hero.lead)} />
+    <p class="lead-2">{t.hero.lead2}</p>
+    <div class="doors">
+      <a class="door k" href={p('keelokit')}><span class="who">{t.hero.doors[0][0]}</span><span class="what">{t.hero.doors[0][1]}</span><small>{t.hero.doors[0][2]}</small></a>
+      <a class="door h" href={p('harbor')}><span class="who">{t.hero.doors[1][0]}</span><span class="what">{t.hero.doors[1][1]}</span><small>{t.hero.doors[1][2]}</small></a>
+    </div>
+  </div>
+  <div class="wrap hero-art">
+    <Pane cap={t.hero.cap} class="hero-pane"><Convoy variant="hero" label={t.hero.scene} /></Pane>
+  </div>
+</section>
+
+<div class="skyband">
+<section id="plugins" class="sky wrap">
+  <p class="eyebrow">{t.plugins.eyebrow}</p>
+  <h2>{t.plugins.title}</h2>
+  <p class="sub">{t.plugins.lead}</p>
+  <div class="two">
+    {t.plugins.cards.map((card, i) => (
+      <article class="plugin">
+        <header>
+          <h3>{card.name}</h3>
+          {i === 0
+            ? <span class="badge"><span data-release-v>{release ? `v${release.version}` : ''}</span>{release ? ' · ' : ''}{c.badges.released}</span>
+            : <span class="badge">{harborBadge}</span>}
+        </header>
+        <p class="tag">{card.tag}{card.start && <span class="start">{card.start}</span>}</p>
+        <ul>{card.points.map((x) => <li set:html={rich(x)} />)}</ul>
+        <p class="links"><a class="go" href={p(i === 0 ? 'keelokit' : 'harbor')}>{card.go} <span aria-hidden="true">→</span></a><a class="go alt" href={p(i === 0 ? 'technical' : 'harborTech')}>{card.tech}</a></p>
+      </article>
+    ))}
+  </div>
+  <div class="dep"><span class="arrow" aria-hidden="true">↳</span><p><b>{t.plugins.dep[0]}</b> <span set:html={rich(t.plugins.dep[1])} /></p></div>
+</section>
+
+<section id="voyages" class="sky wrap tight">
+  <p class="eyebrow">{t.voyages.eyebrow}</p>
+  <h2>{t.voyages.title}</h2>
+  <div class="voyages">
+    {t.voyages.items.map((v, i) => (
+      <article class="voyage">
+        <Pane>
+          {i === 0 && <Sailboat label={v.label} />}
+          {i === 1 && <CargoShip label={v.label} />}
+          {i === 2 && <Convoy variant="voyage" label={v.label} />}
+        </Pane>
+        <p class="who">{v.who}</p>
+        <h3>{v.title}</h3>
+        <p set:html={rich(v.text)} />
+        <p class="how" set:html={rich(v.how)} />
+      </article>
+    ))}
+  </div>
+</section>
+
+<section id="guide" class="sky wrap tight">
+  <p class="eyebrow">{t.guide.eyebrow}</p>
+  <h2>{t.guide.title}</h2>
+  <p class="sub">{t.guide.lead}</p>
+  <div class="guide">
+    {t.guide.rows.map(([who, text, use, note]) => (
+      <div class={`row ${who}`}><p set:html={rich(text)} /><p class="use">{use}<i>{note}</i></p></div>
+    ))}
+  </div>
+  <div class="vignettes">
+    {t.guide.vignettes.map(([who, title, text]) => <div class={`vig ${who}`}><h3>{title}</h3><p set:html={rich(text)} /></div>)}
+  </div>
+  <p class="truth">{t.guide.truth}</p>
+</section>
+</div>
+
+<div class="sea" data-deep>
+  <section id="together" class="block wrap">
+    <p class="eyebrow on-sea">{t.together.eyebrow}</p>
+    <h2>{t.together.title}</h2>
+    <div class="how">
+      <div>
+        {t.together.body.map((x) => <p class="sub" set:html={rich(x)} />)}
+      </div>
+      <Pane cap={t.together.cap}><Port label={t.together.scene} /></Pane>
+    </div>
+    <div class="roles">
+      {t.together.roles.map(([art, term, title, text, label]) => <RoleCard art={art} term={term} title={title} text={text} label={label} />)}
+    </div>
+    <p class="mapnote">{t.together.mapnote} <a href={`${p('harborTech')}#analogies`}>{t.together.mapLink} →</a></p>
+  </section>
+
+  <section id="why" class="block wrap">
+    <aside class="why">
+      <h2>{t.why.title}</h2>
+      {t.why.body.map((x) => <p>{x}</p>)}
+      <p class="sign">— {t.why.sign}</p>
+    </aside>
+  </section>
+
+  <section id="try" class="block wrap">
+    <p class="eyebrow on-sea">{t.try.eyebrow}</p>
+    <h2>{t.try.title}</h2>
+    <div class="cols">
+      <div>
+        <h3>{t.try.k.name}</h3>
+        <Install locale={locale} lines={INSTALL} id="install-keelokit" />
+        <p set:html={rich(t.try.k.text)} />
+        <ReleaseLine locale={locale} release={release} />
+        <p class="actions"><a class="btn board" href={DOWNLOAD} data-release-zip><span aria-hidden="true">⬇</span> {t.try.k.download}</a><a class="btn light" href={REPO} rel="noopener">{t.try.k.github} <span aria-hidden="true">↗</span></a></p>
+      </div>
+      <div>
+        <h3>{t.try.h.name} <span class="badge on-sea">{t.try.h.badge}</span></h3>
+        <Install locale={locale} lines={hLines} id="install-harbor" />
+        <p set:html={rich(t.try.h.text)} />
+        <p class="actions"><a class="btn light" href={HARBOR_REPO} rel="noopener">{t.try.h.github} <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </div>
+  </section>
+</div>

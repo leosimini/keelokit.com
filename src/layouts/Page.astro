@@ -1,87 +1,73 @@
 ---
 import '../styles/global.css';
-import { AUTHOR, REPO, T, type Locale } from '../i18n';
+import { AUTHOR, C, PATHS, SITE, href, type Locale, type Page } from '../copy/common';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
-interface Props { locale: Locale }
-const { locale } = Astro.props;
-const t = T[locale];
-const site = 'https://keelokit.com';
-const canonical = locale === 'en' ? `${site}/` : `${site}/es`;
-
-// The author's canonical identity lives on his own site; this page only points to it.
-const jsonld = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareSourceCode',
-    '@id': REPO,
-    name: 'Keelokit',
-    description: t.description,
-    url: canonical,
-    sameAs: [`${AUTHOR.url}/keelokit`],
-    codeRepository: REPO,
-    programmingLanguage: ['TypeScript', 'Python'],
-    runtimePlatform: 'Claude Code',
-    license: 'https://opensource.org/licenses/MIT',
-    inLanguage: locale,
-    author: { '@id': `${AUTHOR.url}/#person` },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${AUTHOR.url}/#person`,
-    name: AUTHOR.name,
-    alternateName: ['Leo Simini', AUTHOR.handle],
-    url: AUTHOR.url,
-    sameAs: AUTHOR.sameAs,
-  },
-];
+interface Props {
+  locale: Locale;
+  page: Page;
+  title: string;
+  description: string;
+  ogAlt: string;
+  jsonld: object[];
+}
+const { locale, page, title, description, ogAlt, jsonld } = Astro.props;
+const abs = (l: Locale) => `${SITE}${href(l, PATHS[page])}`;
+const canonical = abs(locale);
 ---
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t.title}</title>
-    <meta name="description" content={t.description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="author" content={AUTHOR.name} />
     <link rel="author" href={AUTHOR.url} />
     <link rel="me" href={AUTHOR.url} />
     <link rel="me" href={AUTHOR.github} />
     <link rel="me" href={AUTHOR.linkedin} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={`${site}/`} />
-    <link rel="alternate" hreflang="es" href={`${site}/es`} />
-    <link rel="alternate" hreflang="x-default" href={`${site}/`} />
+    <link rel="alternate" hreflang="en" href={abs('en')} />
+    <link rel="alternate" hreflang="es" href={abs('es')} />
+    <link rel="alternate" hreflang="x-default" href={abs('en')} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#f6f1e8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f1e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a1424" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Keelokit" />
-    <meta property="og:title" content={t.title} />
-    <meta property="og:description" content={t.description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${site}/og.png`} />
+    <meta property="og:image" content={`${SITE}/og.png`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={t.ogAlt} />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'es_AR'} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={t.title} />
-    <meta name="twitter:description" content={t.description} />
-    <meta name="twitter:image" content={`${site}/og.png`} />
-    <meta name="twitter:image:alt" content={t.ogAlt} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE}/og.png`} />
+    <meta name="twitter:image:alt" content={ogAlt} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Fragment+Mono&family=Karla:wght@400;500;600&display=swap" />
     <script is:inline>document.documentElement.classList.add('js')</script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
   </head>
-  <body>
-    <a class="skip" href="#main">{locale === 'en' ? 'Skip to content' : 'Ir al contenido'}</a>
-    <slot />
+  <body data-page={page}>
+    <a class="skip" href="#main">{C[locale].skip}</a>
+    <Header locale={locale} page={page} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} page={page} />
     <script>
       import { fetchReleaseCached, releaseDate, releaseNotes, releaseZip } from '../lib/release';
       // Copy buttons: the label says "Copied" for a moment, and screen readers hear it.
@@ -96,33 +82,38 @@ const jsonld = [
           setTimeout(() => { label.textContent = idle; btn.classList.remove('is-done'); }, 1600);
         });
       });
-      // The release line: the build wrote the version it saw; this refreshes it from the release
-      // branch, so a new Keelokit version shows up without redeploying the site. Cached for an
-      // hour, so it doesn't ask GitHub again on every page.
+      // Keelokit's release line: the build wrote the version it saw; this refreshes it from the release
+      // branch, so a new Keelokit version shows up without redeploying the site. Cached for an hour.
+      // Harbor has no release to read: its badge is written by hand.
       const line = document.querySelector<HTMLElement>('[data-release]');
-      if (line) {
+      const versions = document.querySelectorAll<HTMLElement>('[data-release-v]');
+      if (line || versions.length) {
         fetchReleaseCached().then((r) => {
           if (!r) return;
+          versions.forEach((el) => { el.textContent = `v${r.version}`; });
+          document.querySelectorAll<HTMLAnchorElement>('[data-release-zip]').forEach((a) => { a.href = releaseZip(r.version); });
+          if (!line) return;
           line.querySelector('[data-release-version]')!.textContent = `v${r.version}`;
           line.querySelector('[data-release-date]')!.textContent = r.date ? ` · ${releaseDate(r.date, line.dataset.lang!)}` : '';
           line.querySelectorAll<HTMLAnchorElement>('[data-release-notes]').forEach((a) => { a.href = releaseNotes(r.version); });
-          document.querySelectorAll<HTMLAnchorElement>('[data-release-zip]').forEach((a) => { a.href = releaseZip(r.version); });
           line.hidden = false;
         });
       }
-      // The bar: compact once the page moves, deep glass once the sky is behind it.
+      // The bar: compact once the page moves, deep glass while the sea is behind it.
       const bar = document.querySelector<HTMLElement>('[data-bar]');
-      const hero = document.querySelector<HTMLElement>('.hero');
+      const deep = [...document.querySelectorAll<HTMLElement>('[data-deep]')];
       const toTop = document.querySelector<HTMLElement>('[data-to-top]');
       const onScroll = () => {
         const y = window.scrollY;
         bar?.classList.toggle('is-stuck', y > 8);
-        bar?.classList.toggle('is-deep', !!hero && hero.getBoundingClientRect().bottom < (bar?.offsetHeight ?? 60));
+        const probe = (bar?.offsetHeight ?? 60) / 2;
+        bar?.classList.toggle('is-deep', deep.some((el) => { const r = el.getBoundingClientRect(); return r.top <= probe && r.bottom > probe; }));
         if (toTop) toTop.hidden = y < document.documentElement.scrollHeight / 2 - innerHeight / 2;
       };
       addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
       onScroll();
-      // Where you are: the section under the bar is marked in the nav and in the menu.
+      // Where you are: the section under the bar is marked in the side index.
       const spied = [...new Set([...document.querySelectorAll<HTMLAnchorElement>('[data-spy]')].map((a) => a.dataset.spy!))]
         .map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
       let ticking = false;
@@ -134,9 +125,11 @@ const jsonld = [
           if (a.dataset.spy === id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
         });
       };
-      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
-      mark();
-      // The menu (mobile): a sheet with the sections; Esc, the close button or a link close it.
+      if (spied.length) {
+        addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
+        mark();
+      }
+      // The menu (mobile): a sheet with the pages; Esc, the close button or a link close it.
       const sheet = document.querySelector<HTMLElement>('[data-menu]');
       const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]');
       if (sheet && opener) {

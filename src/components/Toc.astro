@@ -1,0 +1,9 @@
+---
+// The side index of a technical page: it replaces the menu of depths. The section under the bar is marked.
+interface Props { title: string; items: [string, string][] }
+const { title, items } = Astro.props;
+---
+<nav class="toc" aria-label={title}>
+  <p class="toc-title">{title}</p>
+  <ol>{items.map(([id, label]) => <li><a href={`#${id}`} data-spy={id}>{label}</a></li>)}</ol>
+</nav>

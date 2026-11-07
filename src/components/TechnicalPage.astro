@@ -1,0 +1,222 @@
+---
+// /keelokit/technical: the part of the old page for developers, at the bottom of the dive (−20 m).
+import Term from './Term.astro';
+import Toc from './Toc.astro';
+import WhereMap from './WhereMap.astro';
+import { PATHS, href, type Locale } from '../copy/common';
+import { technical } from '../copy/technical';
+import { cmd, DOCTOR, GUARD, LOCAL, treeRows, VERIFY } from '../lib/content';
+import { SHOTS } from '../lib/shots';
+import { STACK } from '../lib/stack';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = technical[locale];
+const shot = (key: string) => ({ src: `/img/dashboard/${locale}/${key}.webp`, ...SHOTS[locale][key] });
+const full = shot('full');
+const dark = shot('dark');
+const toc: [string, string][] = ['how', 'commands', 'dashboard', 'local', 'keel', 'auto', 'where', 'learned'].map((id) => [id, t.toc[id as keyof typeof t.toc]]);
+const badge = locale === 'en' ? 'New' : 'Nuevo';
+---
+<section class="hero subhero">
+  <div class="wrap hero-copy">
+    <p class="crumbs"><a href={href(locale, PATHS.keelokit)}>Keelokit</a> <span aria-hidden="true">/</span> <span>{t.intro.eyebrow.split(' · ')[1]}</span></p>
+    <h1><span>{t.intro.title[0]}</span> <em>{t.intro.title[1]}</em></h1>
+    <p class="lead">{t.intro.lead}</p>
+    <p class="doors-line">
+      <a class="more-link" href={href(locale, PATHS.keelokit)}>← {t.intro.back}</a>
+      <a class="more-link" href={href(locale, PATHS.harborTech)}>{t.intro.harbor} →</a>
+    </p>
+  </div>
+</section>
+
+<div class="sea tech" data-deep>
+  <p class="surface wrap">{t.surface}</p>
+  <div class="wrap tech-layout">
+    <Toc title={t.toc.title} items={toc} />
+    <div class="tech-body">
+
+      <section id="how" class="block">
+        <p class="depth">{t.how.depth}</p>
+        <div class="rise">
+          <h2>{t.how.title}</h2>
+          <p class="sub" set:html={cmd(t.how.lead)} />
+        </div>
+        <ol class="steps rise">
+          {t.how.steps.map(([name, text], i) => (
+            <li><span class="n">{String(i + 1).padStart(2, '0')}</span><h3>{name}</h3><p>{text}</p></li>
+          ))}
+        </ol>
+        <div class="pair rise">
+          <figure class="tree">
+            <figcaption>{t.how.treeTitle}</figcaption>
+            <ul class="rows">{treeRows(t.how.tree).map((r) => <li style={`--d:${r.depth}`}><span class="guides" aria-hidden="true" /><span class:list={["path", { dir: r.name.endsWith("/") }]}>{r.name}</span>{r.note && <span class="note">{r.note}</span>}</li>)}</ul>
+            <p class="fine">{t.how.treeNote}</p>
+          </figure>
+          <Term title={t.verifyTitle} lines={VERIFY} />
+        </div>
+        <div class="stack rise">
+          <p class="stack-title">{t.how.stackTitle}</p>
+          <ul>
+            {STACK.map((i) => (
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d={i.d} /></svg><span>{i.label}</span></li>
+            ))}
+          </ul>
+        </div>
+        <h3 class="sub-h rise">{t.start.title}</h3>
+        <div class="table rise" role="region" aria-label={t.start.title} tabindex="0">
+          <table>
+            <thead><tr>{t.start.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.start.rows.map(([have, start, get, isNew]) => <tr><td>{have}</td><td><code set:html={cmd(start)} />{isNew && <span class="new">{badge}</span>}</td><td set:html={cmd(get)} /></tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="commands" class="block">
+        <p class="depth">{t.commands.depth}</p>
+        <div class="rise">
+          <h2>{t.commands.title}</h2>
+          <p class="sub" set:html={cmd(t.commands.lead)} />
+        </div>
+        <div class="cmd-groups">
+          {t.commands.groups.map((g) => (
+            <section class="cmd-group rise" aria-labelledby={`cmd-${g.id}`}>
+              <header><h3 id={`cmd-${g.id}`}>{g.label}</h3><p>{g.lead}</p></header>
+              <div class="commands">
+                {g.items.map((c) => (
+                  <details class:list={['command', { 'is-new': c.badge }]}>
+                    <summary>
+                      <span class="cmd-line"><code set:html={cmd(c.name)} />{c.badge && <span class="new">{t.commands.badge}</span>}</span>
+                      <p>{c.text}</p>
+                      <span class="more">{t.commands.more}<span class="chev" aria-hidden="true"></span></span>
+                    </summary>
+                    <div class="command-body">
+                      <div>
+                        <p class="k">{t.commands.how}</p>
+                        <ol>{c.steps.map((step) => <li set:html={cmd(step)} />)}</ol>
+                      </div>
+                      <div>
+                        <p class="k">{t.commands.when}</p>
+                        <p>{c.when}</p>
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </section>
+
+      <section id="dashboard" class="block dash">
+        <p class="depth">{t.dash.depth}</p>
+        <div class="rise">
+          <p><span class="new">{t.dash.badge}</span></p>
+          <h2>{t.dash.title}</h2>
+          <p class="sub" set:html={cmd(t.dash.lead)} />
+        </div>
+        <figure class="shot rise">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>{t.dash.caption}</span><a class="tag" href={full.src} target="_blank" rel="noopener">{t.dash.open} <span aria-hidden="true">↗</span></a></figcaption>
+          <div class="scroller" tabindex="0" aria-label={t.dash.caption}>
+            <img src={full.src} width={full.w} height={full.h} alt={`${t.dash.title}: ${t.dash.caption}`} loading="lazy" decoding="async" />
+          </div>
+        </figure>
+        <div class="parts">
+          {t.dash.parts.map(([key, title, text], i) => {
+            const s = shot(key);
+            return (
+              <article class:list={['part', 'rise', { flip: i % 2 === 1 }]}>
+                <a class:list={['frame', { narrow: s.w < 900, tall: s.h / s.w > 0.95 }]} href={s.src} target="_blank" rel="noopener">
+                  <img src={s.src} width={s.w} height={s.h} alt={title} loading="lazy" decoding="async" />
+                </a>
+                <div class="part-copy">
+                  <span class="n">{String(i + 1).padStart(2, '0')}</span>
+                  <h3>{title}</h3>
+                  <p set:html={cmd(text)} />
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <figure class="shot dark rise">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>{t.dash.darkCaption}</span></figcaption>
+          <a class="frame" href={dark.src} target="_blank" rel="noopener"><img src={dark.src} width={dark.w} height={dark.h} alt={t.dash.darkCaption} loading="lazy" decoding="async" /></a>
+        </figure>
+      </section>
+
+      <section id="local" class="block">
+        <p class="depth">{t.local.depth}</p>
+        <div class="rise">
+          <p><span class="new">{t.local.badge}</span></p>
+          <h2>{t.local.title}</h2>
+          <p class="sub" set:html={cmd(t.local.lead)} />
+        </div>
+        <div class="pair rise">
+          <ol class="timeline">
+            {t.local.points.map(([title, text]) => <li><h3>{title}</h3><p>{text}</p></li>)}
+          </ol>
+          <Term title={t.local.termTitle} lines={LOCAL} tag={t.keel.example} />
+        </div>
+        <p class="fine rise">{t.local.note}</p>
+      </section>
+
+      <section id="keel" class="block">
+        <p class="depth">{t.keel.depth}</p>
+        <div class="rise">
+          <h2>{t.keel.title}</h2>
+          <p class="sub">{t.keel.lead}</p>
+        </div>
+        <div class="principles rise">
+          {t.keel.principles.map(([title, text], i) => (
+            <article><span class="n">{['I', 'II', 'III', 'IV'][i]}</span><h3>{title}</h3><p>{text}</p></article>
+          ))}
+        </div>
+        <div class="proof rise">
+          <h3>{t.keel.proofTitle}</h3>
+          <ul>{t.keel.proof.map(([title, text]) => <li><strong>{title}.</strong> {text}</li>)}</ul>
+        </div>
+        <div class="pair rise">
+          <Term title={t.keel.doctorTitle} lines={DOCTOR} tag={t.keel.example} />
+          <figure class="rules">
+            <figcaption>{t.keel.rulesTitle}</figcaption>
+            <ul>
+              {t.keel.rules.map(([id, rule, check]) => (
+                <li><code class="rid">{id}</code><span class="rule">{rule}</span><span class="check">{check}</span></li>
+              ))}
+            </ul>
+          </figure>
+        </div>
+      </section>
+
+      <section id="auto" class="block">
+        <p class="depth">{t.auto.depth}</p>
+        <h2 class="rise">{t.auto.title}</h2>
+        <div class="pair rise">
+          <ol class="timeline">
+            {t.auto.items.map(([when, what]) => <li><h3>{when}</h3><p>{what}</p></li>)}
+          </ol>
+          <Term title={t.auto.guardExample} lines={GUARD} />
+        </div>
+      </section>
+
+      <section id="where" class="block">
+        <p class="depth">{t.where.depth}</p>
+        <div class="rise">
+          <h2>{t.where.title}</h2>
+          <p class="sub">{t.where.lead}</p>
+        </div>
+        <WhereMap where={t.where as any} full />
+      </section>
+
+      <section id="learned" class="block">
+        <p class="depth">{t.pictures.depth}</p>
+        <h2 class="rise">{t.pictures.title}</h2>
+        <p class="learned rise"><strong>{t.pictures.learnedTitle}.</strong> {t.pictures.learned}</p>
+        <aside class="mislead rise">
+          <h3>{t.pictures.noteTitle}</h3>
+          <ul>{t.pictures.notes.map((n) => <li>{n}</li>)}</ul>
+        </aside>
+      </section>
+    </div>
+  </div>
+</div>

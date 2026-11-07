@@ -1,0 +1,42 @@
+---
+// Where everything happens: the computer, GitHub and Fly.io. The full version adds the environments
+// with their gate, and the other pieces the project uses.
+interface Where {
+  computer: string[]; github: (string | string[])[]; fly: string[]; arrows: string[];
+  staging?: string[]; gate?: string; production?: string[]; also?: string[][];
+}
+interface Props { where: Where; full?: boolean }
+const { where: w, full = false } = Astro.props;
+const gh = w.github;
+---
+<div class="pl-map rise">
+  <div class="pl-node">
+    <p class="pl-place">{w.computer[0]}</p>
+    <h3>{w.computer[1]}</h3>
+    <p>{w.computer[2]}</p>
+  </div>
+  <div class="pl-arrow" aria-hidden="true"><svg viewBox="0 0 56 14"><path d="M0 7h50M44 1l8 6-8 6" /></svg>{w.arrows[0]}</div>
+  <div class="pl-node">
+    <p class="pl-place">{gh[0]}</p>
+    <h3>{gh[1]}</h3>
+    <ul>{(gh[2] as string[]).map((item) => <li>{item}</li>)}</ul>
+  </div>
+  <div class="pl-arrow" aria-hidden="true"><svg viewBox="0 0 56 14"><path d="M0 7h50M44 1l8 6-8 6" /></svg>{w.arrows[1]}</div>
+  <div class="pl-node">
+    <p class="pl-place">{w.fly[0]}</p>
+    <h3>{w.fly[1]}</h3>
+    <p>{w.fly[2]}</p>
+    {full && w.staging && w.production && (
+      <div class="pl-envs">
+        <div class="pl-env"><b>{w.staging[0]}</b><span>{w.staging[1]}</span></div>
+        <div class="pl-gate"><i aria-hidden="true"></i>{w.gate}</div>
+        <div class="pl-env prod"><b>{w.production[0]}</b><span>{w.production[1]}</span></div>
+      </div>
+    )}
+  </div>
+</div>
+{full && w.also && (
+  <div class="pl-also rise">
+    {w.also.map(([name, text]) => <div><b>{name}</b><span>{text}</span></div>)}
+  </div>
+)}

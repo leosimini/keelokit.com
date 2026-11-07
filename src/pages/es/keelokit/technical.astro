@@ -1,0 +1,15 @@
+---
+import Page from '../../../layouts/Page.astro';
+import TechnicalPage from '../../../components/TechnicalPage.astro';
+import { PATHS, REPO, SITE, href } from '../../../copy/common';
+import { technical } from '../../../copy/technical';
+import { keelokit } from '../../../copy/keelokit';
+import { graph, keelokitLd, techArticle } from '../../../lib/schema';
+
+const locale = 'es';
+const t = technical[locale];
+const url = `${SITE}${href(locale, PATHS.technical)}`;
+---
+<Page locale={locale} page="technical" title={t.title} description={t.description} ogAlt={t.ogAlt} jsonld={graph(keelokitLd({ url: `${SITE}${href(locale, PATHS.keelokit)}`, description: keelokit[locale].description, locale }), techArticle({ url, headline: t.title, description: t.description, locale, about: REPO }))}>
+  <TechnicalPage locale={locale} />
+</Page>

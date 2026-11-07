@@ -1,0 +1,13 @@
+---
+// Keelokit's latest release, from its release branch (see lib/release.ts). Hidden when it can't be read.
+import { C, type Locale } from '../copy/common';
+import { fetchRelease, releaseDate, releaseNotes, releaseZip } from '../lib/release';
+interface Props { locale: Locale; release: Awaited<ReturnType<typeof fetchRelease>> }
+const { locale, release } = Astro.props;
+const r = C[locale].release;
+---
+<p class="release" data-release data-lang={locale} hidden={!release}>
+  {r.label}: <a class="version" data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener"><strong data-release-version>{release && `v${release.version}`}</strong></a><span data-release-date>{release?.date && ` · ${releaseDate(release.date, locale)}`}</span>
+  · <a data-release-notes href={release ? releaseNotes(release.version) : '#'} rel="noopener">{r.notes} <span aria-hidden="true">↗</span></a>
+  · <a data-release-zip href={release ? releaseZip(release.version) : '#'}>{r.zip} <span aria-hidden="true">↓</span></a>
+</p>

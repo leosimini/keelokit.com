@@ -1,0 +1,177 @@
+---
+// /harbor/how-it-works: Keelokit Harbor for developers, from the logbook down. It starts at −20 m.
+import Toc from './Toc.astro';
+import { HARBOR_REPO, PATHS, href, type Locale } from '../copy/common';
+import { harborTech } from '../copy/harbor-tech';
+import { treeRows } from '../lib/content';
+import { rich } from '../lib/rich';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = harborTech[locale];
+const ids = ['logbook', 'convoy', 'seals', 'watch', 'fresh', 'tide', 'keelokit', 'failures', 'analogies', 'designed'] as const;
+const toc: [string, string][] = ids.map((id) => [id, t.toc[id]]);
+const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar';
+---
+<section class="hero subhero">
+  <div class="wrap hero-copy">
+    <p class="crumbs"><a href={href(locale, PATHS.harbor)}>Keelokit Harbor</a> <span aria-hidden="true">/</span> <span>{t.intro.eyebrow.split(' · ')[1]}</span> <span class="badge">{badge}</span></p>
+    <h1><span>{t.intro.title[0]}</span> <em>{t.intro.title[1]}</em></h1>
+    <p class="lead" set:html={rich(t.intro.lead)} />
+    <p class="lead-2">{t.intro.status}</p>
+    <p class="doors-line">
+      <a class="more-link" href={href(locale, PATHS.harbor)}>← {t.intro.back}</a>
+      <a class="more-link" href={href(locale, PATHS.technical)}>{t.intro.keelokit} →</a>
+    </p>
+  </div>
+</section>
+
+<div class="sea tech" data-deep>
+  <p class="surface wrap">{t.surface}</p>
+  <div class="wrap tech-layout">
+    <Toc title={t.toc.title} items={toc} />
+    <div class="tech-body">
+
+      <section id="logbook" class="block">
+        <p class="depth">{t.logbook.depth}</p>
+        <div class="rise">
+          <h2>{t.logbook.title}</h2>
+          <p class="sub" set:html={rich(t.logbook.lead)} />
+        </div>
+        <div class="pair rise">
+          <figure class="tree">
+            <figcaption>{t.logbook.treeTitle}</figcaption>
+            <ul class="rows">{treeRows(t.logbook.tree).map((r) => <li style={`--d:${r.depth}`}><span class="guides" aria-hidden="true" /><span class:list={["path", { dir: r.name.endsWith("/") }]}>{r.name}</span>{r.note && <span class="note">{r.note}</span>}</li>)}</ul>
+          </figure>
+          <ul class="facts">
+            {t.logbook.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section id="convoy" class="block">
+        <p class="depth">{t.convoy.depth}</p>
+        <h2 class="rise">{t.convoy.title}</h2>
+        <div class="table rise" role="region" aria-label={t.convoy.title} tabindex="0">
+          <table>
+            <thead><tr>{t.convoy.stateHead.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.convoy.states.map(([s, m]) => <tr><td><code>{s}</code></td><td set:html={rich(m)} /></tr>)}</tbody>
+          </table>
+        </div>
+        <div class="table rise" role="region" aria-label={t.convoy.cmdHead[0]} tabindex="0">
+          <table>
+            <thead><tr>{t.convoy.cmdHead.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.convoy.commands.map(([cmd, what]) => <tr><td><code>{cmd}</code></td><td set:html={rich(what)} /></tr>)}</tbody>
+          </table>
+        </div>
+        <p class="fine rise" set:html={rich(t.convoy.note)} />
+      </section>
+
+      <section id="seals" class="block">
+        <p class="depth">{t.seals.depth}</p>
+        <div class="rise">
+          <h2>{t.seals.title}</h2>
+          <p class="sub">{t.seals.lead}</p>
+        </div>
+        <ul class="facts rise">
+          {t.seals.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+        </ul>
+      </section>
+
+      <section id="watch" class="block">
+        <p class="depth">{t.watch.depth}</p>
+        <h2 class="rise">{t.watch.title}</h2>
+        <ul class="facts rise">
+          {t.watch.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+        </ul>
+      </section>
+
+      <section id="fresh" class="block">
+        <p class="depth">{t.fresh.depth}</p>
+        <div class="rise">
+          <h2>{t.fresh.title}</h2>
+          <p class="sub">{t.fresh.lead}</p>
+        </div>
+        <div class="table rise" role="region" aria-label={t.fresh.title} tabindex="0">
+          <table>
+            <thead><tr>{t.fresh.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.fresh.rows.map(([hook, what, often]) => <tr><td><code>{hook}</code></td><td set:html={rich(what)} /><td>{often}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p class="fine rise">{t.fresh.note}</p>
+      </section>
+
+      <section id="tide" class="block">
+        <p class="depth">{t.tide.depth}</p>
+        <div class="rise">
+          <h2>{t.tide.title}</h2>
+          <p class="sub" set:html={rich(t.tide.lead)} />
+        </div>
+        <ul class="facts rise">
+          {t.tide.points.map(([title, text]) => <li><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+        </ul>
+      </section>
+
+      <section id="keelokit" class="block">
+        <p class="depth">{t.keelokit.depth}</p>
+        <div class="rise">
+          <h2>{t.keelokit.title}</h2>
+          <p class="sub" set:html={rich(t.keelokit.lead)} />
+        </div>
+        <div class="table rise" role="region" aria-label={t.keelokit.title} tabindex="0">
+          <table>
+            <thead><tr>{t.keelokit.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.keelokit.rows.map(([k, h]) => <tr><td set:html={rich(k)} /><td set:html={rich(h)} /></tr>)}</tbody>
+          </table>
+        </div>
+        <div class="config rise">
+          <p class="stack-title" set:html={rich(t.keelokit.configTitle)} />
+          <pre><code>{t.keelokit.config.join('\n')}</code></pre>
+          <p class="fine" set:html={rich(t.keelokit.configNote)} />
+        </div>
+      </section>
+
+      <section id="failures" class="block">
+        <p class="depth">{t.failures.depth}</p>
+        <div class="rise">
+          <h2>{t.failures.title}</h2>
+          <p class="sub">{t.failures.lead}</p>
+        </div>
+        <div class="table rise" role="region" aria-label={t.failures.title} tabindex="0">
+          <table>
+            <thead><tr>{t.failures.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.failures.rows.map(([a, b]) => <tr><td set:html={rich(a)} /><td set:html={rich(b)} /></tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="analogies" class="block">
+        <p class="depth">{t.analogies.depth}</p>
+        <div class="rise">
+          <h2>{t.analogies.title}</h2>
+          <p class="sub">{t.analogies.lead}</p>
+        </div>
+        <div class="table rise" role="region" aria-label={t.analogies.title} tabindex="0">
+          <table class="wide">
+            <thead><tr>{t.analogies.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+            <tbody>{t.analogies.rows.map(([a, b, c]) => <tr><td set:html={rich(a)} /><td>{b}</td><td set:html={rich(c)} /></tr>)}</tbody>
+          </table>
+        </div>
+        <aside class="mislead rise">
+          <h3>{t.analogies.mislead}</h3>
+          <ul>{t.analogies.misleadPoints.map((n) => <li set:html={rich(n)} />)}</ul>
+        </aside>
+      </section>
+
+      <section id="designed" class="block">
+        <p class="depth">{t.designed.depth}</p>
+        <div class="rise">
+          <h2>{t.designed.title}</h2>
+          <p class="sub">{t.designed.lead}</p>
+        </div>
+        <ul class="plain-list rise">{t.designed.points.map((p) => <li set:html={rich(p)} />)}</ul>
+        <p class="actions rise"><a class="btn board" href={`${HARBOR_REPO}/blob/main/docs/design.md`} rel="noopener">{t.designed.link} <span aria-hidden="true">↗</span></a></p>
+      </section>
+    </div>
+  </div>
+</div>

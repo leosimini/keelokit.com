@@ -1,0 +1,10 @@
+---
+// A terminal window with a title and the lines of an example output.
+import Out from './Out.astro';
+interface Props { title: string; lines: [string, string][]; tag?: string }
+const { title, lines, tag } = Astro.props;
+---
+<figure class="term">
+  <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>{title}{tag && <span class="tag">{tag}</span>}</figcaption>
+  <pre><code>{lines.map(([c, text]) => <Out c={c} text={text} />)}</code></pre>
+</figure>

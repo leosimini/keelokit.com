@@ -1,0 +1,192 @@
+---
+// /keelokit: Keelokit in plain words, the part of the old page that a person who isn't a developer reads.
+import Foil from './Foil.astro';
+import Install from './Install.astro';
+import ReleaseLine from './ReleaseLine.astro';
+import WhereMap from './WhereMap.astro';
+import { C, HARBOR_REPO, INSTALL, PATHS, REPO, href, type Locale } from '../copy/common';
+import { keelokit } from '../copy/keelokit';
+import { cmd } from '../lib/content';
+import { rich } from '../lib/rich';
+import { DOWNLOAD, fetchRelease, releaseZip } from '../lib/release';
+import { SHOTS } from '../lib/shots';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = keelokit[locale];
+const c = C[locale];
+const p = t.plain;
+const release = await fetchRelease();
+const tech = href(locale, PATHS.technical);
+const full = { src: `/img/dashboard/${locale}/full.webp`, ...SHOTS[locale].full };
+const chip = (who: 'you' | 'claude' | 'approve') => ({ cls: who === 'claude' ? 'claude' : 'you', label: p.steps.who[who] });
+---
+<section class="hero">
+  <div class="wrap hero-copy">
+    <p class="eyebrow">{t.hero.eyebrow}</p>
+    <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
+    <p class="lead">{t.hero.lead}</p>
+    <p class="lead-2">{t.hero.lead2}</p>
+    <div class="doors">
+      <a class="door plain" href="#plain"><span class="who">{t.hero.doors.plain[0]}</span><span class="what">{t.hero.doors.plain[1]} <span aria-hidden="true">↓</span></span></a>
+      <a class="door dev" href={tech}><span class="who">{t.hero.doors.dev[0]}</span><span class="what">{t.hero.doors.dev[1]} <span aria-hidden="true">→</span></span></a>
+    </div>
+    <p class="strip">{t.hero.harbor[0]} <a href={href(locale, PATHS.harbor)}>{t.hero.harbor[1]} <span aria-hidden="true">→</span></a></p>
+    <ReleaseLine locale={locale} release={release} />
+  </div>
+  <Foil />
+</section>
+
+<div class="sea" data-deep>
+  <p class="surface wrap">{t.surface}</p>
+
+  <section id="plain" class="block wrap">
+    <p class="depth">{p.idea.depth}</p>
+    <div class="rise">
+      <h2>{p.idea.title[0]} <em class="pl-em">{p.idea.title[1]}</em></h2>
+      <p class="sub">{p.idea.lead}</p>
+    </div>
+    <div class="pl-contrast rise">
+      <div class="pl-without"><p class="pl-k">{p.idea.without[0]}</p><p>{p.idea.without[1]}</p></div>
+      <div class="pl-with"><p class="pl-k">{p.idea.with[0]}</p><p>{p.idea.with[1]}</p></div>
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <p class="depth">{p.steps.depth}</p>
+    <div class="rise">
+      <h2>{p.steps.title}</h2>
+      <p class="pl-legend">
+        <span><span class="pl-chip you">{p.steps.who.you}</span> {p.steps.legend.you}</span>
+        <span><span class="pl-chip claude">{p.steps.who.claude}</span> {p.steps.legend.claude}</span>
+      </p>
+    </div>
+    <ol class="steps pl-steps rise">
+      {p.steps.items.map(([name, text, who], i) => (
+        <li>
+          <span class="n">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{name}</h3>
+          <p>{text}</p>
+          <span class="pl-who">{who.map((w) => { const x = chip(w); return <span class:list={['pl-chip', x.cls]}>{x.label}</span>; })}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="pl-mode rise" set:html={p.steps.mode} />
+  </section>
+
+  <section class="block wrap">
+    <p class="depth">{p.crew.depth}</p>
+    <div class="rise">
+      <h2>{p.crew.title}</h2>
+      <p class="sub">{p.crew.lead}</p>
+    </div>
+    <div class="pl-crew rise">
+      {p.crew.roles.map(([agent, name, text], i) => (
+        <article class:list={['pl-role', { key: i === 0, builder: i === 1 }]}>
+          <code class="pl-agent">{agent}</code>
+          <h3>{name}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+    <p class="pl-rule rise">{p.crew.rule}</p>
+  </section>
+
+  <section id="where" class="block wrap">
+    <p class="depth">{p.where.depth}</p>
+    <div class="rise">
+      <h2>{p.where.title}</h2>
+      <p class="sub">{p.where.lead}</p>
+    </div>
+    <WhereMap where={p.where as any} />
+    <p class="more rise"><a class="more-link" href={`${tech}#where`}>{p.where.more} <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <section id="dashboard" class="block wrap dash">
+    <p class="depth">{t.dash.depth}</p>
+    <div class="rise">
+      <p><span class="new">{t.dash.badge}</span></p>
+      <h2>{t.dash.title}</h2>
+      <p class="sub" set:html={cmd(t.dash.lead)} />
+    </div>
+    <figure class="shot rise">
+      <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>{t.dash.caption}</span><a class="tag" href={full.src} target="_blank" rel="noopener">{t.dash.open} <span aria-hidden="true">↗</span></a></figcaption>
+      <div class="scroller" tabindex="0" aria-label={t.dash.caption}>
+        <img src={full.src} width={full.w} height={full.h} alt={`${t.dash.title}: ${t.dash.caption}`} loading="lazy" decoding="async" />
+      </div>
+    </figure>
+    <p class="more rise"><a class="more-link" href={`${tech}#dashboard`}>{t.dash.more} <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <section id="local" class="block wrap">
+    <p class="depth">{t.local.depth}</p>
+    <div class="card-line rise">
+      <div>
+        <p><span class="new">{t.local.badge}</span></p>
+        <h2>{t.local.title}</h2>
+        <p class="sub" set:html={cmd(t.local.lead)} />
+        <p class="fine">{t.local.note}</p>
+        <p class="more"><a class="more-link" href={`${tech}#local`}>{t.local.more} <span aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="keel" class="block wrap">
+    <p class="depth">{t.keel.depth}</p>
+    <div class="rise">
+      <h2>{t.keel.title}</h2>
+      <p class="sub">{t.keel.lead}</p>
+    </div>
+    <div class="principles rise">
+      {t.keel.principles.map(([title, text], i) => (
+        <article><span class="n">{['I', 'II', 'III', 'IV'][i]}</span><h3>{title}</h3><p>{text}</p></article>
+      ))}
+    </div>
+    <p class="more rise"><a class="more-link" href={`${tech}#keel`}>{t.keel.more} <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <section id="start" class="block wrap">
+    <p class="depth">{p.faq.depth}</p>
+    <h2 class="rise">{p.faq.title}</h2>
+    <div class="pl-faq rise">
+      {p.faq.items.map(([q, a], i) => (
+        <article class:list={{ flag: i === 0 }}><h3>{q}</h3><p set:html={cmd(a)} /></article>
+      ))}
+    </div>
+    <h2 class="sub-h rise">{t.start.title}</h2>
+    <div class="table rise" role="region" aria-label={t.start.title} tabindex="0">
+      <table>
+        <thead><tr>{t.start.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+        <tbody>{t.start.rows.map(([have, start, get]) => <tr><td>{have}</td><td><code set:html={cmd(start)} /></td><td set:html={cmd(get)} /></tr>)}</tbody>
+      </table>
+    </div>
+    <p class="more rise"><a class="more-link" href={`${tech}#commands`}>{t.start.more} <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <section class="block wrap">
+    <p class="depth">{t.honest.depth}</p>
+    <h2 class="rise">{t.honest.title}</h2>
+    <div class="honest rise">
+      {t.honest.items.map(([title, text]) => <article><h3>{title}</h3><p set:html={cmd(text)} /></article>)}
+    </div>
+    <aside class="why rise">
+      <h2>{t.note.title}</h2>
+      {t.note.body.map((x) => <p>{x}</p>)}
+      <p class="sign">— {t.note.sign}</p>
+    </aside>
+  </section>
+
+  <section id="try" class="block wrap try">
+    <p class="depth">{t.try.depth}</p>
+    <div class="rise">
+      <h2>{t.try.title}</h2>
+      <Install locale={locale} lines={INSTALL} id="install-try" />
+      <p class="sub" set:html={cmd(t.try.lead)} />
+      <p class="fine">{t.try.needs}</p>
+      <p class="actions"><a class="btn board" href={DOWNLOAD} data-release-zip><span aria-hidden="true">⬇</span> {c.release.zip}</a><a class="btn light" href={REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+      <p class="fine">{t.try.zip}</p>
+      <p class="fine">{t.hero.harbor[0]} <a href={href(locale, PATHS.harbor)}>{t.hero.harbor[1]}</a></p>
+    </div>
+    <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />
+  </section>
+</div>

@@ -1,0 +1,14 @@
+---
+import Page from '../../../layouts/Page.astro';
+import KeelokitPage from '../../../components/KeelokitPage.astro';
+import { PATHS, SITE, href } from '../../../copy/common';
+import { keelokit } from '../../../copy/keelokit';
+import { graph, keelokitLd } from '../../../lib/schema';
+
+const locale = 'es';
+const t = keelokit[locale];
+const url = `${SITE}${href(locale, PATHS.keelokit)}`;
+---
+<Page locale={locale} page="keelokit" title={t.title} description={t.description} ogAlt={t.ogAlt} jsonld={graph(keelokitLd({ url, description: t.description, locale }))}>
+  <KeelokitPage locale={locale} />
+</Page>

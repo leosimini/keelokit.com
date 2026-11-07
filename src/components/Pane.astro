@@ -1,0 +1,9 @@
+---
+// A sea panel: the blue water the illustrations sit on, with an optional small caption.
+interface Props { cap?: string; class?: string }
+const { cap, class: cls } = Astro.props;
+---
+<div class:list={['pane', cls]}>
+  <slot />
+  {cap && <span class="cap">{cap}</span>}
+</div>

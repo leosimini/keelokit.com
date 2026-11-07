@@ -1,0 +1,13 @@
+---
+// A command box with a copy button. The lines are shown with a "$" prompt that is not copied.
+import { C, type Locale } from '../copy/common';
+interface Props { locale: Locale; lines: string[]; id?: string }
+const { locale, lines, id } = Astro.props;
+const c = C[locale];
+---
+<div class="install">
+  <pre id={id}><code>{lines.map((line) => <span class="line"><span class="prompt" aria-hidden="true">$</span> {line}</span>)}</code></pre>
+  <button type="button" class="copy" data-copy={lines.join('\n')} data-idle={c.copy} data-done={c.copied}>
+    <span aria-live="polite">{c.copy}</span>
+  </button>
+</div>

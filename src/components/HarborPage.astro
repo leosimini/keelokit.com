@@ -1,0 +1,135 @@
+---
+// /harbor: Keelokit Harbor in plain words. Its status comes first, written plainly.
+import Sprite from './art/Sprite.astro';
+import Sailboat from './art/Sailboat.astro';
+import Convoy from './art/Convoy.astro';
+import Port from './art/Port.astro';
+import Pane from './Pane.astro';
+import Install from './Install.astro';
+import RoleCard from './RoleCard.astro';
+import { C, HARBOR_INSTALL, HARBOR_INSTALL_ES, HARBOR_REPO, PATHS, href, type Locale } from '../copy/common';
+import { harbor } from '../copy/harbor';
+import { home } from '../copy/home';
+import { rich } from '../lib/rich';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = harbor[locale];
+const c = C[locale];
+const labels = home[locale].together.roles; // the pictures' alt text, written once on the home page
+const alt = (id: string) => labels.find((r) => r[0] === id)![4];
+const lines = locale === 'en' ? HARBOR_INSTALL : HARBOR_INSTALL_ES;
+---
+<Sprite />
+<section class="hero subhero">
+  <div class="wrap hero-copy">
+    <p class="crumbs"><a href={href(locale, PATHS.keelokit)}>Keelokit</a> <span aria-hidden="true">/</span> <span>{t.hero.crumb}</span> <span class="badge">{t.hero.badge}</span></p>
+    <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
+    <p class="lead" set:html={rich(t.hero.lead)} />
+    <p class="lead-2">{t.hero.lead2}</p>
+  </div>
+  <div class="wrap status">
+    {t.hero.status.map(([kind, title, text]) => <div class={kind}><h3>{title}</h3><p set:html={rich(text)} /></div>)}
+  </div>
+  <div class="wrap hero-art">
+    <Pane><Convoy variant="arrival" label={t.hero.scene} /></Pane>
+  </div>
+</section>
+
+<div class="sea" data-deep>
+  <section class="block wrap">
+    <p class="depth">{t.problem.depth}</p>
+    <div class="rise">
+      <h2>{t.problem.title}</h2>
+      <p class="sub" set:html={rich(t.problem.lead)} />
+    </div>
+    <ol class="symptoms rise">
+      {t.problem.symptoms.map(([title, text], i) => <li><span class="n">{String(i + 1).padStart(2, '0')}</span><h3>{title}</h3><p set:html={rich(text)} /></li>)}
+    </ol>
+    <div class="duo rise">
+      <figure class="voyage">
+        <Pane><Sailboat label={t.problem.sail[3]} /></Pane>
+        <figcaption><span class="who">{t.problem.sail[0]}</span><b>{t.problem.sail[1]}</b><span set:html={rich(t.problem.sail[2])} /></figcaption>
+      </figure>
+      <figure class="voyage">
+        <Pane><Convoy variant="voyage" label={t.problem.convoy[3]} /></Pane>
+        <figcaption><span class="who">{t.problem.convoy[0]}</span><b>{t.problem.convoy[1]}</b><span set:html={rich(t.problem.convoy[2])} /></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="convoy" class="block wrap">
+    <p class="depth">{t.route.depth}</p>
+    <div class="rise">
+      <h2>{t.route.title}</h2>
+      <p class="sub" set:html={rich(t.route.lead)} />
+    </div>
+    <ol class="route rise">
+      {t.route.stops.map(([state, title, text], i) => (
+        <li><span class="dot">{i + 1}</span><span class="st">{state}</span><h3>{title}</h3><p set:html={rich(text)} /></li>
+      ))}
+    </ol>
+    <div class="sidebyside rise">
+      <Pane><Port label={t.route.scene} /></Pane>
+      <div class="callout">
+        <p class="pl-k">{t.route.tide[0]}</p>
+        <h3 set:html={rich(t.route.tide[1])} />
+        {t.route.tide[2].map((p) => <p set:html={rich(p)} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="promises" class="block wrap">
+    <p class="depth">{t.promises.depth}</p>
+    <div class="rise">
+      <h2>{t.promises.title}</h2>
+      <p class="sub">{t.promises.lead}</p>
+    </div>
+    <div class="roles five rise">
+      {t.promises.items.map(([art, term, title, text]) => <RoleCard art={art} term={term} title={title} text={text} label={alt(art)} />)}
+    </div>
+  </section>
+
+  <section id="crew" class="block wrap">
+    <p class="depth">{t.crew.depth}</p>
+    <div class="rise">
+      <h2>{t.crew.title}</h2>
+      <p class="sub">{t.crew.lead}</p>
+    </div>
+    <div class="roles rise">
+      {t.crew.roles.map(([art, term, title, text]) => <RoleCard art={art} term={term} title={title} text={text} label={alt(art)} />)}
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <p class="depth">{t.skip.depth}</p>
+    <h2 class="rise">{t.skip.title}</h2>
+    <ul class="plain-list rise">
+      {t.skip.points.map((p) => <li set:html={rich(p)} />)}
+    </ul>
+    <p class="more rise"><a class="more-link" href={`${href(locale, PATHS.home)}#guide`}>{t.skip.link} <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <section class="block wrap">
+    <p class="depth">{t.origin.depth}</p>
+    <aside class="why rise">
+      <h2>{t.origin.title}</h2>
+      {t.origin.body.map((p) => <p>{p}</p>)}
+      <p class="sign">— {t.origin.sign}</p>
+    </aside>
+  </section>
+
+  <section id="try" class="block wrap try">
+    <p class="depth">{t.try.depth}</p>
+    <div class="rise">
+      <h2>{t.try.title}</h2>
+      <p class="sub" set:html={rich(t.try.lead)} />
+      <p class="sub" set:html={rich(t.try.status)} />
+      <Install locale={locale} lines={lines} id="install-harbor" />
+      <p class="fine" set:html={rich(t.try.after)} />
+      <p class="actions"><a class="btn board" href={HARBOR_REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a><a class="btn light" href={href(locale, PATHS.harborTech)}>{t.try.tech} <span aria-hidden="true">→</span></a></p>
+      <p class="fine">{t.try.license}.</p>
+    </div>
+    <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />
+  </section>
+</div>

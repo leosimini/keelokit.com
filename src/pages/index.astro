@@ -1,5 +1,16 @@
 ---
-import Base from '../layouts/Base.astro';
-import Home from '../components/Home.astro';
+import Page from '../layouts/Page.astro';
+import HomePage from '../components/HomePage.astro';
+import { PATHS, SITE, href } from '../copy/common';
+import { home } from '../copy/home';
+import { keelokit } from '../copy/keelokit';
+import { harbor } from '../copy/harbor';
+import { graph, harborLd, keelokitLd, site } from '../lib/schema';
+
+const locale = 'en';
+const t = home[locale];
+const url = `${SITE}${href(locale, PATHS.home)}`;
 ---
-<Base locale="en"><Home locale="en" /></Base>
+<Page locale={locale} page="home" title={t.title} description={t.description} ogAlt={t.ogAlt} jsonld={graph(site({ url, name: 'Keelokit', description: t.description, locale }), keelokitLd({ url, description: keelokit[locale].description, locale }), harborLd({ url: `${SITE}${href(locale, PATHS.harbor)}`, description: harbor[locale].description, locale }))}>
+  <HomePage locale={locale} />
+</Page>

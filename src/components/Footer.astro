@@ -1,0 +1,23 @@
+---
+import { AUTHOR, C, HARBOR_REPO, PATHS, REPO, href, type Locale, type Page } from '../copy/common';
+
+interface Props { locale: Locale; page: Page }
+const { locale, page } = Astro.props;
+const f = C[locale].footer;
+const n = C[locale].nav;
+const other: Locale = locale === 'en' ? 'es' : 'en';
+---
+<footer class="seabed" data-deep>
+  <div class="wrap">
+    <p>{f.made} <a href={AUTHOR.url} rel="author me">{AUTHOR.name}</a> (<a href={AUTHOR.github} rel="me noopener">@{AUTHOR.handle}</a>), {f.when}</p>
+    <p class="links">
+      <a href={REPO} rel="noopener">Keelokit</a>
+      <a href={HARBOR_REPO} rel="noopener">Harbor</a>
+      <a href={`${REPO}/blob/main/CHANGELOG.md`} rel="noopener">Changelog</a>
+      <a href={`${REPO}/blob/main/LICENSE`} rel="noopener">{f.license}</a>
+      <a href={`${HARBOR_REPO}/blob/main/LICENSE`} rel="noopener">{f.harborLicense}</a>
+      <a href={AUTHOR.linkedin} rel="me noopener">LinkedIn</a>
+      <a href={href(other, PATHS[page])} hreflang={other}>{n.switch}</a>
+    </p>
+  </div>
+</footer>

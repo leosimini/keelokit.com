@@ -1,0 +1,15 @@
+---
+import Page from '../../../layouts/Page.astro';
+import HarborTechPage from '../../../components/HarborTechPage.astro';
+import { HARBOR_REPO, PATHS, SITE, href } from '../../../copy/common';
+import { harborTech } from '../../../copy/harbor-tech';
+import { harbor } from '../../../copy/harbor';
+import { graph, harborLd, techArticle } from '../../../lib/schema';
+
+const locale = 'es';
+const t = harborTech[locale];
+const url = `${SITE}${href(locale, PATHS.harborTech)}`;
+---
+<Page locale={locale} page="harborTech" title={t.title} description={t.description} ogAlt={t.ogAlt} jsonld={graph(harborLd({ url: `${SITE}${href(locale, PATHS.harbor)}`, description: harbor[locale].description, locale }), techArticle({ url, headline: t.title, description: t.description, locale, about: HARBOR_REPO }))}>
+  <HarborTechPage locale={locale} />
+</Page>

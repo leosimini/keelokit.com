@@ -1,0 +1,15 @@
+---
+import Page from '../../../layouts/Page.astro';
+import HarborPage from '../../../components/HarborPage.astro';
+import { PATHS, SITE, href } from '../../../copy/common';
+import { harbor } from '../../../copy/harbor';
+import { keelokit } from '../../../copy/keelokit';
+import { graph, harborLd, keelokitLd } from '../../../lib/schema';
+
+const locale = 'es';
+const t = harbor[locale];
+const url = `${SITE}${href(locale, PATHS.harbor)}`;
+---
+<Page locale={locale} page="harbor" title={t.title} description={t.description} ogAlt={t.ogAlt} jsonld={graph(harborLd({ url, description: t.description, locale }), keelokitLd({ url: `${SITE}${href(locale, PATHS.keelokit)}`, description: keelokit[locale].description, locale }))}>
+  <HarborPage locale={locale} />
+</Page>
