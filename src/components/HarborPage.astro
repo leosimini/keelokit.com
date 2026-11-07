@@ -1,5 +1,5 @@
 ---
-// /harbor: Keelokit Harbor in plain words. Its status comes first, written plainly.
+// /harbor: Keelokit Harbor in plain words.
 import Sprite from './art/Sprite.astro';
 import Sailboat from './art/Sailboat.astro';
 import Convoy from './art/Convoy.astro';
@@ -7,8 +7,10 @@ import Port from './art/Port.astro';
 import Pane from './Pane.astro';
 import Install from './Install.astro';
 import RoleCard from './RoleCard.astro';
-import { C, HARBOR_INSTALL, HARBOR_INSTALL_ES, HARBOR_REPO, PATHS, href, type Locale } from '../copy/common';
+import { C, HARBOR_INSTALL, HARBOR_REPO, PATHS, href, type Locale } from '../copy/common';
+import HarborBadge from './HarborBadge.astro';
 import { harbor } from '../copy/harbor';
+import { HARBOR_DOWNLOAD, fetchHarborRelease } from '../lib/release';
 import { home } from '../copy/home';
 import { rich } from '../lib/rich';
 
@@ -18,12 +20,12 @@ const t = harbor[locale];
 const c = C[locale];
 const labels = home[locale].together.roles; // the pictures' alt text, written once on the home page
 const alt = (id: string) => labels.find((r) => r[0] === id)![4];
-const lines = locale === 'en' ? HARBOR_INSTALL : HARBOR_INSTALL_ES;
+const rel = await fetchHarborRelease();
 ---
 <Sprite />
 <section class="hero subhero">
   <div class="wrap hero-copy">
-    <p class="crumbs"><a href={href(locale, PATHS.keelokit)}>Keelokit</a> <span aria-hidden="true">/</span> <span>{t.hero.crumb}</span> <span class="badge">{t.hero.badge}</span></p>
+    <p class="crumbs"><a href={href(locale, PATHS.keelokit)}>Keelokit</a> <span aria-hidden="true">/</span> <span>{t.hero.crumb}</span> <HarborBadge locale={locale} version={rel?.version} /></p>
     <h1><span>{t.hero.title[0]}</span> <em>{t.hero.title[1]}</em></h1>
     <p class="lead" set:html={rich(t.hero.lead)} />
     <p class="lead-2">{t.hero.lead2}</p>
@@ -125,9 +127,11 @@ const lines = locale === 'en' ? HARBOR_INSTALL : HARBOR_INSTALL_ES;
       <h2>{t.try.title}</h2>
       <p class="sub" set:html={rich(t.try.lead)} />
       <p class="sub" set:html={rich(t.try.status)} />
-      <Install locale={locale} lines={lines} id="install-harbor" />
+      <Install locale={locale} lines={HARBOR_INSTALL} id="install-harbor" />
       <p class="fine" set:html={rich(t.try.after)} />
-      <p class="actions"><a class="btn board" href={HARBOR_REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a><a class="btn light" href={href(locale, PATHS.harborTech)}>{t.try.tech} <span aria-hidden="true">→</span></a></p>
+      <p class="fine">{t.try.zip}</p>
+      <p class="actions"><a class="btn board" href={HARBOR_DOWNLOAD}><span aria-hidden="true">⬇</span> {t.try.download}</a><a class="btn light" href={HARBOR_REPO} rel="noopener">{t.try.github} <span aria-hidden="true">↗</span></a></p>
+      <p class="fine"><a class="more-link" href={href(locale, PATHS.harborTech)}>{t.try.tech} <span aria-hidden="true">→</span></a></p>
       <p class="fine">{t.try.license}.</p>
     </div>
     <img class="try-icon" src="/icon.svg" width="200" height="200" alt="" />

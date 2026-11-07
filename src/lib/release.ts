@@ -67,3 +67,35 @@ export const releaseNotes = (version: string) =>
 // wraps the whole repository in a folder.
 export const releaseZip = (version: string) =>
   `https://github.com/leosimini/keelokit/releases/download/v${version}/keelokit-plugin.zip`;
+
+// Keelokit Harbor has no `release` branch to read: its version is the tag of its latest GitHub
+// Release, which carries `harbor-plugin.zip`. Same rules as above: read at build time and again in
+// the browser, cached for an hour, and the page says just "released" when the API can't be reached.
+export const HARBOR_API = 'https://api.github.com/repos/leosimini/keelokit-harbor/releases/latest';
+export const HARBOR_DOWNLOAD = 'https://github.com/leosimini/keelokit-harbor/releases/latest/download/harbor-plugin.zip';
+export const HARBOR_RELEASES = 'https://github.com/leosimini/keelokit-harbor/releases/latest';
+
+export async function fetchHarborRelease(timeoutMs = 5000): Promise<{ version: string } | null> {
+  try {
+    const res = await fetch(HARBOR_API, { signal: AbortSignal.timeout(timeoutMs), headers: { Accept: 'application/vnd.github+json' } });
+    if (!res.ok) return null;
+    const version = String((await res.json()).tag_name ?? '').replace(/^v/, '');
+    return /^\d+\.\d+\.\d+/.test(version) ? { version } : null;
+  } catch {
+    return null;
+  }
+}
+
+const HARBOR_KEY = 'harbor:release';
+export async function fetchHarborReleaseCached(ttlMs = 60 * 60 * 1000): Promise<{ version: string } | null> {
+  try {
+    const cached = localStorage.getItem(HARBOR_KEY);
+    if (cached) {
+      const { release, ts } = JSON.parse(cached) as { release: { version: string }; ts: number };
+      if (Date.now() - ts < ttlMs) return release;
+    }
+  } catch {}
+  const release = await fetchHarborRelease();
+  if (release) { try { localStorage.setItem(HARBOR_KEY, JSON.stringify({ release, ts: Date.now() })); } catch {} }
+  return release;
+}

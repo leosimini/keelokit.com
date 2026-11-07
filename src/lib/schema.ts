@@ -28,8 +28,7 @@ export const keelokitLd = (o: { url: string; description: string; locale: Locale
   author: { '@id': `${AUTHOR.url}/#person` },
 });
 
-// Harbor is its own source-code entry, part of Keelokit. It has no release: the version is 0.1.0 and
-// the page says it is not released.
+// Harbor is its own source-code entry, part of Keelokit. Its version is not written here: it changes with each release.
 export const harborLd = (o: { url: string; description: string; locale: Locale }) => ({
   '@context': ctx,
   '@type': 'SoftwareSourceCode',
@@ -40,7 +39,6 @@ export const harborLd = (o: { url: string; description: string; locale: Locale }
   codeRepository: HARBOR_REPO,
   programmingLanguage: 'Python',
   runtimePlatform: 'Claude Code',
-  version: '0.1.0',
   license: 'https://opensource.org/licenses/MIT',
   inLanguage: o.locale,
   isPartOf: { '@id': REPO },

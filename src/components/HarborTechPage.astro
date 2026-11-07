@@ -1,21 +1,23 @@
 ---
 // /harbor/how-it-works: Keelokit Harbor for developers, from the logbook down. It starts at −20 m.
 import Toc from './Toc.astro';
-import { HARBOR_REPO, PATHS, href, type Locale } from '../copy/common';
+import { PATHS, href, type Locale } from '../copy/common';
 import { harborTech } from '../copy/harbor-tech';
 import { treeRows } from '../lib/content';
 import { rich } from '../lib/rich';
+import HarborBadge from './HarborBadge.astro';
+import { fetchHarborRelease } from '../lib/release';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = harborTech[locale];
-const ids = ['logbook', 'convoy', 'seals', 'watch', 'fresh', 'tide', 'keelokit', 'failures', 'analogies', 'designed'] as const;
+const ids = ['logbook', 'convoy', 'seals', 'watch', 'fresh', 'tide', 'keelokit', 'failures', 'analogies'] as const;
 const toc: [string, string][] = ids.map((id) => [id, t.toc[id]]);
-const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar';
+const rel = await fetchHarborRelease();
 ---
 <section class="hero subhero">
   <div class="wrap hero-copy">
-    <p class="crumbs"><a href={href(locale, PATHS.harbor)}>Keelokit Harbor</a> <span aria-hidden="true">/</span> <span>{t.intro.eyebrow.split(' · ')[1]}</span> <span class="badge">{badge}</span></p>
+    <p class="crumbs"><a href={href(locale, PATHS.harbor)}>Keelokit Harbor</a> <span aria-hidden="true">/</span> <span>{t.intro.eyebrow.split(' · ')[1]}</span> <HarborBadge locale={locale} version={rel?.version} /></p>
     <h1><span>{t.intro.title[0]}</span> <em>{t.intro.title[1]}</em></h1>
     <p class="lead" set:html={rich(t.intro.lead)} />
     <p class="lead-2">{t.intro.status}</p>
@@ -163,15 +165,6 @@ const badge = locale === 'en' ? '0.1.0 · not released' : '0.1.0 · sin publicar
         </aside>
       </section>
 
-      <section id="designed" class="block">
-        <p class="depth">{t.designed.depth}</p>
-        <div class="rise">
-          <h2>{t.designed.title}</h2>
-          <p class="sub">{t.designed.lead}</p>
-        </div>
-        <ul class="plain-list rise">{t.designed.points.map((p) => <li set:html={rich(p)} />)}</ul>
-        <p class="actions rise"><a class="btn board" href={`${HARBOR_REPO}/blob/main/docs/design.md`} rel="noopener">{t.designed.link} <span aria-hidden="true">↗</span></a></p>
-      </section>
     </div>
   </div>
 </div>

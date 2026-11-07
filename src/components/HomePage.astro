@@ -10,9 +10,10 @@ import Pane from './Pane.astro';
 import Install from './Install.astro';
 import ReleaseLine from './ReleaseLine.astro';
 import RoleCard from './RoleCard.astro';
-import { C, HARBOR_INSTALL, HARBOR_INSTALL_ES, HARBOR_REPO, HARBOR_VERSION, INSTALL, PATHS, REPO, href, type Locale } from '../copy/common';
+import { C, HARBOR_INSTALL, HARBOR_REPO, INSTALL, PATHS, REPO, href, type Locale } from '../copy/common';
 import { home } from '../copy/home';
-import { DOWNLOAD, fetchRelease, releaseZip } from '../lib/release';
+import HarborBadge from './HarborBadge.astro';
+import { DOWNLOAD, HARBOR_DOWNLOAD, fetchHarborRelease, fetchRelease } from '../lib/release';
 import { rich } from '../lib/rich';
 import { cmd } from '../lib/content';
 
@@ -22,8 +23,7 @@ const t = home[locale];
 const c = C[locale];
 const release = await fetchRelease();
 const p = (page: keyof typeof PATHS) => href(locale, PATHS[page]);
-const hLines = locale === 'en' ? HARBOR_INSTALL : HARBOR_INSTALL_ES;
-const harborBadge = `${HARBOR_VERSION} · ${c.badges.notReleased}`;
+const harborRelease = await fetchHarborRelease();
 const voyageArt = ['sailboat', 'cargo', 'convoy'];
 // Old links such as /#commands pointed into the one long page. A hash never reaches the server, so
 // the home sends them to where those sections live now.
@@ -64,7 +64,7 @@ const prefix = locale === 'en' ? '' : '/es';
           <h3>{card.name}</h3>
           {i === 0
             ? <span class="badge"><span data-release-v>{release ? `v${release.version}` : ''}</span>{release ? ' · ' : ''}{c.badges.released}</span>
-            : <span class="badge">{harborBadge}</span>}
+            : <HarborBadge locale={locale} version={harborRelease?.version} />}
         </header>
         <p class="tag">{card.tag}{card.start && <span class="start">{card.start}</span>}</p>
         <ul>{card.points.map((x) => <li set:html={rich(x)} />)}</ul>
@@ -147,10 +147,11 @@ const prefix = locale === 'en' ? '' : '/es';
         <p class="actions"><a class="btn board" href={DOWNLOAD} data-release-zip><span aria-hidden="true">⬇</span> {t.try.k.download}</a><a class="btn light" href={REPO} rel="noopener">{t.try.k.github} <span aria-hidden="true">↗</span></a></p>
       </div>
       <div>
-        <h3>{t.try.h.name} <span class="badge on-sea">{t.try.h.badge}</span></h3>
-        <Install locale={locale} lines={hLines} id="install-harbor" />
+        <h3>{t.try.h.name} <HarborBadge locale={locale} version={harborRelease?.version} class="on-sea" /></h3>
+        <Install locale={locale} lines={HARBOR_INSTALL} id="install-harbor" />
         <p set:html={rich(t.try.h.text)} />
-        <p class="actions"><a class="btn light" href={HARBOR_REPO} rel="noopener">{t.try.h.github} <span aria-hidden="true">↗</span></a></p>
+        <p class="fine">{t.try.h.zip}</p>
+        <p class="actions"><a class="btn board" href={HARBOR_DOWNLOAD}><span aria-hidden="true">⬇</span> {t.try.h.download}</a><a class="btn light" href={HARBOR_REPO} rel="noopener">{t.try.h.github} <span aria-hidden="true">↗</span></a></p>
       </div>
     </div>
   </section>

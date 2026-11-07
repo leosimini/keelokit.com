@@ -6,13 +6,13 @@ export const home = {
   en: {
     title: 'Keelokit and Keelokit Harbor · two plugins for Claude Code',
     description:
-      'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor lands the work of many parallel sessions on main in one convoy. Which one to install, by signals. By Leopoldo Simini.',
+      'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor orchestrates many sessions that can’t see each other, in Claude Desktop, the CLI and the cloud, and lands their work on main in one convoy. By Leopoldo Simini.',
     ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
     hero: {
       eyebrow: 'Open source · two plugins for Claude Code',
-      title: ['The keel under my apps.', 'And a harbor for the fleet.'],
-      lead: 'Keelokit makes one Claude Code session work like a disciplined team: it writes things down, tests, reviews itself and ships nothing without your OK. Keelokit Harbor is for when you run many sessions at once: it gets their work onto `main` together, in order.',
-      lead2: 'Keelokit is the method I use on my own projects, and it is released. Harbor came out of doing its job by hand on a real monorepo; as a plugin it is at 0.1.0, not released, and has never run on a real project.',
+      title: ['Many sessions that can’t see each other.', 'One harbor that brings them to main.'],
+      lead: 'Keelokit makes one Claude Code session work like a disciplined team. Keelokit Harbor is the powerful part for when there are many: sessions in Claude Desktop, in the CLI and in the cloud, across several accounts, none of which can see the others. Each one finishes its work; Harbor brings it together onto `main`, in order.',
+      lead2: 'Both come from hundreds of hours, thousands by now, of developing many projects in parallel, with many sessions on several accounts that had to keep delivering software with almost no intervention, around the clock or unattended.',
       doors: [
         ['Start here', 'Keelokit', 'One session, done right.'],
         ['Add it when sessions pile up', 'Keelokit Harbor', 'Many sessions, one landing.'],
@@ -36,7 +36,7 @@ export const home = {
           go: 'Keelokit, in plain words', tech: 'How it’s built',
         },
         {
-          name: 'Keelokit Harbor', tag: 'The coordination between sessions.',
+          name: 'Keelokit Harbor', tag: 'The orchestrator for many sessions.',
           points: [
             '**Convoys:** many branches are merged into one, verified once and pushed once.',
             '**A logbook** on a git branch that every session, account and machine reads with `git fetch`.',
@@ -73,17 +73,17 @@ export const home = {
       vignettes: [
         ['k', 'Solo, one MVP', 'One laptop, one story at a time, a Claude plan. Keelokit lands each story as it’s proven. Nothing to coordinate.'],
         ['k', 'A couple of stories a day, a helper now and then', 'A small team where two sessions sometimes run in parallel. Keelokit’s own `coordinate` skill is enough: the sessions don’t collide.'],
-        ['h', 'Many sessions across two accounts', 'Two Claude accounts, a laptop and a cloud container. Each session ends on its own branch; nobody sees the combination until a convoy is assembled and verified once.'],
+        ['h', 'Many sessions across two accounts', 'Two Claude accounts, Claude Desktop on a laptop, the CLI and a cloud container. None of the sessions can see the others. Each one ends on its own branch; nobody sees the combination until a convoy is assembled and verified once.'],
         ['h', 'A migrations folder everyone touches', 'Several branches add migrations in the same week and CI minutes are counting. Harbor keeps them out of the same open convoy and pushes once.'],
       ] as [string, string, string][],
-      truth: 'Harbor has not run on a real project yet. If you try it today, you are the first. Keelokit alone is the tested choice.',
+      truth: 'Harbor builds on Keelokit, so you start there and add Harbor when the sessions multiply.',
     },
     together: {
       eyebrow: 'How they work together',
       title: 'Keelokit proves each vessel. Harbor decides when the convoy sails.',
       body: [
-        'With Harbor adopted, Keelokit’s `build-story` stops at its own branch and reports the exact commit and its verify result. Harbor takes it from there: a seal for that commit, a place in a convoy, one verify of the whole, the harbormaster’s ok, one push to `main`.',
-        'The state of all this lives in a logbook on a git branch that is never `main`, so writing it doesn’t move `main` or start its CI.',
+        'The sessions can’t see each other, so Harbor gives them one thing they all read: a logbook on a git branch. Each session fetches it when it starts, at each prompt and before a push to `main`, so none of them decides on stale state.',
+        'Each session finishes on its own branch with Keelokit’s verify and a seal. Harbor gathers them in a convoy, a skipper assembles it, the harbormaster, one at a time and on watch, gives the ok, and the convoy is verified once and reaches `main` in one push. Writing the logbook never moves `main` or starts its CI.',
       ],
       scene: 'The port with a lighthouse, a crane and container stacks, and a cargo ship approaching',
       cap: 'the port is main',
@@ -104,7 +104,7 @@ export const home = {
       title: keelokit.en.note.title,
       body: [
         keelokit.en.note.body[0],
-        `${keelokit.en.note.body[1]} Harbor came out of the same itch, one level up: after a week of landing many sessions by hand on a real monorepo, I wrote down what I was doing and made a plugin of it.`,
+        `${keelokit.en.note.body[1]} Harbor is what came out of landing all those sessions onto \`main\`, one level up from Keelokit.`,
       ],
       sign: keelokit.en.note.sign,
     },
@@ -116,22 +116,23 @@ export const home = {
         download: 'Download the latest version', github: 'Code and license on GitHub',
       },
       h: {
-        name: 'Keelokit Harbor', badge: 'not released',
-        text: 'Loads from a clone, then `/harbor:adopt` in a Keelokit project (0.12.0 or later). Tested against stand-ins for Keelokit’s verify, not yet on a real project.',
-        github: 'Code and license on GitHub',
+        name: 'Keelokit Harbor',
+        text: 'Then `/harbor:adopt` in a Keelokit project (0.12.0 or later). Needs Python 3.11+, git and a remote `origin`.',
+        zip: 'Or download harbor-plugin.zip: in Claude, Customize → Plugins → Upload.',
+        download: 'Download the latest version', github: 'Code and license on GitHub',
       },
     },
   },
   es: {
     title: 'Keelokit y Keelokit Harbor · dos plugins para Claude Code',
     description:
-      'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor sube a main el trabajo de muchas sesiones en paralelo en un solo convoy. Cuál instalar, según señales. Por Leopoldo Simini.',
+      'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor orquesta muchas sesiones que no se ven entre sí, en Claude Desktop, la CLI y la nube, y sube su trabajo a main en un solo convoy. Por Leopoldo Simini.',
     ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
     hero: {
       eyebrow: 'Open source · dos plugins para Claude Code',
-      title: ['La quilla debajo de mis apps.', 'Y un puerto para la flota.'],
-      lead: 'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado: documenta, prueba, se revisa a sí mismo y no publica nada sin tu OK. Keelokit Harbor es para cuando corrés muchas sesiones a la vez: lleva su trabajo a `main` junto y en orden.',
-      lead2: 'Keelokit es el método que uso en mis propios proyectos, y está publicado. Harbor salió de hacer su trabajo a mano en un monorepo real; como plugin está en 0.1.0, sin publicar, y nunca corrió en un proyecto real.',
+      title: ['Muchas sesiones que no se ven entre sí.', 'Un puerto que las lleva a main.'],
+      lead: 'Keelokit hace que una sesión de Claude Code trabaje como un equipo ordenado. Keelokit Harbor es la parte potente para cuando son muchas: sesiones de Claude Desktop, de la CLI y de la nube, en varias cuentas, que no se ven entre sí. Cada una termina su trabajo; Harbor lo junta en `main`, en orden.',
+      lead2: 'Los dos salen de cientos de horas, a esta altura miles, desarrollando muchos proyectos en paralelo, con muchas sesiones en varias cuentas que tenían que seguir entregando software con casi nada de intervención, de día y de noche o sin supervisión.',
       doors: [
         ['Empezá acá', 'Keelokit', 'Una sesión, bien hecha.'],
         ['Sumalo cuando se acumulen sesiones', 'Keelokit Harbor', 'Muchas sesiones, una subida.'],
@@ -155,7 +156,7 @@ export const home = {
           go: 'Keelokit, en palabras simples', tech: 'Cómo está hecho',
         },
         {
-          name: 'Keelokit Harbor', tag: 'La coordinación entre sesiones.',
+          name: 'Keelokit Harbor', tag: 'El orquestador de muchas sesiones.',
           points: [
             '**Convoys:** muchas ramas se mergean en una, se verifican una vez y se suben una vez.',
             '**Un logbook** en una rama de git que cada sesión, cuenta y máquina lee con `git fetch`.',
@@ -192,17 +193,17 @@ export const home = {
       vignettes: [
         ['k', 'Solo, un MVP', 'Una notebook, una historia por vez, un plan de Claude. Keelokit sube cada historia cuando está probada. Nada que coordinar.'],
         ['k', 'Un par de historias por día, algún ayudante', 'Un equipo chico donde a veces corren dos sesiones en paralelo. Alcanza con la skill `coordinate` de Keelokit: las sesiones no se pisan.'],
-        ['h', 'Muchas sesiones en dos cuentas', 'Dos cuentas de Claude, una notebook y un contenedor en la nube. Cada sesión termina en su rama; nadie ve la combinación hasta que se ensambla un convoy y se verifica una vez.'],
+        ['h', 'Muchas sesiones en dos cuentas', 'Dos cuentas de Claude, Claude Desktop en una notebook, la CLI y un contenedor en la nube. Ninguna sesión ve a las otras. Cada una termina en su rama; nadie ve la combinación hasta que se ensambla un convoy y se verifica una vez.'],
         ['h', 'Una carpeta de migraciones que toca todo el mundo', 'Varias ramas agregan migraciones en la misma semana y los minutos de CI corren. Harbor las mantiene fuera del mismo convoy abierto y sube una sola vez.'],
       ],
-      truth: 'Harbor todavía no corrió en un proyecto real. Si lo probás hoy, sos el primero. Solo Keelokit es la opción probada.',
+      truth: 'Harbor se apoya en Keelokit, así que empezás por ahí y sumás Harbor cuando las sesiones se multiplican.',
     },
     together: {
       eyebrow: 'Cómo trabajan juntos',
       title: 'Keelokit prueba cada vessel. Harbor decide cuándo zarpa el convoy.',
       body: [
-        'Con Harbor adoptado, el `build-story` de Keelokit se detiene en su propia rama e informa el commit exacto y su resultado de verify. Desde ahí sigue Harbor: un seal para ese commit, un lugar en un convoy, un verify del conjunto, el ok del harbormaster, un push a `main`.',
-        'El estado de todo esto vive en un logbook, en una rama de git que nunca es `main`, así que escribirlo no mueve `main` ni dispara su CI.',
+        'Las sesiones no se ven entre sí, así que Harbor les da algo que todas leen: un logbook en una rama de git. Cada sesión lo trae al arrancar, en cada prompt y antes de un push a `main`, para que ninguna decida con un estado viejo.',
+        'Cada sesión termina en su propia rama con el verify de Keelokit y un seal. Harbor las reúne en un convoy, un skipper lo ensambla, el harbormaster, uno a la vez y en su guardia, da el ok, y el convoy se verifica una vez y llega a `main` en un solo push. Escribir el logbook nunca mueve `main` ni dispara su CI.',
       ],
       scene: 'El puerto con un faro, una grúa y pilas de contenedores, y un buque de carga acercándose',
       cap: 'el puerto es main',
@@ -223,7 +224,7 @@ export const home = {
       title: keelokit.es.note.title,
       body: [
         keelokit.es.note.body[0],
-        `${keelokit.es.note.body[1]} Harbor salió de la misma picazón, un nivel más arriba: después de una semana subiendo muchas sesiones a mano en un monorepo real, anoté lo que hacía y lo convertí en un plugin.`,
+        `${keelokit.es.note.body[1]} Harbor es lo que salió de subir todas esas sesiones a \`main\`, un nivel más arriba que Keelokit.`,
       ],
       sign: keelokit.es.note.sign,
     },
@@ -235,9 +236,10 @@ export const home = {
         download: 'Descargá la última versión', github: 'Código y licencia en GitHub',
       },
       h: {
-        name: 'Keelokit Harbor', badge: 'sin publicar',
-        text: 'Se carga desde un clon, y después `/harbor:adopt` en un proyecto con Keelokit (0.12.0 o posterior). Probado contra sustitutos del verify de Keelokit, todavía no en un proyecto real.',
-        github: 'Código y licencia en GitHub',
+        name: 'Keelokit Harbor',
+        text: 'Después `/harbor:adopt` en un proyecto con Keelokit (0.12.0 o posterior). Necesita Python 3.11+, git y un remoto `origin`.',
+        zip: 'O descargá harbor-plugin.zip: en Claude, Customize → Plugins → Upload.',
+        download: 'Descargá la última versión', github: 'Código y licencia en GitHub',
       },
     },
   },

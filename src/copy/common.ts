@@ -25,10 +25,10 @@ export const INSTALL = [
   'claude plugin marketplace add leosimini/keelokit',
   'claude plugin install keelokit@keelokit',
 ];
-export const HARBOR_INSTALL = ['claude --plugin-dir /path/to/keelokit-harbor'];
-export const HARBOR_INSTALL_ES = ['claude --plugin-dir /ruta/a/keelokit-harbor'];
-// Harbor has no release: the badge is a fact written by hand, not read from anywhere.
-export const HARBOR_VERSION = '0.1.0';
+export const HARBOR_INSTALL = [
+  'claude plugin marketplace add leosimini/keelokit-harbor',
+  'claude plugin install harbor@keelokit-harbor',
+];
 
 export type Page = 'home' | 'keelokit' | 'technical' | 'harbor' | 'harborTech';
 // The English path of each page; Spanish is the same under /es.
@@ -57,7 +57,7 @@ const en = {
       ['harborTech', '−20 m', 'Harbor, how it works'],
     ] as [Page | 'which', string, string][],
   },
-  badges: { released: 'released', notReleased: 'not released' },
+  badges: { released: 'released' },
   copy: 'Copy',
   copied: 'Copied',
   release: { label: 'Latest release', notes: 'What’s new', zip: 'Download .zip' },
@@ -83,7 +83,7 @@ const es: typeof en = {
       ['harborTech', '−20 m', 'Harbor, cómo funciona'],
     ],
   },
-  badges: { released: 'publicado', notReleased: 'sin publicar' },
+  badges: { released: 'publicado' },
   copy: 'Copiar',
   copied: 'Copiado',
   release: { label: 'Última versión', notes: 'Novedades', zip: 'Descargar .zip' },

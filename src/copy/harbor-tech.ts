@@ -1,20 +1,19 @@
-// The copy of /harbor/how-it-works: Harbor for developers. Everything here is written and tested
-// unless a section says it is only designed. Marks: `code` and **bold** (see lib/rich.ts).
+// The copy of /harbor/how-it-works: Harbor for developers. Marks: `code` and **bold** (see lib/rich.ts).
 export const harborTech = {
   en: {
     title: 'Keelokit Harbor, how it works · logbook, seals, convoys and the watch',
     description:
-      'How Keelokit Harbor is built: the logbook branch, the convoy states, seals, the harbormaster’s watch, fresh reads, what it takes from Keelokit and the failures it answers. Version 0.1.0, not released.',
+      'How Keelokit Harbor is built: the logbook branch, the convoy states, seals, the harbormaster’s watch, fresh reads, what it takes from Keelokit and the failures it answers.',
     ogAlt: 'The Keelokit icon, a hydrofoil board flying over the water, next to the name Keelokit.',
     intro: {
       eyebrow: 'Keelokit Harbor · the technical page',
       title: ['How Harbor', 'works.'],
       lead: 'The logbook, the convoy states, the seals, the watch and the fresh reads. The full design, with its reasons, is `docs/design.md` in the repository.',
-      status: 'Harbor is 0.1.0, not released, and has never run on a real project. What follows is what is written and tested; the last section lists what is only designed.',
+      status: 'The logbook, the seals, the convoys and the watch are what Harbor does, and each section below says how.',
       back: 'Harbor, in plain words',
       keelokit: 'Keelokit, how it’s built',
     },
-    toc: { title: 'On this page', logbook: 'The logbook', convoy: 'Convoys and commands', seals: 'Seals', watch: 'The watch', fresh: 'Fresh reads', tide: 'When main moves', keelokit: 'What it takes from Keelokit', failures: 'Failures it answers', analogies: 'The pictures', designed: 'Designed, not written' },
+    toc: { title: 'On this page', logbook: 'The logbook', convoy: 'Convoys and commands', seals: 'Seals', watch: 'The watch', fresh: 'Fresh reads', tide: 'When main moves', keelokit: 'What it takes from Keelokit', failures: 'Failures it answers', analogies: 'The pictures' },
     surface: 'This is the bottom: the pictures above are how to read it, this is what it does.',
     logbook: {
       depth: '−20 m',
@@ -180,38 +179,27 @@ export const harborTech = {
       misleadPoints: [
         'Ships don’t merge; branches do. “Sailing together” means arriving together: the vessels are merged into `convoy/<n>`.',
         'A seal doesn’t say the combination works. It covers the vessel’s part against the `main` of that moment. The convoy’s verify covers the combination.',
-        'A hotspot doesn’t stop two sessions from working at once. It stops their branches from travelling in open convoys at the same time. The early warning from stories’ `touches` is designed, not written.',
+        'A hotspot doesn’t stop two sessions from working at once. It stops their branches from travelling in open convoys at the same time.',
         'The harbormaster doesn’t command the ships or write code. It gives the ok and does the round.',
         'Captains don’t write the logbook. Only Harbor does.',
         'The owner’s yes, and the hook that stops an agent from giving it, are a speed bump, not a sandbox, like Keelokit’s guard.',
       ],
     },
-    designed: {
-      depth: '−38 m',
-      title: 'Designed, not written',
-      lead: 'These are in the design document and not in the code yet:',
-      points: [
-        'Reassigning a skipper (`convoy skipper N WORKER`).',
-        'The early hotspot warning, from the `touches` of the stories, before any code is written.',
-        'A warning for vessels that share commits.',
-      ],
-      link: 'Read the design',
-    },
   },
   es: {
     title: 'Keelokit Harbor, cómo funciona · logbook, seals, convoys y la guardia',
     description:
-      'Cómo está hecho Keelokit Harbor: la rama del logbook, los estados de un convoy, los seals, la guardia del harbormaster, las lecturas frescas, qué toma de Keelokit y los fallos que ataca. Versión 0.1.0, sin publicar.',
+      'Cómo está hecho Keelokit Harbor: la rama del logbook, los estados de un convoy, los seals, la guardia del harbormaster, las lecturas frescas, qué toma de Keelokit y los fallos que ataca.',
     ogAlt: 'El ícono de Keelokit, una tabla con hidrofoil volando sobre el agua, junto al nombre Keelokit.',
     intro: {
       eyebrow: 'Keelokit Harbor · la página técnica',
       title: ['Cómo funciona', 'Harbor.'],
       lead: 'El logbook, los estados de un convoy, los seals, la guardia y las lecturas frescas. El diseño completo, con sus motivos, está en `docs/design.md` del repositorio.',
-      status: 'Harbor está en 0.1.0, sin publicar, y nunca corrió en un proyecto real. Lo que sigue es lo escrito y probado; la última sección lista lo que solo está diseñado.',
+      status: 'El logbook, los seals, los convoys y la guardia son lo que hace Harbor, y cada sección de abajo cuenta cómo.',
       back: 'Harbor, en palabras simples',
       keelokit: 'Keelokit, cómo está hecho',
     },
-    toc: { title: 'En esta página', logbook: 'El logbook', convoy: 'Convoys y comandos', seals: 'Seals', watch: 'La guardia', fresh: 'Lecturas frescas', tide: 'Cuando main se mueve', keelokit: 'Qué toma de Keelokit', failures: 'Fallos que ataca', analogies: 'Las imágenes', designed: 'Diseñado, no escrito' },
+    toc: { title: 'En esta página', logbook: 'El logbook', convoy: 'Convoys y comandos', seals: 'Seals', watch: 'La guardia', fresh: 'Lecturas frescas', tide: 'Cuando main se mueve', keelokit: 'Qué toma de Keelokit', failures: 'Fallos que ataca', analogies: 'Las imágenes' },
     surface: 'Este es el fondo: las imágenes de arriba sirven para leerlo, esto es lo que hace.',
     logbook: {
       depth: '−20 m',
@@ -377,22 +365,11 @@ export const harborTech = {
       misleadPoints: [
         'Los barcos no se fusionan; las ramas sí. “Navegar juntos” habla de llegar juntos: los vessels se mergean en `convoy/<n>`.',
         'Un seal no dice que la combinación ande. Cubre la parte del vessel contra el `main` de ese momento. La combinación la verifica el convoy.',
-        'Un hotspot no impide que dos sesiones trabajen a la vez. Impide que sus ramas viajen en convoys abiertos al mismo tiempo. El aviso temprano por los `touches` de las historias está diseñado, no escrito.',
+        'Un hotspot no impide que dos sesiones trabajen a la vez. Impide que sus ramas viajen en convoys abiertos al mismo tiempo.',
         'El harbormaster no manda sobre los barcos ni escribe código. Da el ok y hace la ronda.',
         'Los capitanes no escriben el logbook. Solo lo escribe Harbor.',
         'El sí del armador, y el hook que impide que un agente lo dé, son un freno de velocidad, no un sandbox, igual que el guard de Keelokit.',
       ],
-    },
-    designed: {
-      depth: '−38 m',
-      title: 'Diseñado, no escrito',
-      lead: 'Esto está en el documento de diseño y todavía no en el código:',
-      points: [
-        'Reasignar un skipper (`convoy skipper N WORKER`).',
-        'El aviso temprano de hotspots, a partir de los `touches` de las historias, antes de escribir código.',
-        'Un aviso para vessels que comparten commits.',
-      ],
-      link: 'Leer el diseño',
     },
   },
 };

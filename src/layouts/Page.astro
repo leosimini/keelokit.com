@@ -69,7 +69,7 @@ const canonical = abs(locale);
     </main>
     <Footer locale={locale} page={page} />
     <script>
-      import { fetchReleaseCached, releaseDate, releaseNotes, releaseZip } from '../lib/release';
+      import { fetchHarborReleaseCached, fetchReleaseCached, releaseDate, releaseNotes, releaseZip } from '../lib/release';
       // Copy buttons: the label says "Copied" for a moment, and screen readers hear it.
       document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
         btn.addEventListener('click', async () => {
@@ -99,6 +99,9 @@ const canonical = abs(locale);
           line.hidden = false;
         });
       }
+      // Harbor's badge: the tag of its latest GitHub Release; without it the badge just says "released".
+      const hv = document.querySelectorAll<HTMLElement>('[data-harbor-v]');
+      if (hv.length) fetchHarborReleaseCached().then((r) => { if (r) hv.forEach((el) => { el.textContent = `v${r.version} · `; }); });
       // The bar: compact once the page moves, deep glass while the sea is behind it.
       const bar = document.querySelector<HTMLElement>('[data-bar]');
       const deep = [...document.querySelectorAll<HTMLElement>('[data-deep]')];

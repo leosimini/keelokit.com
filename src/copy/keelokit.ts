@@ -121,7 +121,7 @@ export const keelokit = {
       title: 'Why it exists',
       body: [
         'I’ve been writing software for many years and starting things for most of my life. Coding agents changed how I build: ideas that used to wait for a team or a free month now get a real first version.',
-        'Along the way I kept writing the same instructions to agents, and kept finding the same kinds of bugs after they said “done”. Keelokit is what came out of fixing that, one project at a time. I share it in case it saves you a few detours.',
+        'I have spent hundreds of hours, thousands by now, developing many projects in parallel: many sessions across several accounts that have to keep producing and delivering software on their own, with as little intervention as possible, around the clock or unattended. Along the way I kept writing the same instructions to agents, and kept finding the same kinds of bugs after they said “done”. Keelokit is what came out of fixing that, one project at a time. I share it in case it saves you a few detours.',
       ],
       sign: 'Leo',
     },
@@ -265,7 +265,7 @@ export const keelokit = {
       title: 'Por qué existe',
       body: [
         'Hace muchos años que escribo software y casi toda la vida que emprendo cosas. Los agentes de código cambiaron mi forma de construir: ideas que antes esperaban un equipo o un mes libre ahora tienen una primera versión real.',
-        'En el camino me encontré escribiéndoles siempre las mismas instrucciones a los agentes, y encontrando los mismos tipos de bugs después de que decían “listo”. Keelokit es lo que salió de ir resolviendo eso, proyecto a proyecto. Lo comparto por si te ahorra algunas vueltas.',
+        'Llevo cientos de horas, a esta altura miles, desarrollando muchos proyectos en paralelo: muchas sesiones en varias cuentas que tienen que seguir produciendo y entregando software solas, con la menor intervención posible, de día y de noche o sin supervisión. En el camino me encontré escribiéndoles a los agentes las mismas instrucciones, y encontrando los mismos tipos de bugs después de que decían “listo”. Keelokit es lo que salió de arreglar eso, proyecto a proyecto. Lo comparto por si te ahorra algunas vueltas.',
       ],
       sign: 'Leo',
     },

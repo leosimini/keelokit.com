@@ -1,0 +1,8 @@
+---
+// Harbor's version badge: "v0.1.0 · released", read from its latest GitHub Release. If that can't be
+// read, it says just "released".
+import { C, type Locale } from '../copy/common';
+interface Props { locale: Locale; version?: string | null; class?: string }
+const { locale, version, class: cls } = Astro.props;
+---
+<span class:list={['badge', cls]}><span data-harbor-v>{version ? `v${version} · ` : ''}</span>{C[locale].badges.released}</span>
