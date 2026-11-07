@@ -1,0 +1,6 @@
+---
+// A big branch: Keelokit alone, full tier. A single loaded cargo ship.
+import Scene from './Scene.astro';
+interface Props { label: string }
+---
+<Scene box="-170 -84 325 221" label={Astro.props.label} items={[['cargoA', 0, 0]]} float />

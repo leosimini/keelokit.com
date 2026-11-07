@@ -1,0 +1,14 @@
+---
+// Keelokit + Harbor. `hero`: the convoy heading for the port; `voyage`: the convoy alone;
+// `arrival`: the convoy at the quay.
+import Scene from './Scene.astro';
+interface Props { variant?: 'hero' | 'voyage' | 'arrival'; label: string }
+const { variant = 'voyage', label } = Astro.props;
+const SCENES = {
+  hero: { box: '-314 -130 938 461', items: [['port', 400.1, 119], ['cargoC', 145.5, -42], ['tug2', 284.9, 73.5], ['cargoA', 0, 0], ['tug', 181.9, 133], ['cargoB', -139.4, 38.5], ['sailboat', 0, 182]] },
+  voyage: { box: '-300 -115 570 364', items: [['cargoC', 133.4, -35], ['cargoA', 0, 0], ['tug', 194, 126], ['cargoB', -133.4, 35], ['sailboat', 24.2, 182]] },
+  arrival: { box: '-302 -82 859 428', items: [['cargoA', 0, 0], ['tug', 181.9, 119], ['cargoB', -133.4, 35], ['sailboat', 12.1, 175], ['port', 339.5, 140]] },
+} as const;
+const s = SCENES[variant];
+---
+<Scene box={s.box} label={label} items={s.items as any} float />

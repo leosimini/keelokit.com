@@ -1,0 +1,6 @@
+---
+// The port is `main`: the quay with its lighthouse and crane, and a ship coming in.
+import Scene from './Scene.astro';
+interface Props { label: string }
+---
+<Scene box="-423 -187 641 393" label={Astro.props.label} items={[['port', 0, 0], ['cargoC', -254.6, -105]]} float />

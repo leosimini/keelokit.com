@@ -1,0 +1,7 @@
+---
+// The illustrations' symbols, drawn once per page. Scenes place them with <use href="#id">.
+import { SYMBOLS } from './symbols';
+interface Props { ids?: string[] }
+const { ids = Object.keys(SYMBOLS) } = Astro.props;
+---
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><Fragment set:html={ids.map((id) => SYMBOLS[id]).join('')} /></defs></svg>

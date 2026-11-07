@@ -1,0 +1,6 @@
+---
+// One small story: Keelokit alone. A single sailboat.
+import Scene from './Scene.astro';
+interface Props { label: string }
+---
+<Scene box="-102 -106 175 177" label={Astro.props.label} items={[['sailboat', 0, 0]]} float />

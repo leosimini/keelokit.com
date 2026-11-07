@@ -1,0 +1,12 @@
+---
+// The small flat pictures of the role cards: a lighthouse, the vessels, the logbook.
+import Scene from './Scene.astro';
+interface Props { name: 'lighthouse' | 'vessels' | 'logbook'; label: string }
+const { name, label } = Astro.props;
+const MINI = {
+  lighthouse: { box: '-33 -115 67 138', items: [['lighthouse', 0, 0]] },
+  vessels: { box: '-84 -40 158 158', items: [['tug', 0, 0, 0.9], ['sailboat', 24.2, 70, 0.9]] },
+  logbook: { box: '-50 -19 115 90', items: [['logbook', 0, 0]] },
+} as const;
+---
+<Scene class="mini" box={MINI[name].box} label={label} items={MINI[name].items as any} />

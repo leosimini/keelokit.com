@@ -1,0 +1,12 @@
+---
+// A scene is a viewBox and a list of symbols placed in it: [id, x, y, scale?]. `float` makes the
+// vessels rock a little (never for people who ask for less motion; see global.css).
+interface Props { box: string; label: string; items: [string, number, number, number?][]; float?: boolean; class?: string }
+const { box, label, items, float = false, class: cls } = Astro.props;
+---
+<svg class:list={['scene', cls]} viewBox={box} role="img" aria-label={label} preserveAspectRatio="xMidYMid meet" focusable="false">
+  {items.map(([id, x, y, s], i) => {
+    const use = <use href={`#${id}`} transform={`translate(${x} ${y})${s ? ` scale(${s})` : ''}`} />;
+    return float && id !== 'port' && id !== 'lighthouse' ? <g class="float" style={`--i:${i}`}>{use}</g> : use;
+  })}
+</svg>
